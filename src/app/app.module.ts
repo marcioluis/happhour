@@ -15,6 +15,7 @@ import { LoginPage } from '../pages/login/login';
 //plugins
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { GooglePlus } from '@ionic-native/google-plus';
 //providers
 import { Settings } from '../providers/settings';
 
@@ -65,6 +66,7 @@ export function providers() {
   return [
     StatusBar,
     SplashScreen,
+    GooglePlus,
     // settings provider
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development

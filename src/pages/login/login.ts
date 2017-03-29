@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 /*
   Generated class for the Login page.
@@ -13,10 +14,13 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private googlePlus: GooglePlus) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    this.googlePlus.login()
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
   }
 
 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "784220670042",
+    "project_id": "firebase-happhour"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784220670042:android:de59e43c55030005",
+        "android_client_info": {
+          "package_name": "br.com.mafe.happhour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784220670042-8bvhpli7o6auqipv02d36bgijopp8gme.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.mafe.happhour",
+            "certificate_hash": "0b7bf7d3ac55db64c9299e81f7e4f24509ee71b9"
+          }
+        },
+        {
+          "client_id": "784220670042-ib1ssv1utfr1c4cvfs67t7n9tgkck2vk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOk1WUZyR2zNgMv8ZVEo02-F_Mm3Y2HcU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
