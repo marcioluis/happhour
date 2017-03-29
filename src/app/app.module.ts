@@ -9,13 +9,14 @@ import { MyApp } from './app.component';
 //pages
 import { WelcomePage } from '../pages/welcome/welcome';
 import { TutorialPage } from '../pages/tutorial/tutorial';
-import { SignupPage } from '../pages/signup/signup';
 import { SettingsPage } from '../pages/settings/settings';
 import { LoginPage } from '../pages/login/login';
 //plugins
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GooglePlus } from '@ionic-native/google-plus';
+//mocks
+import { GooglePlusMock } from '../mocks/googlePlusMock';
 //providers
 import { Settings } from '../providers/settings';
 
@@ -27,8 +28,7 @@ import { Settings } from '../providers/settings';
 let pages = [
   MyApp,
   WelcomePage,
-  TutorialPage,
-  SignupPage,
+  TutorialPage,  
   SettingsPage,
   LoginPage
 ];
@@ -62,16 +62,27 @@ export function entryComponents() {
   return pages;
 }
 
-export function providers() {
-  return [
-    StatusBar,
-    SplashScreen,
-    GooglePlus,
-    // settings provider
-    { provide: Settings, useFactory: provideSettings, deps: [Storage] },
-    // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
-  ];
+export function providers(): any {
+  if (window["cordova"]) {
+    return [
+      StatusBar,
+      SplashScreen,
+      GooglePlus,
+      // settings provider
+      { provide: Settings, useFactory: provideSettings, deps: [Storage] },
+      // Keep this to enable Ionic's runtime error handling during development
+      { provide: ErrorHandler, useClass: IonicErrorHandler }
+    ];
+  }
+  else {
+    return [
+      StatusBar,
+      SplashScreen,
+      { provide: GooglePlus, useClass: GooglePlusMock },
+      { provide: Settings, useFactory: provideSettings, deps: [Storage] },
+      { provide: ErrorHandler, useClass: IonicErrorHandler }
+    ];
+  }
 }
 
 @NgModule({
