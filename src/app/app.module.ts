@@ -7,10 +7,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 //app component
 import { MyApp } from './app.component';
 //pages
-import { WelcomePage } from '../pages/welcome/welcome';
-import { TutorialPage } from '../pages/tutorial/tutorial';
-import { SettingsPage } from '../pages/settings/settings';
-import { LoginPage } from '../pages/login/login';
+import { Pages } from '../pages/pages';
 //plugins
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,20 +15,14 @@ import { GooglePlus } from '@ionic-native/google-plus';
 //mocks
 import { GooglePlusMock } from '../mocks/googlePlusMock';
 //providers
-import { Settings } from '../providers/settings';
+import { Settings, Auth } from '../providers/providers';
 
 /**
  * The Pages array lists all of the pages we want to use in our app.
  * We then take these pages and inject them into our NgModule so Angular
  * can find them. As you add and remove pages, make sure to keep this list up to date.
  */
-let pages = [
-  MyApp,
-  WelcomePage,
-  TutorialPage,  
-  SettingsPage,
-  LoginPage
-];
+let pages = Array.of<any>(MyApp, Pages);
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -47,10 +38,8 @@ export function createTranslateLoader(http: Http) {
  */
 export function provideSettings(storage: Storage) {
   return new Settings(storage, {
-    option1: true,
-    option2: 'Ionitron J. Framework',
-    option3: '3',
-    option4: 'Hello'
+    isFirstRun: true,
+    searchRadius: 500
   });
 }
 
@@ -68,6 +57,7 @@ export function providers(): any {
       StatusBar,
       SplashScreen,
       GooglePlus,
+      Auth,
       // settings provider
       { provide: Settings, useFactory: provideSettings, deps: [Storage] },
       // Keep this to enable Ionic's runtime error handling during development
@@ -78,6 +68,8 @@ export function providers(): any {
     return [
       StatusBar,
       SplashScreen,
+      Auth,
+      //mock the GooglePlus plugin
       { provide: GooglePlus, useClass: GooglePlusMock },
       { provide: Settings, useFactory: provideSettings, deps: [Storage] },
       { provide: ErrorHandler, useClass: IonicErrorHandler }
@@ -89,7 +81,7 @@ export function providers(): any {
   declarations: declarations(),
   imports: [
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({ name: '__happyhour', storeName: 'hpdb' }),
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),

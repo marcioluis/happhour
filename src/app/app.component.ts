@@ -3,8 +3,9 @@ import { Platform, Nav, Config } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from 'ng2-translate';
+import { Settings } from '../providers/providers';
 
-import { FirstRunPage } from '../pages/pages';
+import { FirstRunPage, MainPage } from '../pages/pages';
 
 
 @Component({
@@ -12,12 +13,11 @@ import { FirstRunPage } from '../pages/pages';
 })
 export class MyApp {
 
-  rootPage = FirstRunPage;
-
+  rootPage: any;
   @ViewChild(Nav) nav: Nav;
-  pages: any[] = [{ title: 'p1', component: '' }]
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, translate: TranslateService, config: Config) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+    translate: TranslateService, config: Config, settings: Settings) {
 
     translate.setDefaultLang('pt-br');
     translate.use('pt-br');
@@ -30,13 +30,16 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
+
+      //vai para tela home ou de tutorial se for o primeiro uso
+      settings.load().then(() => {
+        if (settings.allSettings.isFirstRun)
+          this.rootPage = FirstRunPage;
+        else
+          this.rootPage = MainPage;
+      });
+
       splashScreen.hide();
     });
-  }
-
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
   }
 }

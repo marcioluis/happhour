@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate';
-import { WelcomePage } from '../welcome/welcome';
+import { WelcomePage } from '../pages';
+import { Settings } from '../../providers/providers';
 
 export interface Slide {
   title: string;
@@ -24,7 +25,7 @@ export class TutorialPage {
   slides: Slide[];
   showSkip = true;
 
-  constructor(public navCtrl: NavController, translate: TranslateService) {
+  constructor(public navCtrl: NavController, translate: TranslateService, private settings: Settings) {
     translate.get(["TUTORIAL_SLIDE1_TITLE",
                    "TUTORIAL_SLIDE1_DESCRIPTION",
                    "TUTORIAL_SLIDE2_TITLE",
@@ -32,8 +33,7 @@ export class TutorialPage {
                    "TUTORIAL_SLIDE3_TITLE",
                    "TUTORIAL_SLIDE3_DESCRIPTION",
     ])
-    .subscribe((values) => {
-      console.log('Loaded values', values);
+    .subscribe((values) => {      
       this.slides = [
         {
           title: values.TUTORIAL_SLIDE1_TITLE,
@@ -62,7 +62,7 @@ export class TutorialPage {
   }
 
   onSlideChangeStart(slider) {
-    this.showSkip = !slider.isEnd;
+    this.showSkip = !slider.isEnd();
   }
 
   ionViewDidEnter() {    

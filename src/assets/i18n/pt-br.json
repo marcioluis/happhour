@@ -1,8 +1,4 @@
-{
-  "NAME": "Nome",
-  "EMAIL": "Email",
-  "USERNAME": "Nome de Usuário",
-  "PASSWORD": "Senha",    
+{  
   "TUTORIAL_SKIP_BUTTON": "Pular",
   "TUTORIAL_CONTINUE_BUTTON": "Continuar",
   "TUTORIAL_SLIDE1_TITLE": "Bem-vindo ao HappHour",
@@ -13,20 +9,10 @@
   "TUTORIAL_SLIDE3_DESCRIPTION": "Precisa de ajuda? Dê uma olhada no README do Super Starter para um tutorial completo",
   "TUTORIAL_SLIDE4_TITLE": "Pronto para Usar?",
   "WELCOME_INTRO": "O ponto de partida para seu próximo app feito no Ionic",
-  "WELCOME_TITLE": "Bem-vindo",
-  "SETTINGS_TITLE": "Configurações",
-  "SETTINGS_OPTION1": "Opção 1",
-  "SETTINGS_OPTION2": "Opção 2",
-  "SETTINGS_OPTION3": "Opção 3",
-  "SETTINGS_OPTION4": "Opção 4",
-  "SETTINGS_PROFILE_BUTTON": "Editar Perfil",
-  "SETTINGS_PAGE_PROFILE": "Editar Perfil",
-  "LOGIN_TITLE": "Entrar",
-  "LOGIN_ERROR": "Não foi possível entrar na sua conta. Verifique seus dados e tente novamente.",
+  "GOOGLE_SIGN_IN_CANCELLED": "Não foi possível entrar na sua conta. Verifique seus dados e tente novamente.",
+  "GOOGLE_SIGN_IN_FAILED": "Houve um erro ao fazer login com sua conta Google. Mudar para outra pode ou não resolver.",
   "LOGIN_FACEBOOK_BUTTON": "Entrar com Facebook",
-  "LOGIN_GOOGLE_BUTTON": "Entrar com Google",    
-  "DONE_BUTTON": "Pronto",
-  "CANCEL_BUTTON": "Cancelar",
-  "BACK_BUTTON_TEXT": "Voltar",
-  "DELETE_BUTTON": "Apagar"
+  "LOGIN_GOOGLE_BUTTON": "Entrar com Google",      
+  "LOADING": "Carregando...",
+  "AUTHENTICATING": "Autenticando..."
 }
