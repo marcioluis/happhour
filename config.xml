@@ -41,4 +41,8 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.784220670042-32tl09nn9ohgr8l4342n8ice1838qk8a" />
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="~2.0.2" />
+    <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
+        <variable name="APP_ID" value="1351096154948593" />
+        <variable name="APP_NAME" value="HappHour" />
+    </plugin>
 </widget>

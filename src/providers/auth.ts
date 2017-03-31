@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { Facebook } from '@ionic-native/facebook';
 import { TranslateService } from 'ng2-translate';
 import { Settings } from './settings';
-import { GoogleUserModel } from '../model/models';
+import { UserModel } from '../model/models';
+
+
+export interface GoogleSignInError {
+  [code: string]: { message: string, name: string }
+}
 
 /*
   Generated class for the Auth provider.
@@ -13,7 +19,7 @@ import { GoogleUserModel } from '../model/models';
 @Injectable()
 export class Auth {
 
-  constructor(private googlePlus: GooglePlus,
+  constructor(private googlePlus: GooglePlus, private facebook: Facebook,
     private settings: Settings, translate: TranslateService) {
     console.log('Auth Provider');
 
@@ -40,7 +46,7 @@ export class Auth {
       webClientId: '784220670042-ib1ssv1utfr1c4cvfs67t7n9tgkck2vk.apps.googleusercontent.com',
       offline: true
     })
-      .then<GoogleUserModel>(user => {
+      .then<UserModel>(user => {
         user.provider = 'google';
         return user;
       })
@@ -48,8 +54,34 @@ export class Auth {
         throw this.GoogleSignInStatusCodes[code];
       });
   }
-}
 
-export interface GoogleSignInError {
-  [code: string]: { message: string, name: string }
+  doFacebookLogin() {
+    let aToken;
+    let permissions = ['email', 'public_profile'];
+    return this.facebook.login(permissions)
+      .then<string>(response => {
+        console.log('response');
+        return this.facebook.getAccessToken()
+      })
+      .then<any>(token => {
+        aToken = token;
+        console.log('token');
+        return this.facebook.api('/me?fields=id,name,gender,first_name,last_name,email,picture', [])
+      })
+      .then<UserModel>(user => {
+        console.log('user');
+        return {
+          email: user.email,
+          idToken: aToken,
+          userId: user.id,
+          displayName: user.name,
+          givenName: user.first_name,
+          familyName: user.last_name,
+          gender: user.gender,
+          imageUrl: user.picture.url,
+          provider: 'facebook'
+        };
+      });
+  }
+
 }

@@ -14,9 +14,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GooglePlus } from '@ionic-native/google-plus';
 //mocks
 import { GooglePlusMock } from '../mocks/googlePlusMock';
+import { FacebookMock } from '../mocks/facebookMock';
 //providers
 import { Settings, Auth } from '../providers/providers';
-
+import { Facebook } from '@ionic-native/facebook';
 /**
  * The Pages array lists all of the pages we want to use in our app.
  * We then take these pages and inject them into our NgModule so Angular
@@ -58,6 +59,7 @@ export function providers(): any {
       SplashScreen,
       GooglePlus,
       Auth,
+      Facebook,
       // settings provider
       { provide: Settings, useFactory: provideSettings, deps: [Storage] },
       // Keep this to enable Ionic's runtime error handling during development
@@ -71,6 +73,8 @@ export function providers(): any {
       Auth,
       //mock the GooglePlus plugin
       { provide: GooglePlus, useClass: GooglePlusMock },
+      { provide: Facebook, useClass: FacebookMock },
+      //
       { provide: Settings, useFactory: provideSettings, deps: [Storage] },
       { provide: ErrorHandler, useClass: IonicErrorHandler }
     ];

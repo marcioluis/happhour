@@ -1,7 +1,7 @@
 import { SettingsModel } from './settingsModel';
-import { GoogleUserModel } from './googleUserModel';
+import { UserModel } from './userModel';
 
 export {
     SettingsModel,
-    GoogleUserModel
+    UserModel
 }

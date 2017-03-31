@@ -1,10 +1,11 @@
-export class GoogleUserModel {
+export class UserModel {
     idToken: string
     email: string
-    userId: string
     displayName: string
     familyName: string
     givenName: string
-    imageUrl: string
     provider: string
+    userId?: string
+    imageUrl?: string
+    gender?: string
 }
