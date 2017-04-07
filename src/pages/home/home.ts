@@ -15,7 +15,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController ) {}
 
-  tapAction(event){
+  tapEatDrink(event){
     let alert = this.alertCtrl.create({
       title: 'Card tapped',
       subTitle: 'Fazer algo agora',
@@ -23,6 +23,12 @@ export class HomePage {
     });    
     alert.present();
   }
+
+  tapCinema(){}
+
+  tapTourism(){}
+
+  tapCreateNew(){}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
