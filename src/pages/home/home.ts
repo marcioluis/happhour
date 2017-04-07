@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 /*
   Generated class for the Home page.
@@ -13,7 +13,16 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController ) {}
+
+  tapAction(event){
+    let alert = this.alertCtrl.create({
+      title: 'Card tapped',
+      subTitle: 'Fazer algo agora',
+      buttons: ['OK']
+    });    
+    alert.present();
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
