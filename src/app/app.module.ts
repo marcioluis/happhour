@@ -7,7 +7,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 //app component
 import { MyApp } from './app.component';
 //pages
-import { Pages } from '../pages/pages';
+import { AllPages } from '../pages/pages';
 //plugins
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,7 +23,7 @@ import { Facebook } from '@ionic-native/facebook';
  * We then take these pages and inject them into our NgModule so Angular
  * can find them. As you add and remove pages, make sure to keep this list up to date.
  */
-let pages = Array.of<any>(MyApp, Pages);
+let pages = Array.of<any>(MyApp, AllPages);
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -71,7 +71,7 @@ export function providers(): any {
       StatusBar,
       SplashScreen,
       Auth,
-      //mock the GooglePlus plugin
+      //mock the plugins
       { provide: GooglePlus, useClass: GooglePlusMock },
       { provide: Facebook, useClass: FacebookMock },
       //
