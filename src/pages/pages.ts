@@ -6,6 +6,7 @@ import { InvitedPage } from './invited/invited'
 import { ConfigsPage } from './configs/configs'
 import { ContactsPage } from './contacts/contacts'
 import { TabsPage } from "./tabs/tabs";
+import { NearbyPage } from "./nearby/nearby";
 
 // The page the user lands on after opening the app and without a session
 export const FirstRunPage = TutorialPage;
@@ -13,7 +14,7 @@ export const FirstRunPage = TutorialPage;
 export const MainPage = TabsPage;
 //individual pages
 export {
-    SettingsPage, WelcomePage, HomePage, TutorialPage, InvitedPage, ConfigsPage, ContactsPage, TabsPage
+    SettingsPage, WelcomePage, HomePage, TutorialPage, InvitedPage, ConfigsPage, ContactsPage, TabsPage, NearbyPage
 }
 //all pages array
 export const AllPages: any[] = [
@@ -24,5 +25,6 @@ export const AllPages: any[] = [
     InvitedPage,
     ConfigsPage,
     ContactsPage,
-    TabsPage
+    TabsPage,
+    NearbyPage
 ]

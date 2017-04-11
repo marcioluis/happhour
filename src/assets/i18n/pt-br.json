@@ -14,5 +14,6 @@
   "LOGIN_FACEBOOK_BUTTON": "Entrar com Facebook",
   "LOGIN_GOOGLE_BUTTON": "Entrar com Google",      
   "LOADING": "Carregando...",
-  "AUTHENTICATING": "Autenticando..."
+  "AUTHENTICATING": "Autenticando...",
+  "BACK_BUTTON_TEXT": "Voltar"
 }

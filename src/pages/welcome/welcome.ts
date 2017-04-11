@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate';
 import { Settings } from '../../providers/providers';
-import { HomePage } from '../pages';
+import { MainPage } from '../pages';
 import { Auth } from '../../providers/providers';
 
 @Component({
@@ -32,7 +32,7 @@ export class WelcomePage {
         this.settings.allSettings.user = googleUser;
         this.settings.allSettings.isFirstRun = false;
         this.settings.save().then(() =>
-          this.navCtrl.setRoot(HomePage, {}, { animate: true, direction: 'forward' }));
+          this.navCtrl.setRoot(MainPage, {}, { animate: true, direction: 'forward' }));
         loader.dismiss();
       })
       .catch(err => {
@@ -52,7 +52,7 @@ export class WelcomePage {
         this.settings.allSettings.user = facebookUser;
         this.settings.allSettings.isFirstRun = false;
         this.settings.save().then(() =>
-          this.navCtrl.setRoot(HomePage, {}, { animate: true, direction: 'forward' }));
+          this.navCtrl.setRoot(MainPage, {}, { animate: true, direction: 'forward' }));
         loader.dismiss();
       })
       .catch(err => {

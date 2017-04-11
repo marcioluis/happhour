@@ -14,27 +14,40 @@
 
 
 <ion-content padding>
-  <ion-card (tap)="tapEatDrink($event)">
-    <img src="assets/img/card-saopaolo.png" />
-    <div class="card-title">Comer e beber</div>
-    <div class="card-subtitle">41 Listings</div>
-  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-lg-6>
+        <ion-card (tap)="tapEatDrink($event)">
+          <img src="assets/img/card-saopaolo.png" />
+          <div class="card-title">Comer e beber</div>
+          <div class="card-subtitle">41 Listings</div>
+        </ion-card>
+      </ion-col>
 
-  <ion-card (tap)="tapCinema($event)">
-    <img src="assets/img/card-amsterdam.png" />
-    <div class="card-title">Cinema e teatro</div>
-    <div class="card-subtitle">64 Listings</div>
-  </ion-card>
+      <ion-col col-12 col-lg-6>
+        <ion-card (tap)="tapCinema($event)">
+          <img src="assets/img/card-amsterdam.png" />
+          <div class="card-title">Cinema e teatro</div>
+          <div class="card-subtitle">64 Listings</div>
+        </ion-card>
+      </ion-col>
 
-  <ion-card (tap)="tapTourism($event)">
-    <img src="assets/img/card-sf.png" />
-    <div class="card-title">Passeios e turismo</div>
-    <div class="card-subtitle">72 Listings</div>
-  </ion-card>
+      <ion-col col-12 col-lg-6>
+        <ion-card (tap)="tapTourism($event)">
+          <img src="assets/img/card-sf.png" />
+          <div class="card-title">Passeios e turismo</div>
+          <div class="card-subtitle">72 Listings</div>
+        </ion-card>
+      </ion-col>
 
-  <ion-card (tap)="tapCreateNew($event)">
-    <img src="assets/img/card-madison.png" />
-    <div class="card-title">Criar meu Happ</div>
-    <div class="card-subtitle">28 Listings</div>
-  </ion-card>
+      <ion-col col-12 col-lg-6>
+        <ion-card (tap)="tapCreateNew($event)">
+          <img src="assets/img/card-madison.png" />
+          <div class="card-title">Criar meu Happ</div>
+          <div class="card-subtitle">28 Listings</div>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 </ion-content>
