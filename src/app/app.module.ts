@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { Http } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { Http, HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 //translate
@@ -84,6 +85,8 @@ export function providers(): any {
 @NgModule({
   declarations: declarations(),
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({ name: '__happyhour', storeName: 'hpdb' }),
     TranslateModule.forRoot({
