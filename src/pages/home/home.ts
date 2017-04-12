@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { NearbyPage } from "../pages";
 
 /*
@@ -14,15 +14,9 @@ import { NearbyPage } from "../pages";
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
   tapEatDrink(event) {
-    // let alert = this.alertCtrl.create({
-    //   title: 'Card tapped',
-    //   subTitle: 'Fazer algo agora',
-    //   buttons: ['OK']
-    // });    
-    // alert.present();
     this.navCtrl.push(NearbyPage);
   }
 

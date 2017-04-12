@@ -17,7 +17,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { GooglePlusMock } from '../mocks/googlePlusMock';
 import { FacebookMock } from '../mocks/facebookMock';
 //providers
-import { Settings, Auth } from '../providers/providers';
+import { Settings, Auth, Api, PlaceProvider } from '../providers/providers';
 import { Facebook } from '@ionic-native/facebook';
 /**
  * The Pages array lists all of the pages we want to use in our app.
@@ -59,8 +59,10 @@ export function providers(): any {
       StatusBar,
       SplashScreen,
       GooglePlus,
-      Auth,
       Facebook,
+      Auth,
+      Api,
+      PlaceProvider,      
       // settings provider
       { provide: Settings, useFactory: provideSettings, deps: [Storage] },
       // Keep this to enable Ionic's runtime error handling during development
@@ -72,6 +74,8 @@ export function providers(): any {
       StatusBar,
       SplashScreen,
       Auth,
+      Api,
+      PlaceProvider,
       //mock the plugins
       { provide: GooglePlus, useClass: GooglePlusMock },
       { provide: Facebook, useClass: FacebookMock },

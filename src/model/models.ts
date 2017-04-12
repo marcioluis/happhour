@@ -1,7 +1,9 @@
-import { SettingsModel } from './settingsModel';
-import { UserModel } from './userModel';
+import { SettingsModel } from './settings-model';
+import { UserModel } from './user-model';
+import { PlaceModel } from "./place-model";
 
 export {
     SettingsModel,
-    UserModel
+    UserModel,
+    PlaceModel
 }

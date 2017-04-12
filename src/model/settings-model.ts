@@ -1,4 +1,4 @@
-import { UserModel } from './userModel';
+import { UserModel } from './models';
 
 export class SettingsModel {
     isFirstRun?: boolean

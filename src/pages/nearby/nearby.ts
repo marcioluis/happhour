@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
+import { PlaceProvider } from "../../providers/providers";
 
 /*
   Generated class for the Nearby page.
@@ -13,20 +14,13 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class NearbyPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private placeService: PlaceProvider) { }
+  places = [];
 
-  items = [{ header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" },
-  { header: "h1", content: "lorem hauasduadu jaiasjdk asndasbdasbdas" }];
+  doSearch(infiniteScroll: InfiniteScroll) {
+    this.placeService.findNearbyPlaces(500, 0, 10)
+      .subscribe(value => this.places.push(value));
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NearbyPage');

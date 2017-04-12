@@ -5,18 +5,15 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>home</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
+<ion-content padding class="card-background-page">
   <ion-grid>
     <ion-row>
-      <ion-col col-12 col-lg-6>
+      <ion-col col-12 col-sm-6>
         <ion-card (tap)="tapEatDrink($event)">
           <img src="assets/img/card-saopaolo.png" />
           <div class="card-title">Comer e beber</div>
@@ -24,7 +21,7 @@
         </ion-card>
       </ion-col>
 
-      <ion-col col-12 col-lg-6>
+      <ion-col col-12 col-sm-6>
         <ion-card (tap)="tapCinema($event)">
           <img src="assets/img/card-amsterdam.png" />
           <div class="card-title">Cinema e teatro</div>
@@ -32,7 +29,7 @@
         </ion-card>
       </ion-col>
 
-      <ion-col col-12 col-lg-6>
+      <ion-col col-12 col-sm-6>
         <ion-card (tap)="tapTourism($event)">
           <img src="assets/img/card-sf.png" />
           <div class="card-title">Passeios e turismo</div>
@@ -40,7 +37,7 @@
         </ion-card>
       </ion-col>
 
-      <ion-col col-12 col-lg-6>
+      <ion-col col-12 col-sm-6>
         <ion-card (tap)="tapCreateNew($event)">
           <img src="assets/img/card-madison.png" />
           <div class="card-title">Criar meu Happ</div>
