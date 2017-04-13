@@ -16,17 +16,29 @@
       <ion-segment-button value="events">
         Eventos
       </ion-segment-button>
-    </ion-segment>    
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let place of places" col-6 col-md-4 col-lg-3 col-xl-2>
         <ion-card>
-          <ion-card-header>{{item.nome}}</ion-card-header>
-          <ion-card-content>{{item.subNome}}</ion-card-content>
+          <img alt="logo" src="{{place.logoUrl}}">
+          <ion-card-header>{{place.nome}}</ion-card-header>
+          <ion-card-content>{{place.subNome}}</ion-card-content>
+          <ion-row>
+            <ion-col>
+              <ion-icon *ngIf="place.isPontuavel" name="beer" isActive="{{place.isPontuavel}}"></ion-icon>
+            </ion-col>
+            <ion-col>
+              <ion-icon *ngIf="place.isReservavel" name="restaurant" isActive="{{place.isReservavel}}"></ion-icon>
+            </ion-col>
+            <ion-col>
+              <ion-icon *ngIf="place.isHappyOnDemand" name="timer" isActive="{{place.isHappyOnDemand}}"></ion-icon>
+            </ion-col>
+          </ion-row>
         </ion-card>
       </ion-col>
     </ion-row>

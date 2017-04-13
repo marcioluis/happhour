@@ -18,12 +18,25 @@ export class NearbyPage {
   places = [];
 
   doSearch(infiniteScroll: InfiniteScroll) {
-    this.placeService.findNearbyPlaces(500, 0, 10)
-      .subscribe(value => this.places.push(value));
+    let skip = this.places.length;
+    this.placeService.findNearbyPlaces(500, skip, 4)
+      .subscribe(
+      value => {        
+        if (value.length)
+          value.forEach(element => {
+            this.places.push(element);
+          });
+      },
+      error => {
+        console.log(error);
+      },
+      () => infiniteScroll.complete());
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NearbyPage');
+    this.placeService.findNearbyPlaces(500, 0, 4)
+      .subscribe(value => this.places = value);
   }
 
 }
