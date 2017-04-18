@@ -20,16 +20,7 @@ export class HomePage {
     this.navCtrl.push(NearbyPage);
   }
 
-  tapCinema() {
-    this.navCtrl.push(NearbyPage);
-  }
-
-  tapTourism() {
-    this.navCtrl.push(NearbyPage);
-  }
-
-  tapCreateNew() {
-    this.navCtrl.push(NearbyPage);
+  tapCreateNew() {    
   }
 
   ionViewDidLoad() {

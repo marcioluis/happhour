@@ -31,7 +31,7 @@ export class PlaceProvider {
     });
     //http://stackoverflow.com/questions/37618337/how-to-use-skip-and-take-with-rxjs-observable
     return Observable.from<PlaceModel[]>(promise)
-      .map(data =>data.slice(skip, skip + size));
+      .map(data => data.slice(skip, skip + size));
   }
 
 }
@@ -49,7 +49,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 1234,
   nome: "Mulligan Porto Alegre", subNome: "Irish pub",
-  logoUrl: "http://gaucha.rbsdirect.com.br/imagesrc/16730536.jpg?w=620&h=415&fr=true",
+  logoUrl: "http://silvercreekart.weebly.com/uploads/3/7/3/0/37300503/9869404.png",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -59,7 +59,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 1235,
   nome: "Pedrini", subNome: "",
-  logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRcpUszc0DkhaX-NQVvEis7Tw6nZkwMKjAdvt37XLIgppncmmxK",
+  logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/A_Voz_do_Brasil_logo.svg/256px-A_Voz_do_Brasil_logo.svg.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
   horariosFuncionamento: { 1: "18h - 1h", 2: "18h - 1h", 3: "18h - 1h", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -69,7 +69,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 456,
   nome: "4Beers", subNome: "Bar de cervejas artesanais",
-  logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSIelVH6cOzCktUM5jLCZ7du6gRVTUVK7jIKhSQMWzNg9oSXKdB",
+  logoUrl: "https://logodownload.org/wp-content/uploads/2014/09/lol-logo-league-of-legends-4.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -79,7 +79,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 4567,
   nome: "Mulligan Porto Alegre", subNome: "Irish pub",
-  logoUrl: "http://gaucha.rbsdirect.com.br/imagesrc/16730536.jpg?w=620&h=415&fr=true",
+  logoUrl: "https://typo3.org/fileadmin/t3org/images/icons/slack.svg",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -89,7 +89,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 4568,
   nome: "Pedrini", subNome: "",
-  logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRcpUszc0DkhaX-NQVvEis7Tw6nZkwMKjAdvt37XLIgppncmmxK",
+  logoUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSQksVuC8-cD1RFYccUzIDpZ_gD0tZw38b1MVEVGLYvqIPSbYnWUA",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
   horariosFuncionamento: { 1: "18h - 1h", 2: "18h - 1h", 3: "18h - 1h", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -99,7 +99,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 789,
   nome: "4Beers", subNome: "Bar de cervejas artesanais",
-  logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSIelVH6cOzCktUM5jLCZ7du6gRVTUVK7jIKhSQMWzNg9oSXKdB",
+  logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Chromium_11_Logo.svg/256px-Chromium_11_Logo.svg.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -109,7 +109,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 7890,
   nome: "Mulligan Porto Alegre", subNome: "Irish pub",
-  logoUrl: "http://gaucha.rbsdirect.com.br/imagesrc/16730536.jpg?w=620&h=415&fr=true",
+  logoUrl: "https://upload.wikimedia.org/wikipedia/commons/7/76/Media_Player_Classic_logo.png",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -119,7 +119,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 7891,
   nome: "Pedrini", subNome: "",
-  logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRcpUszc0DkhaX-NQVvEis7Tw6nZkwMKjAdvt37XLIgppncmmxK",
+  logoUrl: "https://4.bp.blogspot.com/-rMQvgxPet-A/VySnsgGDF1I/AAAAAAAAFgY/YOZUZL4wRRMZ5Y6Gv0UZDBtzb_t3uH98QCLcB/s1600/AFC_inline.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
   horariosFuncionamento: { 1: "18h - 1h", 2: "18h - 1h", 3: "18h - 1h", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -129,7 +129,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 7893,
   nome: "4Beers", subNome: "Bar de cervejas artesanais",
-  logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSIelVH6cOzCktUM5jLCZ7du6gRVTUVK7jIKhSQMWzNg9oSXKdB",
+  logoUrl: "https://images.vexels.com/media/users/3/136311/isolated/lists/b26ff18482f595dacf0017d4d0251c0a-logo-kebab-embrulhar-fast-food.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -139,7 +139,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 7894,
   nome: "Mulligan Porto Alegre", subNome: "Irish pub",
-  logoUrl: "http://gaucha.rbsdirect.com.br/imagesrc/16730536.jpg?w=620&h=415&fr=true",
+  logoUrl: "https://opensource.org/files/twitterlogo.png",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [
@@ -149,7 +149,7 @@ const placesMockData: PlaceModel[] = [{
 }, {
   _id: 7895,
   nome: "Pedrini", subNome: "",
-  logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRcpUszc0DkhaX-NQVvEis7Tw6nZkwMKjAdvt37XLIgppncmmxK",
+  logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSoInmyuFsDxaHwf9luOPksCYFL6Lx1EaQt16TIMe867bEUV9HC4w",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
   horariosFuncionamento: { 1: "18h - 1h", 2: "18h - 1h", 3: "18h - 1h", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
   fotosUrls: [

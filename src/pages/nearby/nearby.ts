@@ -21,11 +21,12 @@ export class NearbyPage {
     let skip = this.places.length;
     this.placeService.findNearbyPlaces(500, skip, 4)
       .subscribe(
-      value => {        
+      value => {
         if (value.length)
           value.forEach(element => {
             this.places.push(element);
           });
+        infiniteScroll.complete();
       },
       error => {
         console.log(error);
@@ -34,6 +35,7 @@ export class NearbyPage {
   }
 
   ionViewDidLoad() {
+    //se a tela é muito grande carrega só 4 e depois nada mais pois não existe ação de scroll
     console.log('ionViewDidLoad NearbyPage');
     this.placeService.findNearbyPlaces(500, 0, 4)
       .subscribe(value => this.places = value);
