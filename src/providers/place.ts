@@ -53,6 +53,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "http://silvercreekart.weebly.com/uploads/3/7/3/0/37300503/9869404.png",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://2.kekantoimg.com/iNKlCUKmkreSO-X0FltzpKMlOBY=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/814/113814.jpg",
     "https://imagesapt.apontador-assets.com/fit-in/640x480/7d526959259b4329a4ada9fc3a17e7e6/3k2yv72s-320148250593434.jpg",
@@ -63,6 +64,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/A_Voz_do_Brasil_logo.svg/256px-A_Voz_do_Brasil_logo.svg.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
   horariosFuncionamento: { 1: "18h - 1h", 2: "18h - 1h", 3: "18h - 1h", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://3.kekantoimg.com/abphgIiG07F-T0GfsZuS4gtrr2M=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/887/116887.jpg",
     "http://1.bp.blogspot.com/-lB5B463mp3k/VE-Xow1lBzI/AAAAAAAAAVA/SIzUzzb4TDc/s1600/Imagem%2B1.jpg",
@@ -73,6 +75,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://logodownload.org/wp-content/uploads/2014/09/lol-logo-league-of-legends-4.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://media-cdn.tripadvisor.com/media/photo-s/0b/c4/2e/ab/bar-e-suas-vinte-torneiras.jpg",
     "https://igx.4sqi.net/img/general/original/42099106_nQ_m_JhxlYoKFupTU3jJpRAIMCf1cvoAl95CY3M7UHQ.jpg",
@@ -83,6 +86,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://typo3.org/fileadmin/t3org/images/icons/slack.svg",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://2.kekantoimg.com/iNKlCUKmkreSO-X0FltzpKMlOBY=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/814/113814.jpg",
     "https://imagesapt.apontador-assets.com/fit-in/640x480/7d526959259b4329a4ada9fc3a17e7e6/3k2yv72s-320148250593434.jpg",
@@ -93,6 +97,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSQksVuC8-cD1RFYccUzIDpZ_gD0tZw38b1MVEVGLYvqIPSbYnWUA",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
   horariosFuncionamento: { 1: "18h - 1h", 2: "18h - 1h", 3: "18h - 1h", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://3.kekantoimg.com/abphgIiG07F-T0GfsZuS4gtrr2M=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/887/116887.jpg",
     "http://1.bp.blogspot.com/-lB5B463mp3k/VE-Xow1lBzI/AAAAAAAAAVA/SIzUzzb4TDc/s1600/Imagem%2B1.jpg",
@@ -103,6 +108,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Chromium_11_Logo.svg/256px-Chromium_11_Logo.svg.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://media-cdn.tripadvisor.com/media/photo-s/0b/c4/2e/ab/bar-e-suas-vinte-torneiras.jpg",
     "https://igx.4sqi.net/img/general/original/42099106_nQ_m_JhxlYoKFupTU3jJpRAIMCf1cvoAl95CY3M7UHQ.jpg",
@@ -113,6 +119,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://upload.wikimedia.org/wikipedia/commons/7/76/Media_Player_Classic_logo.png",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://2.kekantoimg.com/iNKlCUKmkreSO-X0FltzpKMlOBY=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/814/113814.jpg",
     "https://imagesapt.apontador-assets.com/fit-in/640x480/7d526959259b4329a4ada9fc3a17e7e6/3k2yv72s-320148250593434.jpg",
@@ -123,6 +130,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://4.bp.blogspot.com/-rMQvgxPet-A/VySnsgGDF1I/AAAAAAAAFgY/YOZUZL4wRRMZ5Y6Gv0UZDBtzb_t3uH98QCLcB/s1600/AFC_inline.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
   horariosFuncionamento: { 1: "18h - 1h", 2: "18h - 1h", 3: "18h - 1h", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://3.kekantoimg.com/abphgIiG07F-T0GfsZuS4gtrr2M=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/887/116887.jpg",
     "http://1.bp.blogspot.com/-lB5B463mp3k/VE-Xow1lBzI/AAAAAAAAAVA/SIzUzzb4TDc/s1600/Imagem%2B1.jpg",
@@ -133,6 +141,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://images.vexels.com/media/users/3/136311/isolated/lists/b26ff18482f595dacf0017d4d0251c0a-logo-kebab-embrulhar-fast-food.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://media-cdn.tripadvisor.com/media/photo-s/0b/c4/2e/ab/bar-e-suas-vinte-torneiras.jpg",
     "https://igx.4sqi.net/img/general/original/42099106_nQ_m_JhxlYoKFupTU3jJpRAIMCf1cvoAl95CY3M7UHQ.jpg",
@@ -143,6 +152,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://opensource.org/files/twitterlogo.png",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://2.kekantoimg.com/iNKlCUKmkreSO-X0FltzpKMlOBY=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/814/113814.jpg",
     "https://imagesapt.apontador-assets.com/fit-in/640x480/7d526959259b4329a4ada9fc3a17e7e6/3k2yv72s-320148250593434.jpg",
@@ -153,6 +163,7 @@ const placesMockData: PlaceModel[] = [{
   logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSoInmyuFsDxaHwf9luOPksCYFL6Lx1EaQt16TIMe867bEUV9HC4w",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
   horariosFuncionamento: { 1: "18h - 1h", 2: "18h - 1h", 3: "18h - 1h", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "",
   fotosUrls: [
     "https://3.kekantoimg.com/abphgIiG07F-T0GfsZuS4gtrr2M=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/887/116887.jpg",
     "http://1.bp.blogspot.com/-lB5B463mp3k/VE-Xow1lBzI/AAAAAAAAAVA/SIzUzzb4TDc/s1600/Imagem%2B1.jpg",

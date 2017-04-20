@@ -4,8 +4,8 @@ export class PlaceModel {
     logoUrl: string
     endereco: string
     telefones: string[]
-    subNome?: string
-    descricao?: string
+    descricao: string
+    subNome?: string    
     isHappyOnDemand?: boolean
     isPontuavel?: boolean
     isReservavel?: boolean    
