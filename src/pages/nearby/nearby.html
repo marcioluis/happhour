@@ -8,24 +8,14 @@
   <ion-navbar>
     <ion-title>nearby</ion-title>
   </ion-navbar>
-  <ion-toolbar>
-    <ion-segment>
-      <ion-segment-button value="places">
-        Lugares
-      </ion-segment-button>
-      <ion-segment-button value="events">
-        Eventos
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let place of places" col-6 col-md-4 col-lg-3 col-xl-2>
-        <ion-card>
-          <img alt="logo" src="{{place.logoUrl}}">
+        <ion-card (tap)="goDetails(place)">
+          <img alt="logo" src="{{place.logoUrl}}">          
           <ion-card-header>{{place.nome}}</ion-card-header>
           <ion-card-content>{{place.subNome}}</ion-card-content>
           <ion-row>
@@ -51,8 +41,6 @@
   <ion-fab right bottom>
     <button ion-fab color="secondary"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="left">
-      <button ion-fab><ion-icon name="walk"></ion-icon></button>
-      <button ion-fab><ion-icon name="film"></ion-icon></button>
       <button ion-fab><ion-icon name="beer"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>

@@ -27,7 +27,7 @@ export class PlaceProvider {
     let promise = new Promise<PlaceModel[]>((resolve, reject) => {
       setTimeout(() => {
         resolve(placesMockData);
-      }, 3550);
+      }, 2550);
     });
     //http://stackoverflow.com/questions/37618337/how-to-use-skip-and-take-with-rxjs-observable
     return Observable.from<PlaceModel[]>(promise)
@@ -38,10 +38,11 @@ export class PlaceProvider {
 
 const placesMockData: PlaceModel[] = [{
   _id: 123,
-  nome: "4Beers", subNome: "Bar de cervejas artesanais",
+  nome: "4Beers", subNome: "Cerveja & Cultura",
   logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSIelVH6cOzCktUM5jLCZ7du6gRVTUVK7jIKhSQMWzNg9oSXKdB",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
   horariosFuncionamento: { 1: "fechado", 2: "fechado", 3: "fechado", 4: "19h - 23h", 5: "19h - 23h", 6: "18h-00h", 7: "fechado" },
+  descricao: "A 4beer é um tap house, bar com 20 torneiras de chopp saídas direto da câmara fria, junto da cervejaria Diefen Bier. \n\r Às 23h: Hell Bells, último chopp!",
   fotosUrls: [
     "https://media-cdn.tripadvisor.com/media/photo-s/0b/c4/2e/ab/bar-e-suas-vinte-torneiras.jpg",
     "https://igx.4sqi.net/img/general/original/42099106_nQ_m_JhxlYoKFupTU3jJpRAIMCf1cvoAl95CY3M7UHQ.jpg",

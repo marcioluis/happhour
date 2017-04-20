@@ -36,8 +36,8 @@ export class NearbyPage {
       () => infiniteScroll.complete());
   }
 
-  goDetails(place: PlaceModel){
-    
+  goDetails(placeToDetail: PlaceModel) {
+    this.navCtrl.push('PlaceDetailPage', { place: placeToDetail })
   }
 
   ionViewDidLoad() {

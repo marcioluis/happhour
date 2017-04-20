@@ -5,6 +5,7 @@ export class PlaceModel {
     endereco: string
     telefones: string[]
     subNome?: string
+    descricao?: string
     isHappyOnDemand?: boolean
     isPontuavel?: boolean
     isReservavel?: boolean    
