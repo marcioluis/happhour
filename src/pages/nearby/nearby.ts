@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
+import { NavController, NavParams, InfiniteScroll, IonicPage } from 'ionic-angular';
 import { PlaceProvider } from "../../providers/providers";
+import { PlaceModel } from "../../model/models";
 
 /*
   Generated class for the Nearby page.
@@ -8,6 +9,7 @@ import { PlaceProvider } from "../../providers/providers";
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+@IonicPage()
 @Component({
   selector: 'page-nearby',
   templateUrl: 'nearby.html'
@@ -32,6 +34,10 @@ export class NearbyPage {
         console.log(error);
       },
       () => infiniteScroll.complete());
+  }
+
+  goDetails(place: PlaceModel){
+    
   }
 
   ionViewDidLoad() {

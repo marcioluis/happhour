@@ -5,9 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from 'ng2-translate';
 import { Settings } from '../providers/providers';
 
-import { FirstRunPage, MainPage } from '../pages/pages';
-
-
 @Component({
   template: `<ion-nav #content [root]="rootPage"></ion-nav>`
 })
@@ -34,10 +31,10 @@ export class MyApp {
       //vai para tela home ou de tutorial se for o primeiro uso
       settings.load().then(() => {
         if (settings.allSettings.isFirstRun)
-          this.rootPage = FirstRunPage;
+          this.rootPage = 'TutorialPage';
         else
-          this.rootPage = MainPage;
-      });
+          this.rootPage = 'TabsPage';
+      }); 
 
       splashScreen.hide();
     });

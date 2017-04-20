@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { Settings } from '../../providers/providers';
 import { TranslateService } from 'ng2-translate';
 
@@ -10,6 +10,7 @@ import { TranslateService } from 'ng2-translate';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+@IonicPage()
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html'

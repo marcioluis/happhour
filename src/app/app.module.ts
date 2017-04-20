@@ -7,8 +7,6 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 //app component
 import { MyApp } from './app.component';
-//pages
-import { AllPages } from '../pages/pages';
 //plugins
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,7 +22,6 @@ import { Facebook } from '@ionic-native/facebook';
  * We then take these pages and inject them into our NgModule so Angular
  * can find them. As you add and remove pages, make sure to keep this list up to date.
  */
-let pages = Array.of<any>(MyApp, AllPages);
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -43,14 +40,6 @@ export function provideSettings(storage: Storage) {
     isFirstRun: true,
     searchRadius: 500
   });
-}
-
-export function declarations() {
-  return pages;
-}
-
-export function entryComponents() {
-  return pages;
 }
 
 export function providers(): any {
@@ -87,7 +76,7 @@ export function providers(): any {
 }
 
 @NgModule({
-  declarations: declarations(),
+  declarations: [MyApp],
   imports: [
     BrowserModule,
     HttpModule,
@@ -100,7 +89,7 @@ export function providers(): any {
     })
   ],
   bootstrap: [IonicApp],
-  entryComponents: entryComponents(),
+  entryComponents: [MyApp],
   providers: providers()
 })
 export class AppModule { }

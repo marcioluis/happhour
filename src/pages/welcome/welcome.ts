@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, IonicPage } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate';
 import { Settings } from '../../providers/providers';
-import { MainPage } from '../pages';
 import { Auth } from '../../providers/providers';
 
+@IonicPage()
 @Component({
   selector: 'page-welcome',
   templateUrl: 'welcome.html'
@@ -32,7 +32,7 @@ export class WelcomePage {
         this.settings.allSettings.user = googleUser;
         this.settings.allSettings.isFirstRun = false;
         this.settings.save().then(() =>
-          this.navCtrl.setRoot(MainPage, {}, { animate: true, direction: 'forward' }));
+          this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' }));
         loader.dismiss();
       })
       .catch(err => {
@@ -52,7 +52,7 @@ export class WelcomePage {
         this.settings.allSettings.user = facebookUser;
         this.settings.allSettings.isFirstRun = false;
         this.settings.save().then(() =>
-          this.navCtrl.setRoot(MainPage, {}, { animate: true, direction: 'forward' }));
+          this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' }));
         loader.dismiss();
       })
       .catch(err => {

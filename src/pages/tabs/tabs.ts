@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { InvitedPage, HomePage, ConfigsPage, ContactsPage } from '../pages';
+import { NavController, IonicPage } from 'ionic-angular';
 
 /*
   Generated class for the Tabs tabs.
@@ -8,16 +7,17 @@ import { InvitedPage, HomePage, ConfigsPage, ContactsPage } from '../pages';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+@IonicPage({name: 'TabsPage'})
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root: any = InvitedPage;
-  tab2Root: any = HomePage;
-  tab3Root: any = ConfigsPage;
-  tab4Root: any = ContactsPage;
+  tab1Root: any = 'InvitedPage';
+  tab2Root: any = 'HomePage';
+  tab3Root: any = 'ConfigsPage';
+  tab4Root: any = 'ContactsPage';
 
   constructor(public navCtrl: NavController) {
 
