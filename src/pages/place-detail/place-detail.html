@@ -46,8 +46,8 @@
     <p>{{place.hoje}}</p>
   </div>
 
-  <button ion-button full>Criar Happ aqui!</button>
-  
+  <button ion-button full (tap)="createEvent()">Criar Happ aqui!</button>
+
   <h5>Fotos:</h5>
   <ion-slides [autoplay]="1000*10" [loop]="true" [pager]="true" [slidesPerView]="1">
     <ion-slide *ngFor="let foto of place.fotosUrls">

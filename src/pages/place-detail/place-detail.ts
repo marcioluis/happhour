@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
+import { TranslateService } from 'ng2-translate';
 import { PlaceModel } from "../../model/models";
 
 /**
@@ -17,7 +18,7 @@ export class PlaceDetailPage {
 
   place: PlaceModel = this.navParams.get('place');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadCtrl: LoadingController, translate: TranslateService) {
   }
 
   ionViewDidLoad() {
@@ -29,6 +30,21 @@ export class PlaceDetailPage {
     let dia = new Date().getDay() + 1;
     let horario = this.place.horariosFuncionamento[dia];
     this.place['hoje'] = horario;
+  }
+
+  createEvent() {
+    let loader = this.loadCtrl.create({
+      content: "Criando evento"
+    });
+    loader.present();
+    setTimeout(() => {
+      let parent = this.navCtrl.parent;
+      if (parent instanceof Tabs) {
+        parent.select(0);
+      }
+       
+      loader.dismiss();
+    }, 2550);
   }
 
 }
