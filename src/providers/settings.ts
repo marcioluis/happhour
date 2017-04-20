@@ -11,8 +11,7 @@ export class Settings {
 
   settings: SettingsModel;
 
-  private _defaults: SettingsModel;
-  private _readyPromise: Promise<any>;
+  private _defaults: SettingsModel;  
 
   constructor(private storage: Storage, defaults: SettingsModel) {
     this._defaults = defaults;
