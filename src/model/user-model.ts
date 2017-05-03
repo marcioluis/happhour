@@ -1,4 +1,5 @@
 export class UserModel {
+    _id: number
     idToken: string
     email: string
     displayName: string

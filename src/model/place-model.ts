@@ -1,5 +1,6 @@
 
 export class PlaceModel {
+    _id: number
     nome: string
     logoUrl: string
     endereco: string
@@ -10,6 +11,5 @@ export class PlaceModel {
     isPontuavel?: boolean
     isReservavel?: boolean    
     horariosFuncionamento?: any
-    fotosUrls?: string[]
-    _id?: number
+    fotosUrls?: string[]    
 }
