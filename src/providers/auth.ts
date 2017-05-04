@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';
 import { Settings } from './settings';
 import { UserModel } from '../model/models';
 
@@ -69,8 +69,8 @@ export class Auth {
         return this.facebook.api('/me?fields=id,name,gender,first_name,last_name,email,picture', [])
       })
       .then<UserModel>(user => {
-        console.log('user');
         return {
+          _id: 0,
           email: user.email,
           idToken: aToken,
           userId: user.id,

@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PlaceModel } from "../model/models";
-//import { Api } from "./providers";
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/skip';
-import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/from';
-
-
-
 
 /*
   Generated class for the Place provider.

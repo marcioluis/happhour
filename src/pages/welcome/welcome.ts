@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, IonicPage } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';
 import { Settings } from '../../providers/providers';
 import { Auth } from '../../providers/providers';
+import { UserProvider } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -12,7 +13,7 @@ import { Auth } from '../../providers/providers';
 export class WelcomePage {
 
   constructor(public navCtrl: NavController, private settings: Settings,
-    private loadCtrl: LoadingController, translate: TranslateService, private auth: Auth) {
+    private loadCtrl: LoadingController, translate: TranslateService, private auth: Auth, private user: UserProvider) {
 
     settings.load();
     translate.get(["AUTHENTICATING"])
@@ -21,45 +22,38 @@ export class WelcomePage {
 
   private strings;
 
-  loginGoogle() {
-    let loader = this.loadCtrl.create({
-      content: this.strings.LOADING
-    });
-    loader.present();
+  async loginGoogle() {
+    let loader = this.presentLoader();
+    //TODO: tratar possiveis erros em loginGoole
+    let googleUser = await this.auth.doGoogleLogin();
+    await this.user.saveAndMerge(googleUser);
 
-    this.auth.doGoogleLogin()
-      .then(googleUser => {
-        this.settings.allSettings.user = googleUser;
-        this.settings.allSettings.isFirstRun = false;
-        this.settings.save().then(() =>
-          this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' }));
-        loader.dismiss();
-      })
-      .catch(err => {
-        console.error(err);
-        loader.dismiss();
-      });
+    this.settings.allSettings.isFirstRun = false;
+    await this.settings.save();
+
+    loader.dismiss();
+    this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
   }
 
-  loginFacebook() {
+  async loginFacebook() {
+    let loader = this.presentLoader();
+    //TODO: tratar possiveis erros em loginFacebook
+    let facebookUser = await this.auth.doFacebookLogin();
+    await this.user.saveAndMerge(facebookUser);
+
+    this.settings.allSettings.isFirstRun = false;
+    await this.settings.save();
+
+    loader.dismiss();
+    this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+  }
+
+  private presentLoader() {
     let loader = this.loadCtrl.create({
       content: this.strings.LOADING
     });
     loader.present();
-
-    this.auth.doFacebookLogin()
-      .then(facebookUser => {
-        this.settings.allSettings.user = facebookUser;
-        this.settings.allSettings.isFirstRun = false;
-        this.settings.save().then(() =>
-          this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' }));
-        loader.dismiss();
-      })
-      .catch(err => {
-        console.error(err);
-        loader.dismiss();
-      });
-
+    return loader;
   }
 
   ionViewDidLoad() {

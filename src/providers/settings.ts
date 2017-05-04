@@ -11,13 +11,16 @@ export class Settings {
 
   settings: SettingsModel;
 
-  private _defaults: SettingsModel;  
+  private _defaults: SettingsModel;
 
   constructor(private storage: Storage, defaults: SettingsModel) {
     this._defaults = defaults;
     storage.ready().then(() => console.log('storage is ready'));
   }
 
+  /**
+   * load the storage
+   */
   load() {
     return this.storage.get(this.SETTINGS_KEY).then((value) => {
       if (value) {

@@ -1,4 +1,5 @@
 {
+  "version": "0.1.0",
   "name": "ionic-hello-world",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -26,9 +27,10 @@
     "@ionic-native/sqlite": "~3.4.0",
     "@ionic-native/status-bar": "~3.4.0",
     "@ionic/storage": "~2.0.0",
+    "@ngx-translate/core": "^6.0.1",
+    "@ngx-translate/http-loader": "0.0.3",
     "ionic-angular": "~3.0.1",
     "ionicons": "3.0.0",
-    "ng2-translate": "^5.0.0",
     "rxjs": "~5.1.1",
     "sw-toolbox": "~3.6.0",
     "zone.js": "^0.8.5"

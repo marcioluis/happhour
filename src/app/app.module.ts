@@ -4,7 +4,8 @@ import { Http, HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 //translate
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 //app component
 import { MyApp } from './app.component';
 //plugins
@@ -26,9 +27,8 @@ import { Facebook } from '@ionic-native/facebook';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, './assets/i18n', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n', '.json');
 }
-
 /**
  * The Settings provider takes a set of default settings for your app.
  *
@@ -51,7 +51,7 @@ export function providers(): any {
       Facebook,
       Auth,
       Api,
-      PlaceProvider,      
+      PlaceProvider,
       // settings provider
       { provide: Settings, useFactory: provideSettings, deps: [Storage] },
       // Keep this to enable Ionic's runtime error handling during development
@@ -81,11 +81,13 @@ export function providers(): any {
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot({ name: '__happyhour', storeName: 'hpdb' }),
+    IonicStorageModule.forRoot({ name: '_happyhourdb', storeName: 'ionic_storage' }),
     TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http]
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [Http]
+      }
     })
   ],
   bootstrap: [IonicApp],
