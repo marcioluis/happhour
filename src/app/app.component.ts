@@ -3,7 +3,7 @@ import { Platform, Nav, Config } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
-import { Settings } from '../providers/providers';
+import { Settings } from '../providers';
 
 @Component({
   template: `<ion-nav #content [root]="rootPage"></ion-nav>`

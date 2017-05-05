@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-import { Settings } from '../../providers/providers';
+import { Settings } from '../../providers';
 
 export interface Slide {
   title: string;
@@ -34,7 +34,6 @@ export class TutorialPage {
       "TUTORIAL_SLIDE3_DESCRIPTION",
     ])
       .subscribe((values) => {
-        console.log(values);
         this.slides = [
           {
             title: values.TUTORIAL_SLIDE1_TITLE,

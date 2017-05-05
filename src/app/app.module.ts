@@ -17,7 +17,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlusMock } from '../mocks/googlePlusMock';
 import { FacebookMock } from '../mocks/facebookMock';
 //providers
-import { Settings, Auth, Api, PlaceProvider, UserProvider } from '../providers/providers';
+import { Api, Auth, PlaceProvider, Settings, UserProvider } from "../providers";
 
 /** 
  * The translate loader needs to know where to load i18n files
@@ -33,10 +33,7 @@ export function factoryTranslateLoader(http: Http) {
  * these values will not overwrite the saved values (this can be done manually if desired).
  */
 export function provideDefaultSettings(storage: Storage) {
-  return new Settings(storage, {
-    isFirstRun: true,
-    searchRadius: 500
-  });
+  return new Settings(storage, { isFirstRun: true, searchRadius: 500 });
 }
 
 export function providers(): any[] {
@@ -46,8 +43,8 @@ export function providers(): any[] {
       SplashScreen,
       GooglePlus,
       Facebook,
-      Auth,
       Api,
+      Auth,
       PlaceProvider,
       UserProvider,
       // settings provider
@@ -60,15 +57,16 @@ export function providers(): any[] {
     return [
       StatusBar,
       SplashScreen,
-      Auth,
       Api,
+      Auth,
       PlaceProvider,
       UserProvider,
+      //settings provider
+      { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
       //mock the plugins
       { provide: GooglePlus, useClass: GooglePlusMock },
       { provide: Facebook, useClass: FacebookMock },
-      //
-      { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
+      // Keep this to enable Ionic's runtime error handling during development
       { provide: ErrorHandler, useClass: IonicErrorHandler }
     ];
   }

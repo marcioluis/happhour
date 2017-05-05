@@ -70,7 +70,7 @@ export class Auth {
       })
       .then<UserModel>(user => {
         return {
-          _id: 0,
+          id: 0,
           email: user.email,
           idToken: aToken,
           userId: user.id,

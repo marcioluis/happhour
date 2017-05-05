@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll, IonicPage } from 'ionic-angular';
-import { PlaceProvider } from "../../providers/providers";
+import { PlaceProvider } from "../../providers";
 import { PlaceModel } from "../../model/models";
 
 /*

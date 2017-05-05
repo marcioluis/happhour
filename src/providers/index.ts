@@ -5,9 +5,9 @@ import { PlaceProvider } from "./place";
 import { UserProvider } from './user';
 
 export {
+    Api,
     Settings,
     Auth,
-    Api,
     PlaceProvider,
     UserProvider
 }

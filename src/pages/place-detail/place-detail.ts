@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-import { PlaceModel, HappHourModel } from "../../model/models";
+import { PlaceModel } from "../../model/models";
 
 /**
  * Generated class for the PlaceDetail page.
@@ -37,7 +37,6 @@ export class PlaceDetailPage {
       content: "Criando evento"
     });
     loader.present();
-    let event: HappHourModel = { _id: 0 };
 
     setTimeout(() => {
       let parent = this.navCtrl.parent;

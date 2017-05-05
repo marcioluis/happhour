@@ -1,7 +1,7 @@
 import { UserModel, PlaceModel } from "./models";
 
 export class HappHourModel {
-    _id: number 
+    id: number
     name?: string
     creator?: UserModel
     place?: PlaceModel

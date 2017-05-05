@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-import { Settings } from '../../providers/providers';
-import { Auth } from '../../providers/providers';
-import { UserProvider } from '../../providers/providers';
+import { Settings } from '../../providers';
+import { Auth } from '../../providers';
+import { UserProvider } from '../../providers';
 
 @IonicPage()
 @Component({

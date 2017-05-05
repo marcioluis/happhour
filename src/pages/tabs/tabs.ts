@@ -7,7 +7,7 @@ import { NavController, IonicPage } from 'ionic-angular';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
-@IonicPage({name: 'TabsPage'})
+@IonicPage()
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html'

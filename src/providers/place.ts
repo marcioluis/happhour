@@ -30,7 +30,7 @@ export class PlaceProvider {
 }
 
 const placesMockData: PlaceModel[] = [{
-  _id: 123,
+  id: 123,
   nome: "4Beers", subNome: "Cerveja & Cultura",
   logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSIelVH6cOzCktUM5jLCZ7du6gRVTUVK7jIKhSQMWzNg9oSXKdB",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
@@ -41,7 +41,7 @@ const placesMockData: PlaceModel[] = [{
     "https://igx.4sqi.net/img/general/original/42099106_nQ_m_JhxlYoKFupTU3jJpRAIMCf1cvoAl95CY3M7UHQ.jpg",
     "https://media-cdn.tripadvisor.com/media/photo-s/0c/10/a3/41/4beer-cerveja-cultura.jpg"]
 }, {
-  _id: 1234,
+  id: 1234,
   nome: "Mulligan Porto Alegre", subNome: "Irish pub",
   logoUrl: "http://silvercreekart.weebly.com/uploads/3/7/3/0/37300503/9869404.png",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
@@ -52,7 +52,7 @@ const placesMockData: PlaceModel[] = [{
     "https://imagesapt.apontador-assets.com/fit-in/640x480/7d526959259b4329a4ada9fc3a17e7e6/3k2yv72s-320148250593434.jpg",
     "http://3.bp.blogspot.com/-kOUsGgSTuFY/TbrMpQ05GrI/AAAAAAAAABo/d6X6joh13is/s1600/Mulligan_Small.jpg"]
 }, {
-  _id: 1235,
+  id: 1235,
   nome: "Pedrini", subNome: "",
   logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/A_Voz_do_Brasil_logo.svg/256px-A_Voz_do_Brasil_logo.svg.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
@@ -63,7 +63,7 @@ const placesMockData: PlaceModel[] = [{
     "http://1.bp.blogspot.com/-lB5B463mp3k/VE-Xow1lBzI/AAAAAAAAAVA/SIzUzzb4TDc/s1600/Imagem%2B1.jpg",
     "https://3.kekantoimg.com/szxjO6_em79V5cBwj4W1T6vH2JY=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/879/277879.jpg"]
 }, {
-  _id: 456,
+  id: 456,
   nome: "4Beers", subNome: "Bar de cervejas artesanais",
   logoUrl: "https://logodownload.org/wp-content/uploads/2014/09/lol-logo-league-of-legends-4.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
@@ -74,7 +74,7 @@ const placesMockData: PlaceModel[] = [{
     "https://igx.4sqi.net/img/general/original/42099106_nQ_m_JhxlYoKFupTU3jJpRAIMCf1cvoAl95CY3M7UHQ.jpg",
     "https://media-cdn.tripadvisor.com/media/photo-s/0c/10/a3/41/4beer-cerveja-cultura.jpg"]
 }, {
-  _id: 4567,
+  id: 4567,
   nome: "Mulligan Porto Alegre", subNome: "Irish pub",
   logoUrl: "https://typo3.org/fileadmin/t3org/images/icons/slack.svg",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
@@ -85,7 +85,7 @@ const placesMockData: PlaceModel[] = [{
     "https://imagesapt.apontador-assets.com/fit-in/640x480/7d526959259b4329a4ada9fc3a17e7e6/3k2yv72s-320148250593434.jpg",
     "http://3.bp.blogspot.com/-kOUsGgSTuFY/TbrMpQ05GrI/AAAAAAAAABo/d6X6joh13is/s1600/Mulligan_Small.jpg"]
 }, {
-  _id: 4568,
+  id: 4568,
   nome: "Pedrini", subNome: "",
   logoUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSQksVuC8-cD1RFYccUzIDpZ_gD0tZw38b1MVEVGLYvqIPSbYnWUA",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
@@ -96,7 +96,7 @@ const placesMockData: PlaceModel[] = [{
     "http://1.bp.blogspot.com/-lB5B463mp3k/VE-Xow1lBzI/AAAAAAAAAVA/SIzUzzb4TDc/s1600/Imagem%2B1.jpg",
     "https://3.kekantoimg.com/szxjO6_em79V5cBwj4W1T6vH2JY=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/879/277879.jpg"]
 }, {
-  _id: 789,
+  id: 789,
   nome: "4Beers", subNome: "Bar de cervejas artesanais",
   logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Chromium_11_Logo.svg/256px-Chromium_11_Logo.svg.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
@@ -107,7 +107,7 @@ const placesMockData: PlaceModel[] = [{
     "https://igx.4sqi.net/img/general/original/42099106_nQ_m_JhxlYoKFupTU3jJpRAIMCf1cvoAl95CY3M7UHQ.jpg",
     "https://media-cdn.tripadvisor.com/media/photo-s/0c/10/a3/41/4beer-cerveja-cultura.jpg"]
 }, {
-  _id: 7890,
+  id: 7890,
   nome: "Mulligan Porto Alegre", subNome: "Irish pub",
   logoUrl: "https://upload.wikimedia.org/wikipedia/commons/7/76/Media_Player_Classic_logo.png",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
@@ -118,7 +118,7 @@ const placesMockData: PlaceModel[] = [{
     "https://imagesapt.apontador-assets.com/fit-in/640x480/7d526959259b4329a4ada9fc3a17e7e6/3k2yv72s-320148250593434.jpg",
     "http://3.bp.blogspot.com/-kOUsGgSTuFY/TbrMpQ05GrI/AAAAAAAAABo/d6X6joh13is/s1600/Mulligan_Small.jpg"]
 }, {
-  _id: 7891,
+  id: 7891,
   nome: "Pedrini", subNome: "",
   logoUrl: "https://4.bp.blogspot.com/-rMQvgxPet-A/VySnsgGDF1I/AAAAAAAAFgY/YOZUZL4wRRMZ5Y6Gv0UZDBtzb_t3uH98QCLcB/s1600/AFC_inline.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,
@@ -129,7 +129,7 @@ const placesMockData: PlaceModel[] = [{
     "http://1.bp.blogspot.com/-lB5B463mp3k/VE-Xow1lBzI/AAAAAAAAAVA/SIzUzzb4TDc/s1600/Imagem%2B1.jpg",
     "https://3.kekantoimg.com/szxjO6_em79V5cBwj4W1T6vH2JY=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/879/277879.jpg"]
 }, {
-  _id: 7893,
+  id: 7893,
   nome: "4Beers", subNome: "Bar de cervejas artesanais",
   logoUrl: "https://images.vexels.com/media/users/3/136311/isolated/lists/b26ff18482f595dacf0017d4d0251c0a-logo-kebab-embrulhar-fast-food.png",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: true, isReservavel: true,
@@ -140,7 +140,7 @@ const placesMockData: PlaceModel[] = [{
     "https://igx.4sqi.net/img/general/original/42099106_nQ_m_JhxlYoKFupTU3jJpRAIMCf1cvoAl95CY3M7UHQ.jpg",
     "https://media-cdn.tripadvisor.com/media/photo-s/0c/10/a3/41/4beer-cerveja-cultura.jpg"]
 }, {
-  _id: 7894,
+  id: 7894,
   nome: "Mulligan Porto Alegre", subNome: "Irish pub",
   logoUrl: "https://opensource.org/files/twitterlogo.png",
   endereco: "Av. Padre Chagas 666", telefones: ["5133627666", "5132145678"], isHappyOnDemand: false, isPontuavel: true, isReservavel: false,
@@ -151,7 +151,7 @@ const placesMockData: PlaceModel[] = [{
     "https://imagesapt.apontador-assets.com/fit-in/640x480/7d526959259b4329a4ada9fc3a17e7e6/3k2yv72s-320148250593434.jpg",
     "http://3.bp.blogspot.com/-kOUsGgSTuFY/TbrMpQ05GrI/AAAAAAAAABo/d6X6joh13is/s1600/Mulligan_Small.jpg"]
 }, {
-  _id: 7895,
+  id: 7895,
   nome: "Pedrini", subNome: "",
   logoUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSoInmyuFsDxaHwf9luOPksCYFL6Lx1EaQt16TIMe867bEUV9HC4w",
   endereco: "Av. Polônia 240", telefones: ["5133627666", "5132145678"], isHappyOnDemand: true, isPontuavel: false, isReservavel: true,

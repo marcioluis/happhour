@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { SettingsModel } from '../model/models';
 
@@ -13,8 +13,8 @@ export class Settings {
 
   private _defaults: SettingsModel;
 
-  constructor(private storage: Storage, defaults: SettingsModel) {
-    this._defaults = defaults;
+  constructor(private storage: Storage, @Optional() defaults: SettingsModel) {
+    this._defaults = defaults || {};
     storage.ready().then(() => console.log('storage is ready'));
   }
 
