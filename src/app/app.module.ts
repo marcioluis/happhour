@@ -12,22 +12,19 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { Facebook } from '@ionic-native/facebook';
 //mocks
 import { GooglePlusMock } from '../mocks/googlePlusMock';
 import { FacebookMock } from '../mocks/facebookMock';
 //providers
-import { Settings, Auth, Api, PlaceProvider } from '../providers/providers';
-import { Facebook } from '@ionic-native/facebook';
-/**
- * The Pages array lists all of the pages we want to use in our app.
- * We then take these pages and inject them into our NgModule so Angular
- * can find them. As you add and remove pages, make sure to keep this list up to date.
- */
+import { Settings, Auth, Api, PlaceProvider, UserProvider } from '../providers/providers';
 
-// The translate loader needs to know where to load i18n files
-// in Ionic's static asset pipeline.
-export function createTranslateLoader(http: Http) {
-  return new TranslateHttpLoader(http, './assets/i18n', '.json');
+/** 
+ * The translate loader needs to know where to load i18n files
+ * in Ionic's static asset pipeline.
+ */
+export function factoryTranslateLoader(http: Http) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 /**
  * The Settings provider takes a set of default settings for your app.
@@ -35,14 +32,14 @@ export function createTranslateLoader(http: Http) {
  * You can add new settings options at any time. Once the settings are saved,
  * these values will not overwrite the saved values (this can be done manually if desired).
  */
-export function provideSettings(storage: Storage) {
+export function provideDefaultSettings(storage: Storage) {
   return new Settings(storage, {
     isFirstRun: true,
     searchRadius: 500
   });
 }
 
-export function providers(): any {
+export function providers(): any[] {
   if (window["cordova"]) {
     return [
       StatusBar,
@@ -52,8 +49,9 @@ export function providers(): any {
       Auth,
       Api,
       PlaceProvider,
+      UserProvider,
       // settings provider
-      { provide: Settings, useFactory: provideSettings, deps: [Storage] },
+      { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
       // Keep this to enable Ionic's runtime error handling during development
       { provide: ErrorHandler, useClass: IonicErrorHandler }
     ];
@@ -65,11 +63,12 @@ export function providers(): any {
       Auth,
       Api,
       PlaceProvider,
+      UserProvider,
       //mock the plugins
       { provide: GooglePlus, useClass: GooglePlusMock },
       { provide: Facebook, useClass: FacebookMock },
       //
-      { provide: Settings, useFactory: provideSettings, deps: [Storage] },
+      { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
       { provide: ErrorHandler, useClass: IonicErrorHandler }
     ];
   }
@@ -85,7 +84,7 @@ export function providers(): any {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: createTranslateLoader,
+        useFactory: factoryTranslateLoader,
         deps: [Http]
       }
     })

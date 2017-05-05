@@ -34,6 +34,7 @@ export class TutorialPage {
       "TUTORIAL_SLIDE3_DESCRIPTION",
     ])
       .subscribe((values) => {
+        console.log(values);
         this.slides = [
           {
             title: values.TUTORIAL_SLIDE1_TITLE,

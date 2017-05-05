@@ -1,4 +1,4 @@
-{  
+{
   "TUTORIAL_SKIP_BUTTON": "Pular",
   "TUTORIAL_CONTINUE_BUTTON": "Continuar",
   "TUTORIAL_SLIDE1_TITLE": "Bem-vindo ao HappHour",
@@ -12,7 +12,7 @@
   "GOOGLE_SIGN_IN_CANCELLED": "Não foi possível entrar na sua conta. Verifique seus dados e tente novamente.",
   "GOOGLE_SIGN_IN_FAILED": "Houve um erro ao fazer login com sua conta Google. Mudar para outra pode ou não resolver.",
   "LOGIN_FACEBOOK_BUTTON": "Entrar com Facebook",
-  "LOGIN_GOOGLE_BUTTON": "Entrar com Google",      
+  "LOGIN_GOOGLE_BUTTON": "Entrar com Google",
   "LOADING": "Carregando...",
   "AUTHENTICATING": "Autenticando...",
   "BACK_BUTTON_TEXT": "Voltar"
