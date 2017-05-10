@@ -1,12 +1,13 @@
 export class UserModel {
-    id: number
-    idToken: string
+    id?: number
+    providerIdToken: string
     email: string
     displayName: string
     familyName: string
     givenName: string
     provider: string
-    userId?: string
+    authCode?: string
+    providerUserId?: string
     imageUrl?: string
     gender?: string
 }

@@ -40,48 +40,48 @@ export class Auth {
 
   private GoogleSignInStatusCodes: GoogleSignInError;
 
-  doGoogleLogin() {
-    return this.googlePlus.login({
-      profiles: 'profile email',
-      webClientId: '784220670042-ib1ssv1utfr1c4cvfs67t7n9tgkck2vk.apps.googleusercontent.com',
-      offline: true
-    })
-      .then<UserModel>(user => {
-        user.provider = 'google';
-        return user;
-      })
-      .catch(code => {
-        throw this.GoogleSignInStatusCodes[code];
+  async doGoogleLogin(): Promise<UserModel> {
+    try {
+      let gUser = await this.googlePlus.login({
+        profiles: 'profile email',
+        webClientId: '784220670042-ib1ssv1utfr1c4cvfs67t7n9tgkck2vk.apps.googleusercontent.com',
+        offline: true
       });
+
+      return {
+        email: gUser.email,          // 'eddyverbruggen@gmail.com'        
+        displayName: gUser.displayName,    // 'Eddy Verbruggen'
+        familyName: gUser.familyName,   // 'Verbruggen'
+        givenName: gUser.givenName,   // 'Eddy'
+        imageUrl: gUser.imageUrl,  // 'http://link-to-my-profilepic.google.com'
+        providerIdToken: gUser.idToken, // idToken that can be exchanged to verify user identity.
+        authCode: gUser.serverAuthCode,// Auth code that can be exchanged for an access token and refresh token for offline access
+        provider: gUser.provider = 'google'
+      }
+    }
+    catch (error) {
+      throw this.GoogleSignInStatusCodes[error];
+    }
+
   }
 
-  doFacebookLogin() {
-    let aToken;
+  async doFacebookLogin(): Promise<UserModel> {
     let permissions = ['email', 'public_profile'];
-    return this.facebook.login(permissions)
-      .then<string>(response => {
-        console.log('response');
-        return this.facebook.getAccessToken()
-      })
-      .then<any>(token => {
-        aToken = token;
-        console.log('token');
-        return this.facebook.api('/me?fields=id,name,gender,first_name,last_name,email,picture', [])
-      })
-      .then<UserModel>(user => {
-        return {
-          id: 0,
-          email: user.email,
-          idToken: aToken,
-          userId: user.id,
-          displayName: user.name,
-          givenName: user.first_name,
-          familyName: user.last_name,
-          gender: user.gender,
-          imageUrl: user.picture.url,
-          provider: 'facebook'
-        };
-      });
+    let faceResponse = await this.facebook.login(permissions);
+    let token = await this.facebook.getAccessToken();
+    let user = await this.facebook.api('/me?fields=id,name,gender,first_name,last_name,email,picture', []);
+
+    return {
+      email: user.email,
+      providerIdToken: token,
+      providerUserId: user.id,
+      displayName: user.name,
+      givenName: user.first_name,
+      familyName: user.last_name,
+      gender: user.gender,
+      imageUrl: user.picture.url,
+      provider: 'facebook'
+    };
   }
 
 }
