@@ -68,20 +68,23 @@ export class Auth {
   async doFacebookLogin(): Promise<UserModel> {
     let permissions = ['email', 'public_profile'];
     let faceResponse = await this.facebook.login(permissions);
-    let token = await this.facebook.getAccessToken();
-    let user = await this.facebook.api('/me?fields=id,name,gender,first_name,last_name,email,picture', []);
 
-    return {
-      email: user.email,
-      providerIdToken: token,
-      providerUserId: user.id,
-      displayName: user.name,
-      givenName: user.first_name,
-      familyName: user.last_name,
-      gender: user.gender,
-      imageUrl: user.picture.url,
-      provider: 'facebook'
-    };
+    if (faceResponse.status === 'connected') {
+      let token = await this.facebook.getAccessToken();
+      let user = await this.facebook.api('/me?fields=id,name,gender,first_name,last_name,email,picture', []);
+
+      return {
+        email: user.email,
+        providerIdToken: token,
+        providerUserId: user.id,
+        displayName: user.name,
+        givenName: user.first_name,
+        familyName: user.last_name,
+        gender: user.gender,
+        imageUrl: user.picture.url,
+        provider: 'facebook'
+      };
+    }
   }
 
 }
