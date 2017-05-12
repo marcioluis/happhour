@@ -7,10 +7,19 @@ import 'rxjs/add/operator/map';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://example.com/api/v1';
+  private url: string = 'https://example.com/api/v1';
 
-  constructor(public http: Http) {
+  constructor(private http: Http) {
     console.log('Api Provider');
+  }
+
+  extractData(res: Response) {
+    let body = res.json();
+    return body.data || {};
+  }
+
+  handleError(error: Response | any) {
+    // In a real world app, you might use a remote logging infrastructure
   }
 
   get(endpoint: string, params?: any, options?: RequestOptions) {

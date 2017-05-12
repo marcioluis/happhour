@@ -16,9 +16,17 @@ export class UserProvider {
     storage.ready().then(() => console.log('storage is ready'));
   }
 
-  async saveAndMerge(user: UserModel) {
-    this._user = user;
-    await this.api.post('', user);
-    return this.storage.set(this.USER_KEY, user);
+  saveAndMerge(user: UserModel) {
+    return this.api.post('', user);
+  }
+
+  async loadUser(): Promise<UserModel> {
+    if (this._user) {
+      return Promise.resolve(this._user);
+    }
+    else {
+      this._user = await this.storage.get(this.USER_KEY);
+      return Promise.resolve(this._user);
+    }
   }
 }

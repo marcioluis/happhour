@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { PlaceModel } from "../../model/models";
+import { HapphourProvider } from "../../providers/happhour";
+import { UserProvider } from "../../providers/user";
 
 /**
  * Generated class for the PlaceDetail page.
@@ -18,7 +20,8 @@ export class PlaceDetailPage {
 
   place: PlaceModel = this.navParams.get('place');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadCtrl: LoadingController, translate: TranslateService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadCtrl: LoadingController,
+    private eventProvider: HapphourProvider, private userProvider: UserProvider) {
   }
 
   ionViewDidLoad() {
@@ -32,20 +35,24 @@ export class PlaceDetailPage {
     this.place['hoje'] = horario;
   }
 
-  createEvent() {
+  async createEvent() {
     let loader = this.loadCtrl.create({
       content: "Criando evento"
     });
     loader.present();
 
-    setTimeout(() => {
-      let parent = this.navCtrl.parent;
-      if (parent instanceof Tabs) {
-        parent.select(0);
-      }
-
-      loader.dismiss();
-    }, 2550);
+    let owner = await this.userProvider.loadUser();
+    let evento = this.eventProvider.createNewHappHour(this.place, owner);
+    this.eventProvider.saveEvent(evento).subscribe(
+      (value) => { },
+      (error) => { },
+      () => {
+        let parent = this.navCtrl.parent;
+        if (parent instanceof Tabs) {
+          parent.select(0);
+        }
+        loader.dismiss();
+      });
   }
 
 }
