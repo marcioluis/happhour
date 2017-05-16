@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 import { PlaceModel } from "../../model/models";
 import { HapphourProvider } from "../../providers/happhour";
 import { UserProvider } from "../../providers/user";
@@ -44,7 +43,7 @@ export class PlaceDetailPage {
     let owner = await this.userProvider.loadUser();
     let evento = this.eventProvider.createNewHappHour(this.place, owner);
     this.eventProvider.saveEvent(evento).subscribe(
-      (value) => { },
+      (value) => { console.log(value); },
       (error) => { },
       () => {
         let parent = this.navCtrl.parent;

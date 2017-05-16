@@ -7,15 +7,10 @@ import 'rxjs/add/operator/map';
  */
 @Injectable()
 export class Api {
-  private url: string = 'https://example.com/api/v1';
+  private url: string = 'http://localhost:3000/api/v1';
 
   constructor(private http: Http) {
     console.log('Api Provider');
-  }
-
-  extractData(res: Response) {
-    let body = res.json();
-    return body.data || {};
   }
 
   handleError(error: Response | any) {

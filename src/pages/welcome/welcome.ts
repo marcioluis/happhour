@@ -26,26 +26,26 @@ export class WelcomePage {
     let loader = this.presentLoader();
     //TODO: tratar possiveis erros em loginGoole
     let googleUser = await this.auth.doGoogleLogin();
-    await this.user.saveAndMerge(googleUser);
 
-    this.settings.allSettings.isFirstRun = false;
-    await this.settings.save();
-
-    loader.dismiss();
-    this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+    this.user.save(googleUser).subscribe((model) => {
+      this.settings.allSettings.isFirstRun = false;
+      this.settings.save().then(() => this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' }));
+    },
+      (error) => loader.dismiss(),
+      () => loader.dismiss());
   }
 
   async loginFacebook() {
     let loader = this.presentLoader();
     //TODO: tratar possiveis erros em loginFacebook
     let facebookUser = await this.auth.doFacebookLogin();
-    await this.user.saveAndMerge(facebookUser);
 
-    this.settings.allSettings.isFirstRun = false;
-    await this.settings.save();
-
-    loader.dismiss();
-    this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+    this.user.save(facebookUser).subscribe((model) => {
+      this.settings.allSettings.isFirstRun = false;
+      this.settings.save().then(() => this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' }));
+    },
+      (error) => loader.dismiss(),
+      () => loader.dismiss());
   }
 
   private presentLoader() {

@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HappHourModel, PlaceModel, UserModel } from '../model/models';
 import { Api } from "./api";
-import { Storage } from "@ionic/storage";
+import { Database } from "./database";
 import * as moment from "moment";
+import * as _ from 'lodash';
+import * as EJSON from 'ejson';
 import { Observable } from 'rxjs/Observable'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/share';
+
 
 /*
   Generated class for the HapphourProvider provider.
@@ -14,13 +19,14 @@ import { Observable } from 'rxjs/Observable'
 @Injectable()
 export class HapphourProvider {
 
-  constructor(private storage: Storage, private api: Api) {
+  constructor(private storage: Database, private api: Api) {
     console.log('Hello HapphourProvider Provider');
-    storage.ready().then(() => console.log('storage is ready@happhour'));
+    _.defer(() => {
+      storage.executeSql('CREATE TABLE IF NOT EXISTS happhours (id PRIMARY KEY, json TEXT)');
+    });
   }
 
   private NAME = 'HappHour em: ';
-  private EVENT_KEY_ACTIVE = '_events';
 
   createNewHappHour(eventPlace: PlaceModel, eventOwner: UserModel) {
     let evento = new HappHourModel();
@@ -28,26 +34,18 @@ export class HapphourProvider {
     evento.data = moment().format();
     evento.isPublic = false;
     evento.place = eventPlace;
-    evento.name = this.NAME + eventPlace.nome;
+    evento.name = `${this.NAME} ${eventPlace.nome}`;
     evento.isActive = true;
 
     return evento;
   }
 
   saveEvent(happhour: HappHourModel): Observable<HappHourModel> {
-    let seq = this.api.post('', happhour).map(response => response.json()).share();
+    let seq = this.api.post('happhours', happhour).map(response => response.json()).share();
 
-    seq.subscribe((json) => {
-      this.storage.get(this.EVENT_KEY_ACTIVE)
-        .then((events) => {
-          if (events) {
-            events.push(json);
-          }
-          else {
-            events = [json];
-          }
-          this.storage.set(this.EVENT_KEY_ACTIVE, events);
-        });
+    seq.subscribe((model: HappHourModel) => {
+      let json = JSON.stringify(model);
+      this.storage.executeSql('INSERT INTO happhours (id, json) VALUES (?, ?)', [model.id, json]);
     });
 
     return seq;

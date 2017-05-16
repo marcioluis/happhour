@@ -13,11 +13,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
+import { SQLite } from "@ionic-native/sqlite";
 //mocks
 import { GooglePlusMock } from '../mocks/googlePlusMock';
 import { FacebookMock } from '../mocks/facebookMock';
 //providers
-import { Api, Auth, PlaceProvider, Settings, UserProvider } from "../providers";
+import { Api, Auth, PlaceProvider, Settings, UserProvider, Database, HapphourProvider } from "../providers";
 
 /** 
  * The translate loader needs to know where to load i18n files
@@ -43,10 +44,13 @@ export function providers(): any[] {
       SplashScreen,
       GooglePlus,
       Facebook,
+      SQLite,
       Api,
       Auth,
       PlaceProvider,
       UserProvider,
+      Database,
+      HapphourProvider,
       // settings provider
       { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
       // Keep this to enable Ionic's runtime error handling during development
@@ -57,10 +61,13 @@ export function providers(): any[] {
     return [
       StatusBar,
       SplashScreen,
+      SQLite,
       Api,
       Auth,
       PlaceProvider,
       UserProvider,
+      Database,
+      HapphourProvider,
       //settings provider
       { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
       //mock the plugins
@@ -78,7 +85,7 @@ export function providers(): any[] {
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot({ name: '_happyhourdb', storeName: 'ionic_storage' }),
+    IonicStorageModule.forRoot({ name: Database.DATABASE_NAME, storeName: 'ionic_storage' }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
