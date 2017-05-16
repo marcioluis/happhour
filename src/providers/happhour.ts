@@ -4,7 +4,6 @@ import { Api } from "./api";
 import { Database } from "./database";
 import * as moment from "moment";
 import * as _ from 'lodash';
-import * as EJSON from 'ejson';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
