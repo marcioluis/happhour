@@ -20,7 +20,7 @@ export class PlaceDetailPage {
   place: PlaceModel = this.navParams.get('place');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadCtrl: LoadingController,
-    private eventProvider: HapphourProvider, private userProvider: UserProvider) {
+    private happhourProvider: HapphourProvider, private userProvider: UserProvider) {
   }
 
   ionViewDidLoad() {
@@ -41,8 +41,8 @@ export class PlaceDetailPage {
     loader.present();
 
     let owner = await this.userProvider.loadUser();
-    let evento = this.eventProvider.createNewHappHour(this.place, owner);
-    this.eventProvider.saveEvent(evento).subscribe(
+    let evento = this.happhourProvider.createNewHappHour(this.place, owner);
+    this.happhourProvider.saveEvent(evento).subscribe(
       (value) => { console.log(value); },
       (error) => { },
       () => {

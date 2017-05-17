@@ -15,7 +15,7 @@ export class Settings {
 
   constructor(private storage: Storage, @Optional() defaults: SettingsModel) {
     this._defaults = defaults || {};
-    storage.ready().then(() => console.log('storage is ready'));
+    storage.ready().then(() => console.log('storage settings is ready'));
   }
 
   /**

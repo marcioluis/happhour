@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
  */
 @Injectable()
 export class Api {
-  private url: string = 'http://localhost:3000/api/v1';
+  private url: string = 'http://10.110.114.121:3000/api/v1';
 
   constructor(private http: Http) {
     console.log('Api Provider');

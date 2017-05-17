@@ -23,7 +23,7 @@ export class Auth {
     private settings: Settings, translate: TranslateService) {
     console.log('Auth Provider');
 
-    translate.get(["GOOGLE_SIGN_IN_CANCELLED", "GOOGLE_SIGN_IN_FAILED"])
+    translate.get(["GOOGLE_SIGN_IN_CANCELLED", "GOOGLE_SIGN_IN_FAILED", "GOOGLE_SIGN_IN_NETWORK"])
       .subscribe(strings => {
         this.GoogleSignInStatusCodes = {
           "12501": {
@@ -33,6 +33,10 @@ export class Auth {
           "12500": {
             name: 'SIGN_IN_FAILED',
             message: strings.GOOGLE_SIGN_IN_FAILED
+          },
+          "7": {
+            name: 'NETWORK_ERROR',
+            message: strings.GOOGLE_SIGN_IN_NETWORK
           }
         }
       });
@@ -60,6 +64,7 @@ export class Auth {
       }
     }
     catch (error) {
+      console.error(error);
       throw this.GoogleSignInStatusCodes[error];
     }
 
@@ -67,23 +72,28 @@ export class Auth {
 
   async doFacebookLogin(): Promise<UserModel> {
     let permissions = ['email', 'public_profile'];
-    let faceResponse = await this.facebook.login(permissions);
 
-    if (faceResponse.status === 'connected') {
-      let token = await this.facebook.getAccessToken();
-      let user = await this.facebook.api('/me?fields=id,name,gender,first_name,last_name,email,picture', []);
+    try {
+      let faceResponse = await this.facebook.login(permissions);
+      if (faceResponse.status === 'connected') {
+        let token = await this.facebook.getAccessToken();
+        let user = await this.facebook.api('/me?fields=id,name,gender,first_name,last_name,email,picture', []);
 
-      return {
-        email: user.email,
-        providerIdToken: token,
-        providerUserId: user.id,
-        displayName: user.name,
-        givenName: user.first_name,
-        familyName: user.last_name,
-        gender: user.gender,
-        imageUrl: user.picture.url,
-        provider: 'facebook'
-      };
+        return {
+          email: user.email,
+          providerIdToken: token,
+          providerUserId: user.id,
+          displayName: user.name,
+          givenName: user.first_name,
+          familyName: user.last_name,
+          gender: user.gender,
+          imageUrl: user.picture.url,
+          provider: 'facebook'
+        };
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, IonicPage } from 'ionic-angular';
+import { NavController, LoadingController, IonicPage, AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Settings } from '../../providers';
 import { Auth } from '../../providers';
@@ -13,7 +13,7 @@ import { UserProvider } from '../../providers';
 export class WelcomePage {
 
   constructor(public navCtrl: NavController, private settings: Settings,
-    private loadCtrl: LoadingController, translate: TranslateService, private auth: Auth, private user: UserProvider) {
+    private loadCtrl: LoadingController, translate: TranslateService, private auth: Auth, private user: UserProvider, private alertCtrl: AlertController) {
 
     settings.load();
     translate.get(["AUTHENTICATING"])
@@ -25,27 +25,45 @@ export class WelcomePage {
   async loginGoogle() {
     let loader = this.presentLoader();
     //TODO: tratar possiveis erros em loginGoole
-    let googleUser = await this.auth.doGoogleLogin();
-
-    this.user.save(googleUser).subscribe((model) => {
+    try {
+      let googleUser = await this.auth.doGoogleLogin();
+      await this.user.save(googleUser);
       this.settings.allSettings.isFirstRun = false;
-      this.settings.save().then(() => this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' }));
-    },
-      (error) => loader.dismiss(),
-      () => loader.dismiss());
+      await this.settings.save();
+      this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+
+    } catch (error) {
+      this.presentError(error);
+    } finally {
+      loader.dismiss();
+    }
   }
 
   async loginFacebook() {
     let loader = this.presentLoader();
     //TODO: tratar possiveis erros em loginFacebook
-    let facebookUser = await this.auth.doFacebookLogin();
-
-    this.user.save(facebookUser).subscribe((model) => {
+    try {
+      let facebookUser = await this.auth.doFacebookLogin();
+      await this.user.save(facebookUser);
       this.settings.allSettings.isFirstRun = false;
-      this.settings.save().then(() => this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' }));
-    },
-      (error) => loader.dismiss(),
-      () => loader.dismiss());
+      await this.settings.save();
+      this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' })
+
+    } catch (error) {
+      this.presentError(error);
+    }
+    finally {
+      loader.dismiss()
+    }
+  }
+
+  private presentError(error) {
+    let alert = this.alertCtrl.create({
+      title: error.name,
+      subTitle: error.message || JSON.stringify(error, null, '\t'),
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   private presentLoader() {

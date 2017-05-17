@@ -11,6 +11,7 @@
   "WELCOME_INTRO": "O ponto de partida para seu próximo app feito no Ionic",
   "GOOGLE_SIGN_IN_CANCELLED": "Não foi possível entrar na sua conta. Verifique seus dados e tente novamente.",
   "GOOGLE_SIGN_IN_FAILED": "Houve um erro ao fazer login com sua conta Google. Mudar para outra pode ou não resolver.",
+  "GOOGLE_SIGN_IN_NETWORK": "Erro de conexão. Tentar novamente deve resolver o problema.",
   "LOGIN_FACEBOOK_BUTTON": "Entrar com Facebook",
   "LOGIN_GOOGLE_BUTTON": "Entrar com Google",
   "LOADING": "Carregando...",
