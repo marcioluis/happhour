@@ -34,9 +34,9 @@ export class MyApp {
           this.rootPage = 'TutorialPage';
         else
           this.rootPage = 'TabsPage';
-      });
 
-      splashScreen.hide();
+        splashScreen.hide();
+      });
     });
   }
 }

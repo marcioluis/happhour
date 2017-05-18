@@ -68,7 +68,7 @@ export class WelcomePage {
 
   private presentLoader() {
     let loader = this.loadCtrl.create({
-      content: this.strings.LOADING
+      content: this.strings.AUTHENTICATING
     });
     loader.present();
     return loader;

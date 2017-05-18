@@ -39,7 +39,7 @@ export class Database {
     });
   }
 
-  executeSql(sql: string, params: Array<any> = []): Observable<any> {
+  executeReadSql(sql: string, params: Array<any> = []): Observable<ResultSet> {
     return Observable.create((observer: Observer<any>) => {
       this.platform.ready().then(() => {
         this.getDb().subscribe((db) => {
@@ -56,4 +56,33 @@ export class Database {
     });
   }
 
+  executeCommandSql(sql: string, params: Array<any> = []): Observable<Result> {
+    return Observable.create((observer: Observer<any>) => {
+      this.platform.ready().then(() => {
+        this.getDb().subscribe((db) => {
+          db.executeSql(sql, params).then((rs) => {
+            observer.next(rs);
+            observer.complete();
+          }, (err) => {
+            console.error(`Erro SQL: ${sql}\nParametros: ${JSON.stringify(params)}\nErro: ${JSON.stringify(err)}`);
+            observer.error(err);
+            observer.complete();
+          });
+        });
+      });
+    });
+  }
+
+}
+
+export interface ResultSet {
+  rows: {
+    item(index: number): any,
+    length: number
+  };
+};
+
+export interface Result {
+  insertId: any,
+  rowsAffected: number
 }

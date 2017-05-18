@@ -40,18 +40,22 @@ export class PlaceDetailPage {
     });
     loader.present();
 
-    let owner = await this.userProvider.loadUser();
-    let evento = this.happhourProvider.createNewHappHour(this.place, owner);
-    this.happhourProvider.saveEvent(evento).subscribe(
-      (value) => { console.log(value); },
-      (error) => { },
-      () => {
-        let parent = this.navCtrl.parent;
-        if (parent instanceof Tabs) {
-          parent.select(0);
-        }
-        loader.dismiss();
-      });
+    try {
+      let owner = await this.userProvider.loadUser();
+      let happHour = this.happhourProvider.createNewHappHour(this.place, owner);
+      await this.happhourProvider.saveHappHour(happHour);
+
+      let parent = this.navCtrl.parent;
+      if (parent instanceof Tabs) {
+        this.navCtrl.popToRoot();
+        parent.select(0);
+      }
+    } catch (error) {
+
+    }
+    finally {
+      loader.dismiss();
+    }
   }
 
 }

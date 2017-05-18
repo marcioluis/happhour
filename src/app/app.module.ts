@@ -37,47 +37,38 @@ export function provideDefaultSettings(storage: Storage) {
   return new Settings(storage, { isFirstRun: true, searchRadius: 500 });
 }
 
-export function providers(): any[] {
+export function configureGP() {
   if (window["cordova"]) {
-    return [
-      StatusBar,
-      SplashScreen,
-      GooglePlus,
-      Facebook,
-      SQLite,
-      Api,
-      Auth,
-      PlaceProvider,
-      UserProvider,
-      Database,
-      HapphourProvider,
-      // settings provider
-      { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
-      // Keep this to enable Ionic's runtime error handling during development
-      { provide: ErrorHandler, useClass: IonicErrorHandler }
-    ];
+    return GooglePlus;
   }
-  else {
-    return [
-      StatusBar,
-      SplashScreen,
-      SQLite,
-      Api,
-      Auth,
-      PlaceProvider,
-      UserProvider,
-      Database,
-      HapphourProvider,
-      //settings provider
-      { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
-      //mock the plugins
-      { provide: GooglePlus, useClass: GooglePlusMock },
-      { provide: Facebook, useClass: FacebookMock },
-      // Keep this to enable Ionic's runtime error handling during development
-      { provide: ErrorHandler, useClass: IonicErrorHandler }
-    ];
-  }
+  return GooglePlusMock;
 }
+
+export function configureFB() {
+  if (window["cordova"]) {
+    return Facebook;
+  }
+  return FacebookMock;
+}
+
+const providers: any[] = [
+  StatusBar,
+  SplashScreen,
+  SQLite,
+  Api,
+  Auth,
+  PlaceProvider,
+  UserProvider,
+  Database,
+  HapphourProvider,
+  //settings provider
+  { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
+  //mock the plugins
+  { provide: GooglePlus, useClass: configureGP },
+  { provide: Facebook, useClass: configureFB },
+  // Keep this to enable Ionic's runtime error handling during development
+  { provide: ErrorHandler, useClass: IonicErrorHandler }
+];
 
 @NgModule({
   declarations: [MyApp],
@@ -96,6 +87,6 @@ export function providers(): any[] {
   ],
   bootstrap: [IonicApp],
   entryComponents: [MyApp],
-  providers: providers()
+  providers: providers
 })
 export class AppModule { }

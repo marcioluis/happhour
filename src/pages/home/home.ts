@@ -14,17 +14,19 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
 
   tapEatDrink(event) {
     this.navCtrl.push('NearbyPage');
   }
 
-  tapCreateNew() {    
+  tapCreateNew() {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
+
 
 }

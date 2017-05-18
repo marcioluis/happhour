@@ -21,13 +21,14 @@ export class HapphourProvider {
   constructor(private storage: Database, private api: Api) {
     console.log('Hello HapphourProvider Provider');
     _.defer(() => {
-      storage.executeSql('CREATE TABLE IF NOT EXISTS happhours (id PRIMARY KEY, json TEXT)');
+      storage.executeCommandSql('CREATE TABLE IF NOT EXISTS happhours (id INTEGER PRIMARY KEY ASC, is_active NUMERIC, json TEXT)')
+        .subscribe(rs => console.log('tabela happhours criada'), error => console.error(`Erro ao criar tabela happhour ${JSON.stringify(error)}`));
     });
   }
 
   private NAME = 'HappHour em: ';
 
-  createNewHappHour(eventPlace: PlaceModel, eventOwner: UserModel) {
+  createNewHappHour(eventPlace: PlaceModel, eventOwner: UserModel): HappHourModel {
     let evento = new HappHourModel();
     evento.creator = eventOwner;
     evento.data = moment().format();
@@ -39,14 +40,20 @@ export class HapphourProvider {
     return evento;
   }
 
-  saveEvent(happhour: HappHourModel): Observable<HappHourModel> {
-    let seq = this.api.post('happhours', happhour).map(response => response.json()).share();
+  async saveHappHour(happhour: HappHourModel): Promise<HappHourModel> {
+    let seq = <Promise<HappHourModel>>this.api.post('happhours', happhour).map(response => response.json()).toPromise();
 
-    seq.subscribe((model: HappHourModel) => {
-      let json = JSON.stringify(model);
-      this.storage.executeSql('INSERT INTO happhours (id, json) VALUES (?, ?)', [model.id, json]);
-    });
+    let model = await seq;
+    let json = JSON.stringify(model);
+
+    this.storage.executeCommandSql('INSERT INTO happhours (id, is_active, json) VALUES (?, ?, ?)', [model.id, +model.isActive, json])
+      .subscribe((rs) => console.log(`rows: ${rs.rowsAffected}`), (er) => { console.error(er); });
 
     return seq;
+  }
+
+  getActiveHappHours(): Observable<HappHourModel> {
+    return this.storage.executeReadSql('SELECT id, json FROM happhours WHERE is_active = 1')
+      .map((rs, i) => rs.rows.item(i).json).map(data => JSON.parse(data));
   }
 }
