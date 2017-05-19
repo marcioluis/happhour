@@ -3,6 +3,7 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { HapphourProvider } from "../../providers/happhour";
 import { HappHourModel } from "../../model/models";
 
+
 /*
   Generated class for the Invited page.
 
