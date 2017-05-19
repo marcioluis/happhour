@@ -6,8 +6,7 @@ import * as moment from "moment";
 import * as _ from 'lodash';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/share';
-
+import 'rxjs/add/operator/mergeMap';
 
 /*
   Generated class for the HapphourProvider provider.
@@ -21,12 +20,10 @@ export class HapphourProvider {
   constructor(private storage: Database, private api: Api) {
     console.log('Hello HapphourProvider Provider');
     _.defer(() => {
-      storage.executeCommandSql('CREATE TABLE IF NOT EXISTS happhours (id INTEGER PRIMARY KEY ASC, is_active NUMERIC, json TEXT)')
-        .subscribe(rs => console.log('tabela happhours criada'), error => console.error(`Erro ao criar tabela happhour ${JSON.stringify(error)}`));
+      storage.executeCommandSql('CREATE TABLE IF NOT EXISTS happhours (id INTEGER PRIMARY KEY ASC, is_active BOOLEAN, json TEXT)')
+        .subscribe(rs => console.log('tabela happhours ok'), error => console.error(`Erro ao criar tabela happhour ${JSON.stringify(error)}`));
     });
   }
-
-  private NAME = 'HappHour em: ';
 
   createNewHappHour(eventPlace: PlaceModel, eventOwner: UserModel): HappHourModel {
     let evento = new HappHourModel();
@@ -34,26 +31,32 @@ export class HapphourProvider {
     evento.data = moment().format();
     evento.isPublic = false;
     evento.place = eventPlace;
-    evento.name = `${this.NAME} ${eventPlace.nome}`;
+    evento.name = `HappHour em ${eventPlace.nome}`;
     evento.isActive = true;
-
     return evento;
   }
 
-  async saveHappHour(happhour: HappHourModel): Promise<HappHourModel> {
-    let seq = <Promise<HappHourModel>>this.api.post('happhours', happhour).map(response => response.json()).toPromise();
+  saveHappHourAll(happhour: HappHourModel) {
+    return this.saveHappHourRemote(happhour).flatMap((model) => this.saveHappHourLocal(model));
+  }
 
-    let model = await seq;
+  saveHappHourLocal(model: HappHourModel) {
     let json = JSON.stringify(model);
+    return this.storage.executeCommandSql('INSERT INTO happhours (id, is_active, json) VALUES (?, ?, ?)', [model.id, model.isActive, json]).map(rs => model);
+  }
 
-    this.storage.executeCommandSql('INSERT INTO happhours (id, is_active, json) VALUES (?, ?, ?)', [model.id, +model.isActive, json])
-      .subscribe((rs) => console.log(`rows: ${rs.rowsAffected}`), (er) => { console.error(er); });
-
-    return seq;
+  saveHappHourRemote(model: HappHourModel): Observable<HappHourModel> {
+    return this.api.post('happhours', model).map(response => response.json());
   }
 
   getActiveHappHours(): Observable<HappHourModel> {
-    return this.storage.executeReadSql('SELECT id, json FROM happhours WHERE is_active = 1')
-      .map((rs, i) => rs.rows.item(i).json).map(data => JSON.parse(data));
+    return this.storage.executeReadSql('SELECT id, json FROM happhours WHERE is_active = \'true\'')
+      .map((rs, i) => {
+        if (rs.rows.length)
+          return rs.rows.item(i).json;
+        return '{}';
+      })
+      .map(data => JSON.parse(data));
   }
 }
+

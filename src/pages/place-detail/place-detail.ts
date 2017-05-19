@@ -43,15 +43,19 @@ export class PlaceDetailPage {
     try {
       let owner = await this.userProvider.loadUser();
       let happHour = this.happhourProvider.createNewHappHour(this.place, owner);
-      await this.happhourProvider.saveHappHour(happHour);
 
-      let parent = this.navCtrl.parent;
-      if (parent instanceof Tabs) {
-        this.navCtrl.popToRoot();
-        parent.select(0);
-      }
+      this.happhourProvider.saveHappHourAll(happHour).subscribe((model) => {
+        let parent = this.navCtrl.parent;
+        if (parent instanceof Tabs) {
+          this.navCtrl.popToRoot();
+          parent.select(0);
+        }
+      }, (error) => {
+        console.error(`Erro ao salvar evento: ${JSON.stringify(error, null, '\t')}`)
+      });
+
     } catch (error) {
-
+      console.error(`Erro ao carregar usuario: ${JSON.stringify(error, null, '\t')}`);
     }
     finally {
       loader.dismiss();
