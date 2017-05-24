@@ -38,4 +38,9 @@ export class UserProvider {
       return Promise.resolve(this._user);
     }
   }
+
+  public get user(): UserModel {
+    return this._user;
+  }
+
 }

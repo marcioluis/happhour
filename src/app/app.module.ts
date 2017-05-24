@@ -14,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { SQLite } from "@ionic-native/sqlite";
+import { Globalization } from "@ionic-native/globalization";
 //mocks
 import { GooglePlusMock } from '../mocks/googlePlusMock';
 import { FacebookMock } from '../mocks/facebookMock';
@@ -55,6 +56,7 @@ const providers: any[] = [
   StatusBar,
   SplashScreen,
   SQLite,
+  Globalization,
   Api,
   Auth,
   PlaceProvider,
@@ -63,7 +65,7 @@ const providers: any[] = [
   HapphourProvider,
   //settings provider
   { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
-  //mock the plugins
+  //mock the plugins if needed
   { provide: GooglePlus, useClass: configureGP },
   { provide: Facebook, useClass: configureFB },
   // Keep this to enable Ionic's runtime error handling during development

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { HapphourProvider } from "../../providers/happhour";
+import { UserProvider } from "../../providers/user";
 import { HappHourModel } from "../../model/models";
 
 
@@ -17,15 +18,23 @@ import { HappHourModel } from "../../model/models";
 })
 export class InvitedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private happHourProvider: HapphourProvider) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private happHourProvider: HapphourProvider,
+    private userProvider: UserProvider) {
+  }
 
-  activeHapps: HappHourModel[];
+  ownerHapps: HappHourModel[];
+  invitedHapps: HappHourModel[];
   inactiveHapps: HappHourModel[];
 
   ionViewDidEnter() {
-    this.activeHapps = [];
     this.happHourProvider.getActiveHappHours().subscribe(model => {
-      this.activeHapps.push(model);
+      let userId = this.userProvider.user.id;
+      this.ownerHapps = model.filter((item) => item.creator.id === userId);
+      this.invitedHapps = model.filter((item) => {
+        let notCreator = item.creator.id !== userId;
+        let invited = item.invited ? item.invited.some(inv => inv.id === userId) : false;
+        return notCreator && invited;
+      });
     },
       error => {
         console.error(`erro ao selecionar eventos ativos: ${JSON.stringify(error)}`);
@@ -34,6 +43,7 @@ export class InvitedPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InvitedPage');
+    this.userProvider.loadUser();
   }
 
 }

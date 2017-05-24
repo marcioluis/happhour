@@ -49,14 +49,20 @@ export class HapphourProvider {
     return this.api.post('happhours', model).map(response => response.json());
   }
 
-  getActiveHappHours(): Observable<HappHourModel> {
-    return this.storage.executeReadSql('SELECT id, json FROM happhours WHERE is_active = \'true\'')
-      .map((rs, i) => {
-        if (rs.rows.length)
-          return rs.rows.item(i).json;
-        return '{}';
-      })
-      .map(data => JSON.parse(data));
+  getActiveHappHours(): Observable<HappHourModel[]> {
+    return this.storage.executeReadSql("SELECT id, json FROM happhours WHERE is_active = 'true'")
+      .map((rs) => {
+        if (rs.rows.length) {
+          let result: HappHourModel[] = [];
+          for (var index = 0; index < rs.rows.length; index++) {
+            let element = rs.rows.item(index).json;
+            let happ = JSON.parse(element);
+            result.push(happ);
+          }
+          return result;
+        }
+        return [];
+      });
   }
 }
 

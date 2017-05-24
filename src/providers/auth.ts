@@ -64,7 +64,7 @@ export class Auth {
       }
     }
     catch (error) {
-      console.error(error);
+      console.error(`Auth error: ${error}`);
       throw this.GoogleSignInStatusCodes[error];
     }
 
@@ -92,7 +92,7 @@ export class Auth {
         };
       }
     } catch (error) {
-      console.error(error);
+      console.error(`Auth error: ${error}`);
       throw error;
     }
   }
