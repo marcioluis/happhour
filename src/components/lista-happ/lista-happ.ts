@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { HappHourModel } from "../../model/models";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MyHappHourModel } from "../../model/happhour-model";
 import * as moment from "moment";
 
 /**
@@ -15,21 +15,62 @@ import * as moment from "moment";
 export class ListaHappComponent {
 
   @Input()
-  happsOwner: HappHourModel[] = [];
+  happsOwner: MyHappHourModel[] = [];
   @Input()
-  happsAntigos: HappHourModel[] = [];
+  happsAntigos: MyHappHourModel[] = [];
   @Input()
-  happsConvidado: HappHourModel[] = [];
+  happsConvidado: MyHappHourModel[] = [];
+
+  @Output()
+  happConfirmed = new EventEmitter<MyHappHourModel>();
+  @Output()
+  happRefused = new EventEmitter<MyHappHourModel>();
+  @Output()
+  happDetailed = new EventEmitter<MyHappHourModel>();
+  @Output()
+  happCheckedIn = new EventEmitter<MyHappHourModel>();
+  @Output()
+  happCanceled = new EventEmitter<MyHappHourModel>();
 
   constructor() {
     console.log('Hello ListaHappComponent Component');
   }
 
-  formataData(dataIso: string) {
+  formatDate(dataIso: string) {
     return moment(dataIso).format('dddd, DD MMMM');
   }
 
-  trackByHapps(index: number, item: HappHourModel) {
+  userIsConfirmed(happ: MyHappHourModel) {
+    return happ.confirmed;
+  }
+
+  trackByHapps(index: number, item: MyHappHourModel) {
     return item.id;
+  }
+
+  refuseHappHour(happ: MyHappHourModel) {
+    happ.refused = true;
+    happ.confirmed = false;
+    this.happRefused.emit(happ);
+  }
+
+  cancelHappHour(happ: MyHappHourModel) {
+    happ.isActive = false;
+    this.happCanceled.emit(happ);
+  }
+
+  detailHappHour(happ: MyHappHourModel) {
+    this.happDetailed.emit(happ);
+  }
+
+  confirmHappHour(happ: MyHappHourModel) {
+    happ.confirmed = true;
+    happ.refused = false;
+    this.happConfirmed.emit(happ);
+  }
+
+  checkInHappHour(happ: MyHappHourModel) {
+    happ.checkedin = true;
+    this.happCheckedIn.emit(happ);
   }
 }

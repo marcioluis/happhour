@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HappHourModel, PlaceModel, UserModel } from '../model/models';
+import { PlaceModel } from '../model/place-model';
+import { HappHourModel } from '../model/happhour-model';
+import { UserModel } from '../model/user-model';
 import { Api } from "./api";
 import { Database } from "./database";
 import * as moment from "moment";
@@ -28,7 +30,7 @@ export class HapphourProvider {
   createNewHappHour(eventPlace: PlaceModel, eventOwner: UserModel): HappHourModel {
     let evento = new HappHourModel();
     evento.creator = eventOwner;
-    evento.data = moment().format();
+    evento.date = moment().format();
     evento.isPublic = false;
     evento.place = eventPlace;
     evento.name = `HappHour em ${eventPlace.nome}`;

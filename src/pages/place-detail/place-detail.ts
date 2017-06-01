@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Tabs } from 'ionic-angular';
-import { PlaceModel } from "../../model/models";
+import { UserModel } from "../../model/user-model";
+import { PlaceModel } from "../../model/place-model";
 import { HapphourProvider } from "../../providers/happhour";
 import { UserProvider } from "../../providers/user";
 
@@ -29,6 +30,7 @@ export class PlaceDetailPage {
   }
 
   isOpenNow() {
+    //TODO: arrumar esse aberto hoje, meio porco
     let dia = new Date().getDay() + 1;
     let horario = this.place.horariosFuncionamento[dia];
     this.place['hoje'] = horario;
@@ -39,7 +41,7 @@ export class PlaceDetailPage {
       content: "Criando evento"
     });
     loader.present();
-
+    //TODO: Agendar data do evento
     try {
       let owner = await this.userProvider.loadUser();
       let happHour = this.happhourProvider.createNewHappHour(this.place, owner);

@@ -1,4 +1,5 @@
-import { UserModel, PlaceModel } from "./models";
+import { PlaceModel } from "./place-model";
+import { UserModel } from "./user-model";
 
 export class HappHourModel {
     id?: number
@@ -6,8 +7,14 @@ export class HappHourModel {
     creator?: UserModel
     place?: PlaceModel
     invited?: UserModel[]
-    data?: string
+    date?: string
     isPublic?: boolean
     isActive?: boolean
+}
 
+export class MyHappHourModel extends HappHourModel {
+    confirmed?: boolean
+    refused?: boolean
+    checkedin?: boolean
+    owner?: boolean
 }

@@ -14,5 +14,6 @@
 
 
 <ion-content>
-  <lista-happ [happsOwner]="ownerHapps" [happsConvidado]="invitedHapps"></lista-happ>
+  <lista-happ [happsOwner]="ownerHapps" [happsConvidado]="invitedHapps" (happConfirmed)="confirmInvite($event)" (happRefused)="refuseInvite($event)"
+    (happDetailed)="goToDetails($event)" (happCheckedIn)="checkIn($event)" (happCanceled)="cancelHappHour($event)"></lista-happ>
 </ion-content>

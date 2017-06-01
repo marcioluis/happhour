@@ -1,52 +1,70 @@
 <ion-list class="lista-avatar">
   <ion-list-header>Meus Happs</ion-list-header>
-  <ion-item *ngFor="let happ of happsOwner, trackBy: trackByHapps">
-    <ion-avatar item-left>
-      <img src="{{happ.place.logoUrl}}">
-    </ion-avatar>
-    <h2>{{happ.name}}</h2>
-    <p></p>
-    <ion-note>{{formataData(happ.data)}}</ion-note>
-  </ion-item>
+  <ion-item-sliding *ngFor="let happ of happsOwner, trackBy: trackByHapps">
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="{{happ.place.logoUrl}}">
+      </ion-avatar>
+      <h2>{{happ.name}}</h2>
+      <p></p>
+      <ion-note>{{formatDate(happ.data)}}</ion-note>
+    </ion-item>
+    <ion-item-options side="left">
+      <button ion-button color="danger" icon-left (tap)="cancelHappHour(happ)">
+          <ion-icon name="close"></ion-icon>
+          Cancelar
+        </button>
+    </ion-item-options>
+    <ion-item-options side="right">
+      <button ion-button color="light" icon-left (tap)="detailHappHour(happ)">
+          <ion-icon name="ios-more"></ion-icon>
+          Detalhar
+        </button>
+      <button ion-button color="secondary" icon-left (tap)="checkInHappHour(happ)">
+          <ion-icon name="checkmark"></ion-icon>
+          Cheguei!
+        </button>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-list>
 
 <ion-list class="lista-avatar">
   <ion-list-header>Happs que me Convidaram</ion-list-header>
 
-  <ion-item *ngFor="let happ of happsConvidado, trackBy: trackByHapps">
-    <ion-avatar item-left>
-      <img src="{{happ.place.logoUrl}}">
-    </ion-avatar>
-    <h2>{{happ.name}}</h2>
-    <p></p>
-    <ion-note>{{formataData(happ.data)}}</ion-note>
-  </ion-item>
+  <ion-item-sliding *ngFor="let happ of happsConvidado, trackBy: trackByHapps">
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="{{happ.place.logoUrl}}">
+      </ion-avatar>
+      <h2>{{happ.name}}</h2>
+      <p></p>
+      <ion-note>{{formatDate(happ.data)}}</ion-note>
+    </ion-item>
+    <ion-item-options side="left">
+      <button ion-button color="danger" icon-left (tap)="refuseHappHour(happ)">
+          <ion-icon name="close"></ion-icon>
+          Recusar
+        </button>
+    </ion-item-options>
+    <ion-item-options side="right">
+      <button ion-button color="light" icon-left (tap)="detailHappHour(happ)">
+          <ion-icon name="ios-more"></ion-icon>
+          Detalhar
+        </button>
+
+      <button *ngIf="userIsConfirmed(happ)" ion-button color="secondary" icon-left (tap)="checkInHappHour(happ, 'checkin')">
+          <ion-icon name="checkmark"></ion-icon>
+          Cheguei!
+        </button>
+
+      <button *ngIf="!userIsConfirmed(happ)" ion-button color="primary" icon-left (tap)="confirmHappHour(happ, 'confirm')">
+          <ion-icon name="checkmark"></ion-icon>
+          Eu Vou!
+        </button>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-list>
 
 <ion-list class="lista-avatar">
   <ion-list-header>Happs Antigos</ion-list-header>
-  <ion-item>
-    <ion-avatar item-left>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Media_Player_Classic_logo.png">
-    </ion-avatar>
-    <h2>The Evil Dead</h2>
-    <p>Your new event, enjoy!</p>
-    <ion-note>24/5/2017</ion-note>
-  </ion-item>
-  <ion-item>
-    <ion-avatar item-left>
-      <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSIelVH6cOzCktUM5jLCZ7du6gRVTUVK7jIKhSQMWzNg9oSXKdB">
-    </ion-avatar>
-    <h2>Poltergeist</h2>
-    <p>Your new event, enjoy!</p>
-    <ion-note>24/5/2017</ion-note>
-  </ion-item>
-  <ion-item>
-    <ion-avatar item-left>
-      <img src="http://silvercreekart.weebly.com/uploads/3/7/3/0/37300503/9869404.png">
-    </ion-avatar>
-    <h2> Aliens</h2>
-    <p>Your new event, enjoy!</p>
-    <ion-note>2017</ion-note>
-  </ion-item>
 </ion-list>
