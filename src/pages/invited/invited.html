@@ -12,8 +12,12 @@
 
 </ion-header>
 
-
 <ion-content>
-  <lista-happ [happsOwner]="ownerHapps" [happsConvidado]="invitedHapps" (happConfirmed)="confirmInvite($event)" (happRefused)="refuseInvite($event)"
-    (happDetailed)="goToDetails($event)" (happCheckedIn)="checkIn($event)" (happCanceled)="cancelHappHour($event)"></lista-happ>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="Puxe para atualizar" refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <lista-happ [happsActives]="activeHapps" (happConfirmed)="confirmInvite($event)" (happRefused)="refuseInvite($event)" (happDetailed)="goToDetails($event)"
+    (happCheckedIn)="checkIn($event)" (happCanceled)="cancelHappHour($event)"></lista-happ>
 </ion-content>

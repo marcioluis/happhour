@@ -13,3 +13,9 @@ export class PlaceModel {
     horariosFuncionamento?: any
     fotosUrls?: string[]
 }
+
+export class OpenDay {
+    day?: string
+    openAt?: string
+    closeAt?: string
+}

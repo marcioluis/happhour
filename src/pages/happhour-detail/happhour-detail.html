@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>happhour-detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <img src="{{ placeLogo }}">
+  <h3>{{ placeName }}</h3>
+  <h4>{{ placeSubName }}</h4>
+  <hr>
+  <p>HappHour em: {{ happHourDate }}</p>
+  <p>Criado por: {{ owner }}</p>
+
+  <div>
+    <ion-list no-lines>
+      <ion-list-header>
+        Vantagens
+      </ion-list-header>
+      <ion-item *ngIf="isPontuavel">
+        <ion-icon name="beer" isActive="{{ isPontuavel }}" item-left></ion-icon>
+        <ion-textarea rows="2" readonly value="Troque seus HappPoints por itens do bar."></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="isReservavel">
+        <ion-icon name="restaurant" isActive="{{ isReservavel }}" item-left></ion-icon>
+        <ion-textarea readonly value="Esse local aceita reservas."></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="isOnDemand">
+        <ion-icon name="timer" isActive="{{ isOnDemand }}" item-left></ion-icon>
+        <ion-textarea rows="3" readonly value="Sua diversão no seu tempo! Aproveite o Happy Hour da casa no horário que quiser."></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div margin-bottom>
+    <h5>Contato:</h5>
+    <p *ngFor="let fone of telefones">{{ fone }}</p>
+    <h5>Endereço:</h5>
+    <address>{{ address }}</address>
+  </div>
+
+  <div margin-bottom>
+    <h5>Confirmados:</h5>
+    <p>{{ totalConfirmados }} de {{ totalConvidados }}</p>
+  </div>
+
+  <button *ngIf="!isConfirmed" ion-button full (tap)="confirmHappHour()">Eu Vou!</button>
+  <button *ngIf="isConfirmed" ion-button full (tap)="checkInHappHour()">Cheguei!</button>
+
+</ion-content>

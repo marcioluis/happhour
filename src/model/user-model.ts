@@ -11,3 +11,9 @@ export class UserModel {
     imageUrl?: string
     gender?: string
 }
+
+export class UserModelHappHour extends UserModel {
+    isConfirmed?: boolean
+    isRefused?: boolean
+    isCheckedin?: boolean
+}

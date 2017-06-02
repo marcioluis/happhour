@@ -19,6 +19,7 @@ import { UserProvider } from "../../providers/user";
 export class PlaceDetailPage {
 
   place: PlaceModel = this.navParams.get('place');
+  scheduled = this.navParams.get('');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadCtrl: LoadingController,
     private happhourProvider: HapphourProvider, private userProvider: UserProvider) {
@@ -35,6 +36,8 @@ export class PlaceDetailPage {
     let horario = this.place.horariosFuncionamento[dia];
     this.place['hoje'] = horario;
   }
+
+  async scheduleEvent() { }
 
   async createEvent() {
     let loader = this.loadCtrl.create({

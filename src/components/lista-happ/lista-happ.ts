@@ -15,11 +15,12 @@ import * as moment from "moment";
 export class ListaHappComponent {
 
   @Input()
-  happsOwner: MyHappHourModel[] = [];
+  happsActives: MyHappHourModel[];
   @Input()
-  happsAntigos: MyHappHourModel[] = [];
-  @Input()
-  happsConvidado: MyHappHourModel[] = [];
+  happsInactives: MyHappHourModel[];
+
+  _happsOwner: MyHappHourModel[];
+  _happsGuest: MyHappHourModel[];
 
   @Output()
   happConfirmed = new EventEmitter<MyHappHourModel>();
@@ -33,15 +34,31 @@ export class ListaHappComponent {
   happCanceled = new EventEmitter<MyHappHourModel>();
 
   constructor() {
-    console.log('Hello ListaHappComponent Component');
   }
 
-  formatDate(dataIso: string) {
+  get ownerHapps() {
+    return this._happsOwner = this.happsActives.filter(item => item.isOwner);
+  }
+
+  get guestHapps() {
+    return this._happsGuest = this.happsActives.filter(item => item.isGuest);
+  }
+
+  getPlaceLogo(happ: MyHappHourModel) {
+    return happ.place.logoUrl;
+  }
+
+  getName(happ: MyHappHourModel) {
+    return happ.name;
+  }
+
+  getHappDate(happ: MyHappHourModel) {
+    let dataIso = happ.date;
     return moment(dataIso).format('dddd, DD MMMM');
   }
 
   userIsConfirmed(happ: MyHappHourModel) {
-    return happ.confirmed;
+    return happ.isConfirmed;
   }
 
   trackByHapps(index: number, item: MyHappHourModel) {
@@ -49,8 +66,8 @@ export class ListaHappComponent {
   }
 
   refuseHappHour(happ: MyHappHourModel) {
-    happ.refused = true;
-    happ.confirmed = false;
+    happ.isRefused = true;
+    happ.isConfirmed = false;
     this.happRefused.emit(happ);
   }
 
@@ -64,13 +81,13 @@ export class ListaHappComponent {
   }
 
   confirmHappHour(happ: MyHappHourModel) {
-    happ.confirmed = true;
-    happ.refused = false;
+    happ.isConfirmed = true;
+    happ.isRefused = false;
     this.happConfirmed.emit(happ);
   }
 
   checkInHappHour(happ: MyHappHourModel) {
-    happ.checkedin = true;
+    happ.isCheckedin = true;
     this.happCheckedIn.emit(happ);
   }
 }

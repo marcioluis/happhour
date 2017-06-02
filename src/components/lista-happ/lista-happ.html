@@ -1,13 +1,13 @@
 <ion-list class="lista-avatar">
   <ion-list-header>Meus Happs</ion-list-header>
-  <ion-item-sliding *ngFor="let happ of happsOwner, trackBy: trackByHapps">
+  <ion-item-sliding *ngFor="let happ of ownerHapps, trackBy: trackByHapps">
     <ion-item>
       <ion-avatar item-left>
-        <img src="{{happ.place.logoUrl}}">
+        <img src="{{ getPlaceLogo(happ) }}">
       </ion-avatar>
-      <h2>{{happ.name}}</h2>
+      <h2>{{ getName(happ) }}</h2>
       <p></p>
-      <ion-note>{{formatDate(happ.data)}}</ion-note>
+      <ion-note>{{ getHappDate(happ) }}</ion-note>
     </ion-item>
     <ion-item-options side="left">
       <button ion-button color="danger" icon-left (tap)="cancelHappHour(happ)">
@@ -31,14 +31,14 @@
 <ion-list class="lista-avatar">
   <ion-list-header>Happs que me Convidaram</ion-list-header>
 
-  <ion-item-sliding *ngFor="let happ of happsConvidado, trackBy: trackByHapps">
+  <ion-item-sliding *ngFor="let happ of guestHapps, trackBy: trackByHapps">
     <ion-item>
       <ion-avatar item-left>
-        <img src="{{happ.place.logoUrl}}">
+        <img src="{{ getPlaceLogo(happ) }}">
       </ion-avatar>
-      <h2>{{happ.name}}</h2>
+      <h2>{{ getName(happ) }}</h2>
       <p></p>
-      <ion-note>{{formatDate(happ.data)}}</ion-note>
+      <ion-note>{{ getHappDate(happ) }}</ion-note>
     </ion-item>
     <ion-item-options side="left">
       <button ion-button color="danger" icon-left (tap)="refuseHappHour(happ)">
@@ -63,8 +63,4 @@
         </button>
     </ion-item-options>
   </ion-item-sliding>
-</ion-list>
-
-<ion-list class="lista-avatar">
-  <ion-list-header>Happs Antigos</ion-list-header>
 </ion-list>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PlaceModel } from '../model/place-model';
-import { HappHourModel } from '../model/happhour-model';
+import { MyHappHourModel } from '../model/happhour-model';
 import { UserModel } from '../model/user-model';
 import { Api } from "./api";
 import { Database } from "./database";
@@ -27,35 +27,42 @@ export class HapphourProvider {
     });
   }
 
-  createNewHappHour(eventPlace: PlaceModel, eventOwner: UserModel): HappHourModel {
-    let evento = new HappHourModel();
-    evento.creator = eventOwner;
-    evento.date = moment().format();
-    evento.isPublic = false;
-    evento.place = eventPlace;
-    evento.name = `HappHour em ${eventPlace.nome}`;
-    evento.isActive = true;
-    return evento;
+  createNewHappHour(place: PlaceModel, owner: UserModel): MyHappHourModel {
+    let happ = new MyHappHourModel();
+    happ.creator = owner;
+    happ.date = moment().format();
+    happ.isPublic = false;
+    happ.place = place;
+    happ.name = `HappHour em ${place.nome}`;
+    happ.isActive = true;
+    happ.me = owner.id;
+    happ.isOwner = true;
+    happ.isConfirmed = true;
+    return happ;
   }
 
-  saveHappHourAll(happhour: HappHourModel) {
+  /**
+   * Salva um evento primeiro no backend e depois local
+   * @param happhour 
+   */
+  saveHappHourAll(happhour: MyHappHourModel) {
     return this.saveHappHourRemote(happhour).flatMap((model) => this.saveHappHourLocal(model));
   }
 
-  saveHappHourLocal(model: HappHourModel) {
+  saveHappHourLocal(model: MyHappHourModel) {
     let json = JSON.stringify(model);
     return this.storage.executeCommandSql('INSERT INTO happhours (id, is_active, json) VALUES (?, ?, ?)', [model.id, model.isActive, json]).map(rs => model);
   }
 
-  saveHappHourRemote(model: HappHourModel): Observable<HappHourModel> {
+  saveHappHourRemote(model: MyHappHourModel): Observable<MyHappHourModel> {
     return this.api.post('happhours', model).map(response => response.json());
   }
 
-  getActiveHappHours(): Observable<HappHourModel[]> {
+  getActiveHappHours(): Observable<MyHappHourModel[]> {
     return this.storage.executeReadSql("SELECT id, json FROM happhours WHERE is_active = 'true'")
       .map((rs) => {
         if (rs.rows.length) {
-          let result: HappHourModel[] = [];
+          let result: MyHappHourModel[] = [];
           for (var index = 0; index < rs.rows.length; index++) {
             let element = rs.rows.item(index).json;
             let happ = JSON.parse(element);
@@ -66,5 +73,9 @@ export class HapphourProvider {
         return [];
       });
   }
-}
 
+  refuseInvitation(happ: MyHappHourModel) {
+
+  }
+
+}
