@@ -27,6 +27,11 @@ export class HapphourProvider {
     });
   }
 
+  /**
+   * Cria um novo happ hour
+   * @param place local do happhour
+   * @param owner criador do happhour
+   */
   createNewHappHour(place: PlaceModel, owner: UserModel): MyHappHourModel {
     let happ = new MyHappHourModel();
     happ.creator = owner;
@@ -38,6 +43,7 @@ export class HapphourProvider {
     happ.me = owner.id;
     happ.isOwner = true;
     happ.isConfirmed = true;
+    happ.isNew = true;
     return happ;
   }
 
@@ -55,9 +61,20 @@ export class HapphourProvider {
   }
 
   saveHappHourRemote(model: MyHappHourModel): Observable<MyHappHourModel> {
-    return this.api.post('happhours', model).map(response => response.json());
+    //FIXME: mock para nao conectar no servidor
+    let p = new Promise((resolve, reject) => {
+      model.id = Math.ceil(Math.random() * 10000);
+      setTimeout(() => {
+        resolve(model);
+      }, 2500);
+    });
+    return Observable.from(p);
+    //return this.api.post('happhours', model).map(response => response.json());
   }
 
+  /**
+   * Busca os eventos ativos locais
+   */
   getActiveHappHours(): Observable<MyHappHourModel[]> {
     return this.storage.executeReadSql("SELECT id, json FROM happhours WHERE is_active = 'true'")
       .map((rs) => {

@@ -1,5 +1,5 @@
-<ion-tabs>
-  <ion-tab [root]="tab1Root" tabBadge="2" tabBadgeStyle="danger" tabTitle="invited" tabIcon="home"></ion-tab>
+<ion-tabs #tabsComponent>
+  <ion-tab [root]="tab1Root" tabBadge="{{newHappsCount}}" tabBadgeStyle="danger" tabTitle="invited" tabIcon="home"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="search" tabIcon="text"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="configs" tabIcon="stats"></ion-tab>
   <ion-tab [root]="tab4Root" tabTitle="contacts" tabIcon="image"></ion-tab>

@@ -1,7 +1,8 @@
 <ion-list class="lista-avatar">
   <ion-list-header>Meus Happs</ion-list-header>
   <ion-item-sliding *ngFor="let happ of ownerHapps, trackBy: trackByHapps">
-    <ion-item>
+
+    <ion-item (tap)="detailHappHour(happ)">
       <ion-avatar item-left>
         <img src="{{ getPlaceLogo(happ) }}">
       </ion-avatar>
@@ -9,21 +10,24 @@
       <p></p>
       <ion-note>{{ getHappDate(happ) }}</ion-note>
     </ion-item>
+
     <ion-item-options side="left">
       <button ion-button color="danger" icon-left (tap)="cancelHappHour(happ)">
           <ion-icon name="close"></ion-icon>
           Cancelar
-        </button>
+      </button>
     </ion-item-options>
+
     <ion-item-options side="right">
       <button ion-button color="light" icon-left (tap)="detailHappHour(happ)">
           <ion-icon name="ios-more"></ion-icon>
           Detalhar
-        </button>
+      </button>
+
       <button ion-button color="secondary" icon-left (tap)="checkInHappHour(happ)">
           <ion-icon name="checkmark"></ion-icon>
           Cheguei!
-        </button>
+      </button>
     </ion-item-options>
   </ion-item-sliding>
 </ion-list>
@@ -32,7 +36,8 @@
   <ion-list-header>Happs que me Convidaram</ion-list-header>
 
   <ion-item-sliding *ngFor="let happ of guestHapps, trackBy: trackByHapps">
-    <ion-item>
+
+    <ion-item (tap)="detailHappHour(happ)">
       <ion-avatar item-left>
         <img src="{{ getPlaceLogo(happ) }}">
       </ion-avatar>
@@ -40,27 +45,29 @@
       <p></p>
       <ion-note>{{ getHappDate(happ) }}</ion-note>
     </ion-item>
+
     <ion-item-options side="left">
       <button ion-button color="danger" icon-left (tap)="refuseHappHour(happ)">
           <ion-icon name="close"></ion-icon>
           Recusar
-        </button>
+      </button>
     </ion-item-options>
+
     <ion-item-options side="right">
       <button ion-button color="light" icon-left (tap)="detailHappHour(happ)">
           <ion-icon name="ios-more"></ion-icon>
           Detalhar
-        </button>
+      </button>
 
       <button *ngIf="userIsConfirmed(happ)" ion-button color="secondary" icon-left (tap)="checkInHappHour(happ, 'checkin')">
           <ion-icon name="checkmark"></ion-icon>
           Cheguei!
-        </button>
+      </button>
 
       <button *ngIf="!userIsConfirmed(happ)" ion-button color="primary" icon-left (tap)="confirmHappHour(happ, 'confirm')">
           <ion-icon name="checkmark"></ion-icon>
           Eu Vou!
-        </button>
+      </button>
     </ion-item-options>
   </ion-item-sliding>
 </ion-list>

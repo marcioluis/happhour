@@ -34,6 +34,7 @@ export class MyApp {
         translate.use(lang);
         moment.locale(lang);
         console.log(`preferred language: ${lang}`);
+        console.log(`moment locale: ${moment.locale()}`);
       });
 
       //vai para tela home ou de tutorial se for o primeiro uso

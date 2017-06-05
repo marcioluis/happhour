@@ -18,12 +18,15 @@ export class UserProvider {
   }
 
   async save(user: UserModel): Promise<UserModel> {
-    let seq = this.api.post('users', user).map(res => res.json()).toPromise();
+    //FIXME: hardcode para nao depender do servidor
+    //let seq = this.api.post('users', user).map(res => res.json()).toPromise();
 
     try {
-      user = await seq;
+      //user = await seq;
       this.storage.set(this.USER_KEY, user);
-      return seq;
+      //return seq;
+      user.id = Math.ceil(Math.random() * 10000);
+      return Promise.resolve(user);
     } catch (error) {
       throw error;
     }
