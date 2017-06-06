@@ -57,6 +57,8 @@ const providers: any[] = [
   SplashScreen,
   SQLite,
   Globalization,
+  GooglePlus,
+  Facebook,
   Api,
   Auth,
   PlaceProvider,
@@ -65,9 +67,6 @@ const providers: any[] = [
   HapphourProvider,
   //settings provider
   { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
-  //mock the plugins if needed
-  { provide: GooglePlus, useClass: configureGP },
-  { provide: Facebook, useClass: configureFB },
   // Keep this to enable Ionic's runtime error handling during development
   { provide: ErrorHandler, useClass: IonicErrorHandler }
 ];
