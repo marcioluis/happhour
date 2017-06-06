@@ -50,7 +50,10 @@ export class InvitedPage {
    * @param count quantidade de eventos novos
    */
   countNewHapps() {
-    let count = this.activeHapps.map(item => +item.isNew || 0).reduce((total, current) => total + current);
+    let count = 0;
+    if (this.activeHapps.length)
+      count = this.activeHapps.map(item => +item.isNew || 0).reduce((total, current) => total + current);
+
     this.events.publish('invited:count', count);
   }
 

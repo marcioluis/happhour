@@ -65,7 +65,7 @@ export class Auth {
     }
     catch (error) {
       console.error(`Auth error: ${error}`);
-      throw this.GoogleSignInStatusCodes[error];
+      throw this.GoogleSignInStatusCodes[error] || error;
     }
 
   }
