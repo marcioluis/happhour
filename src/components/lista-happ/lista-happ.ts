@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 import { MyHappHourModel } from "../../model/happhour-model";
 import * as moment from "moment";
 
@@ -33,7 +34,7 @@ export class ListaHappComponent {
   @Output()
   happCanceled = new EventEmitter<MyHappHourModel>();
 
-  constructor() {
+  constructor(private alertCtrl: AlertController) {
   }
 
   get ownerHapps() {
@@ -61,18 +62,19 @@ export class ListaHappComponent {
     return happ.isConfirmed;
   }
 
+  userHasCheckedIn(happ: MyHappHourModel) {
+    return happ.isCheckedin;
+  }
+
   trackByHapps(index: number, item: MyHappHourModel) {
     return item.id;
   }
 
   refuseHappHour(happ: MyHappHourModel) {
-    happ.isRefused = true;
-    happ.isConfirmed = false;
     this.happRefused.emit(happ);
   }
 
   cancelHappHour(happ: MyHappHourModel) {
-    happ.isActive = false;
     this.happCanceled.emit(happ);
   }
 
@@ -81,13 +83,20 @@ export class ListaHappComponent {
   }
 
   confirmHappHour(happ: MyHappHourModel) {
-    happ.isConfirmed = true;
-    happ.isRefused = false;
     this.happConfirmed.emit(happ);
   }
 
   checkInHappHour(happ: MyHappHourModel) {
-    happ.isCheckedin = true;
     this.happCheckedIn.emit(happ);
+  }
+
+  showConfirmation() {
+    let alert = this.alertCtrl.create({
+      title: 'Divirta-se!',
+      subTitle: 'Curta o HappHour com seus amigos. Seus pontos serão liberados em seguida.',
+      enableBackdropDismiss: true,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

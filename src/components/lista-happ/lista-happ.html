@@ -24,10 +24,15 @@
           Detalhar
       </button>
 
-      <button ion-button color="secondary" icon-left (tap)="checkInHappHour(happ)">
+      <button *ngIf="!userHasCheckedIn(happ)" ion-button color="secondary" icon-left (tap)="checkInHappHour(happ)">
           <ion-icon name="checkmark"></ion-icon>
           Cheguei!
       </button>
+
+      <button *ngIf="userHasCheckedIn(happ)" ion-button color="secondary" outline icon-left (tap)="showConfirmation()">
+          <ion-icon name="thumbs-up"></ion-icon>      
+      </button>
+
     </ion-item-options>
   </ion-item-sliding>
 </ion-list>
@@ -59,9 +64,13 @@
           Detalhar
       </button>
 
-      <button *ngIf="userIsConfirmed(happ)" ion-button color="secondary" icon-left (tap)="checkInHappHour(happ, 'checkin')">
+      <button *ngIf="!userHasCheckedIn(happ)" ion-button color="secondary" icon-left (tap)="checkInHappHour(happ)">
           <ion-icon name="checkmark"></ion-icon>
           Cheguei!
+      </button>
+
+      <button *ngIf="userHasCheckedIn(happ)" ion-button color="secondary" outline icon-left (tap)="showConfirmation()">
+          <ion-icon name="thumbs-up"></ion-icon>      
       </button>
 
       <button *ngIf="!userIsConfirmed(happ)" ion-button color="primary" icon-left (tap)="confirmHappHour(happ, 'confirm')">

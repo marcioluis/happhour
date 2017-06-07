@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PlaceModel } from '../model/place-model';
-import { MyHappHourModel } from '../model/happhour-model';
+import { MyHappHourModel, MyHappHourModelCheckin } from '../model/happhour-model';
 import { UserModel } from '../model/user-model';
 import { Api } from "./api";
 import { Database } from "./database";
@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
+import { Coordinates } from "@ionic-native/geolocation";
 
 /*
   Generated class for the HapphourProvider provider.
@@ -33,14 +34,19 @@ export class HapphourProvider {
    * @param owner criador do happhour
    */
   createNewHappHour(place: PlaceModel, owner: UserModel): MyHappHourModel {
+    let localOwner = JSON.parse(JSON.stringify(owner));
+    delete localOwner.providerIdToken;
+    delete localOwner.authCode;
+    delete localOwner.providerUserId;
+
     let happ = new MyHappHourModel();
-    happ.creator = owner;
+    happ.creator = localOwner;
     happ.date = moment().format();
     happ.isPublic = false;
     happ.place = place;
     happ.name = `HappHour em ${place.nome}`;
     happ.isActive = true;
-    happ.me = owner.id;
+    happ.me = localOwner.id;
     happ.isOwner = true;
     happ.isConfirmed = true;
     happ.isNew = true;
@@ -55,17 +61,22 @@ export class HapphourProvider {
     return this.saveHappHourRemote(happhour).flatMap((model) => this.saveHappHourLocal(model));
   }
 
+  /**
+   * Insere ou atualiza um evento na base local
+   * @param model 
+   */
   saveHappHourLocal(model: MyHappHourModel) {
     let json = JSON.stringify(model);
-    return this.storage.executeCommandSql('INSERT INTO happhours (id, is_active, json) VALUES (?, ?, ?)', [model.id, model.isActive, json]).map(rs => model);
+    return this.storage.executeCommandSql('INSERT OR REPLACE INTO happhours (id, is_active, json) VALUES (?, ?, ?)', [model.id, model.isActive, json]).map(rs => model);
   }
 
   saveHappHourRemote(model: MyHappHourModel): Observable<MyHappHourModel> {
     //FIXME: mock para nao conectar no servidor
     let p = new Promise((resolve, reject) => {
-      model.id = Math.ceil(Math.random() * 10000);
+      let m = JSON.parse(JSON.stringify(model));
+      m.id = Math.ceil(Math.random() * 10000);
       setTimeout(() => {
-        resolve(model);
+        resolve(m);
       }, 2500);
     });
     return Observable.from(p);
@@ -91,8 +102,71 @@ export class HapphourProvider {
       });
   }
 
-  refuseInvitation(happ: MyHappHourModel) {
+  cancelHappHour(happ: MyHappHourModel): Observable<MyHappHourModel> {
+    happ.isActive = false;
+    //salva remoto e local
+    //FIXME: mock para nao conectar no servidor
+    let p = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let element = JSON.parse(JSON.stringify(happ));
+        resolve(element);
+      }, 2500);
+    });
+    return Observable.from(p).flatMap(model => this.saveHappHourLocal(model));
+    //return this.api.post('happhours/cancel', happ).map(response => response.json()).flatMap(model => this.saveHappHourLocal(model));
+  }
 
+  refuseInvitation(happ: MyHappHourModel): Observable<MyHappHourModel> {
+    happ.isRefused = true;
+    happ.isConfirmed = false;
+    //salva remoto e local
+    //FIXME: mock para nao conectar no servidor
+    let p = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let element = JSON.parse(JSON.stringify(happ));
+        resolve(element);
+      }, 2500);
+    });
+    return Observable.from(p).flatMap(model => this.saveHappHourLocal(model));
+    //return this.api.post('happhours/refuse', happ).map(response => response.json()).flatMap(model => this.saveHappHourLocal(model));
+
+  }
+
+  confirmInvitation(happ: MyHappHourModel): Observable<MyHappHourModel> {
+    happ.isConfirmed = true;
+    happ.isRefused = false;
+    //salva remoto e local
+    //FIXME: mock para nao conectar no servidor
+    let p = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let element = JSON.parse(JSON.stringify(happ));
+        resolve(element);
+      }, 2500);
+    });
+    return Observable.from(p).flatMap(model => this.saveHappHourLocal(model));
+    //return this.api.post('happhours/confirm', happ).map(response => response.json()).flatMap(model => this.saveHappHourLocal(model));
+  }
+
+  checkinHappHour(happ: MyHappHourModel, location: Coordinates): Observable<MyHappHourModel> {
+    happ.isCheckedin = true;
+    //salva remoto e local
+    //FIXME: mock para nao conectar no servidor
+    let p = new Promise<MyHappHourModelCheckin>((resolve, reject) => {
+      setTimeout(() => {
+        let checkinHappHour: MyHappHourModelCheckin = JSON.parse(JSON.stringify(happ));
+        checkinHappHour.latitude = location.latitude;
+        checkinHappHour.longitude = location.longitude;
+        checkinHappHour.accuracy = location.accuracy;
+        resolve(checkinHappHour);
+      }, 2500);
+    });
+    return Observable.from(p).flatMap(model => {
+      delete model.latitude;
+      delete model.longitude;
+      delete model.accuracy;
+      return this.saveHappHourLocal(model)
+    });
+    //return this.api.post('happhours/checkin', checkinHappHour).map(response => response.json()).flatMap(model => this.saveHappHourLocal(model));
   }
 
 }

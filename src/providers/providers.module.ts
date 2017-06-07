@@ -8,6 +8,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { SQLite } from "@ionic-native/sqlite";
 import { Globalization } from "@ionic-native/globalization";
+import { Geolocation } from "@ionic-native/geolocation";
 //providers
 import { Api } from "./api";
 import { Auth } from './auth';
@@ -35,6 +36,7 @@ export function provideDefaultSettings(storage: Storage) {
         Globalization,
         GooglePlus,
         Facebook,
+        Geolocation,
         Api,
         Auth,
         PlaceProvider,

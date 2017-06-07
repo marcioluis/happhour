@@ -29,12 +29,48 @@ export class PlaceDetailPage {
     this.isOpenNow();
   }
 
-  isOpenNow() {
+  get isOpenNow() {
     //TODO: arrumar esse aberto hoje, meio porco
     let dia = new Date().getDay() + 1;
-    let horario = this.place.horariosFuncionamento[dia];
-    this.place['hoje'] = horario;
+    return this.place.horariosFuncionamento[dia];
   }
+
+  get logo() {
+    return this.place.logoUrl;
+  }
+
+  get name() {
+    return this.place.nome;
+  }
+
+  get subname() {
+    return this.place.subNome;
+  }
+
+  get description() {
+    return this.place.descricao;
+  }
+
+  get isPontuavel() {
+    return this.place.isPontuavel;
+  }
+
+  get isReservavel() {
+    return this.place.isReservavel;
+  }
+
+  get isHappyOnDemand() {
+    return this.place.isHappyOnDemand;
+  }
+
+  get telefones() {
+    return this.place.telefones;
+  }
+
+  get address() {
+    return this.place.endereco;
+  }
+
   //TODO: Agendar data do evento
   async scheduleEvent() { }
 

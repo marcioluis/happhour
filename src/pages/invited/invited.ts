@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, Refresher, Events } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, Refresher, Events, LoadingController } from 'ionic-angular';
 import { HapphourProvider } from "../../providers/happhour";
 import { UserProvider } from "../../providers/user";
 import { MyHappHourModel } from "../../model/happhour-model";
+import { Geolocation } from "@ionic-native/geolocation";
 
 @IonicPage()
 @Component({
@@ -12,13 +13,22 @@ import { MyHappHourModel } from "../../model/happhour-model";
 export class InvitedPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private happHourProvider: HapphourProvider,
-    private userProvider: UserProvider, private events: Events) {
+    private userProvider: UserProvider, private events: Events, private geo: Geolocation, private loadCtrl: LoadingController) {
   }
 
   activeHapps: MyHappHourModel[] = [];
   inactiveHapps: MyHappHourModel[] = [];
 
   ionViewDidEnter() {
+    this.selectActiveAndCountNewHapps();
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad InvitedPage');
+    this.userProvider.loadUser();
+  }
+
+  selectActiveAndCountNewHapps() {
     this.happHourProvider.getActiveHappHours().subscribe(model => {
       this.activeHapps = model;
     },
@@ -26,11 +36,6 @@ export class InvitedPage {
         console.error(`erro ao selecionar eventos ativos: ${JSON.stringify(error)}`);
       },
       () => this.countNewHapps());
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InvitedPage');
-    this.userProvider.loadUser();
   }
 
   doRefresh(refresher: Refresher) {
@@ -57,24 +62,73 @@ export class InvitedPage {
     this.events.publish('invited:count', count);
   }
 
-  refuseInvite(happ: MyHappHourModel) {
-    console.log(JSON.stringify(happ));
+  goToDetails(happ: MyHappHourModel) {
+    happ.isNew = false;
+    this.happHourProvider.saveHappHourLocal(happ).subscribe((model) =>
+      this.navCtrl.push('HapphourDetailPage', { 'happhour': model }),
+      error => { },
+      () => this.countNewHapps());
   }
 
-  goToDetails(happ: MyHappHourModel) {
-    this.navCtrl.push('HapphourDetailPage', { 'happhour': happ });
+  refuseInvite(happ: MyHappHourModel) {
+    happ.isNew = false;
+    let loader = this.presentLoader();
+    this.happHourProvider.refuseInvitation(happ).subscribe(
+      model => happ = model,
+      error => console.error(JSON.stringify(error)),
+      () => loader.dismiss());
   }
 
   confirmInvite(happ: MyHappHourModel) {
-    console.log(JSON.stringify(happ));
+    happ.isNew = false;
+    let loader = this.presentLoader();
+    this.happHourProvider.confirmInvitation(happ).subscribe(
+      model => happ = model,
+      error => console.error(JSON.stringify(error)),
+      () => loader.dismiss());
   }
 
-  checkIn(happ: MyHappHourModel) {
-    console.log(JSON.stringify(happ));
+  async checkIn(happ: MyHappHourModel) {
+    try {
+      happ.isNew = false;
+      let loader = this.presentLoader();
+      let position = await this.geo.getCurrentPosition({ enableHighAccuracy: true });
+      this.happHourProvider.checkinHappHour(happ, position.coords).subscribe(
+        model => happ = model,
+        error => console.error(JSON.stringify(error)),
+        () => loader.dismiss());
+    } catch (error) {
+      console.error(JSON.stringify(error))
+    }
   }
 
   cancelHappHour(happ: MyHappHourModel) {
-    console.log(JSON.stringify(happ));
+    happ.isNew = false;
+    let loader = this.presentLoader();
+    this.happHourProvider.cancelHappHour(happ).subscribe(
+      model => happ = model,
+      error => console.error(JSON.stringify(error)),
+      () => {
+        this.selectActiveAndCountNewHapps();
+        loader.dismiss();
+      });
+  }
+
+  private presentError(error) {
+    // let alert = this.alertCtrl.create({
+    //   title: error.name,
+    //   subTitle: error.message || JSON.stringify(error, null, '\t'),
+    //   buttons: ['OK']
+    // });
+    // alert.present();
+  }
+
+  private presentLoader(message: string = 'Aguarde...') {
+    let loader = this.loadCtrl.create({
+      content: 'Aguarde...'
+    });
+    loader.present();
+    return loader;
   }
 
 }

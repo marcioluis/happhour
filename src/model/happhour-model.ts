@@ -29,3 +29,19 @@ export class MyHappHourModel extends HappHourModel {
     me?: number
     isNew?: boolean
 }
+
+export class MyHappHourModelCheckin extends MyHappHourModel {
+    /**
+     * a double representing the position's latitude in decimal degrees.
+     */
+    latitude?: number;
+    /**
+     * A double representing the position's longitude in decimal degrees.
+     */
+    longitude?: number;
+    /**
+     * A double representing the accuracy of the latitude and longitude properties,
+     * expressed in meters.
+     */
+    accuracy?: number;
+}
