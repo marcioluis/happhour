@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Globalization } from "@ionic-native/globalization";
 import { TranslateService } from "@ngx-translate/core";
-import { Settings } from "../providers";
+import { Settings } from "../providers/settings";
 import * as moment from "moment";
 
 @Component({

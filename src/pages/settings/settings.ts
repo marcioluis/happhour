@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
-import { Settings } from '../../providers';
+import { Settings } from '../../providers/settings';
 import { TranslateService } from '@ngx-translate/core';
 
 /*

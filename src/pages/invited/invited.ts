@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, Refresher, Events } from 'ionic-angular';
 import { HapphourProvider } from "../../providers/happhour";
 import { UserProvider } from "../../providers/user";
-import { HappHourModel, MyHappHourModel } from "../../model/happhour-model";
+import { MyHappHourModel } from "../../model/happhour-model";
 
 @IonicPage()
 @Component({

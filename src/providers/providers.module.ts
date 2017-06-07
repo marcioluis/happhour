@@ -9,7 +9,13 @@ import { Facebook } from '@ionic-native/facebook';
 import { SQLite } from "@ionic-native/sqlite";
 import { Globalization } from "@ionic-native/globalization";
 //providers
-import { Api, Auth, PlaceProvider, Settings, UserProvider, Database, HapphourProvider } from "../providers";
+import { Api } from "./api";
+import { Auth } from './auth';
+import { Database } from "./database";
+import { HapphourProvider } from "./happhour";
+import { PlaceProvider } from "./place";
+import { Settings } from './settings';
+import { UserProvider } from './user';
 
 /**
  * The Settings provider takes a set of default settings for your app.

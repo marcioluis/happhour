@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-import { Settings } from '../../providers';
+import { Settings } from '../../providers/settings';
 
 export interface Slide {
   title: string;

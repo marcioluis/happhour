@@ -1,15 +1,15 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Http, HttpModule } from '@angular/http';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Storage, IonicStorageModule } from '@ionic/storage';
+import { IonicApp, IonicModule } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 //translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 //app component
 import { MyApp } from './app.component';
 //providers
-import { Database } from "../providers";
+import { Database } from "../providers/database";
 import { ProvidersModule } from "../providers/providers.module";
 /** 
  * The translate loader needs to know where to load i18n files
