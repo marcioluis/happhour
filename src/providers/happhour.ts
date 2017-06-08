@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PlaceModel } from '../model/place-model';
 import { MyHappHourModel, MyHappHourModelCheckin } from '../model/happhour-model';
-import { UserModel } from '../model/user-model';
+import { UserModel, UserModelHappHour } from '../model/user-model';
 import { Api } from "./api";
 import { Database } from "./database";
 import * as moment from "moment";
@@ -34,10 +34,11 @@ export class HapphourProvider {
    * @param owner criador do happhour
    */
   createNewHappHour(place: PlaceModel, owner: UserModel): MyHappHourModel {
-    let localOwner = JSON.parse(JSON.stringify(owner));
+    let localOwner: UserModelHappHour = JSON.parse(JSON.stringify(owner));
     delete localOwner.providerIdToken;
     delete localOwner.authCode;
     delete localOwner.providerUserId;
+    localOwner.isConfirmed = true;
 
     let happ = new MyHappHourModel();
     happ.creator = localOwner;
@@ -50,6 +51,7 @@ export class HapphourProvider {
     happ.isOwner = true;
     happ.isConfirmed = true;
     happ.isNew = true;
+    happ.invited = [localOwner];
     return happ;
   }
 
@@ -123,7 +125,9 @@ export class HapphourProvider {
     //FIXME: mock para nao conectar no servidor
     let p = new Promise((resolve, reject) => {
       setTimeout(() => {
-        let element = JSON.parse(JSON.stringify(happ));
+        let element: MyHappHourModel = JSON.parse(JSON.stringify(happ));
+        let convidado = element.invited.find(item => item.id === element.me);
+        convidado.isRefused = true;
         resolve(element);
       }, 2500);
     });
@@ -140,6 +144,8 @@ export class HapphourProvider {
     let p = new Promise((resolve, reject) => {
       setTimeout(() => {
         let element = JSON.parse(JSON.stringify(happ));
+        let convidado = element.invited.find(item => item.id === element.me);
+        convidado.isConfirmed = true;
         resolve(element);
       }, 2500);
     });
@@ -157,6 +163,8 @@ export class HapphourProvider {
         checkinHappHour.latitude = location.latitude;
         checkinHappHour.longitude = location.longitude;
         checkinHappHour.accuracy = location.accuracy;
+        let convidado = checkinHappHour.invited.find(item => item.id === checkinHappHour.me);
+        convidado.isCheckedin = true;
         resolve(checkinHappHour);
       }, 2500);
     });

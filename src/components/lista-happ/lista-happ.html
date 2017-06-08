@@ -1,5 +1,12 @@
 <ion-list class="lista-avatar">
   <ion-list-header>Meus Happs</ion-list-header>
+  <ion-item *ngIf="!ownerHapps.length">
+    <ion-avatar item-left>
+      <img src="assets/img/forever-alone.jpg">
+    </ion-avatar>
+    <h2>Forever alone?</h2>
+    <p>Crie um novo HappHour!</p>
+  </ion-item>
   <ion-item-sliding *ngFor="let happ of ownerHapps, trackBy: trackByHapps">
 
     <ion-item (tap)="detailHappHour(happ)">
@@ -7,7 +14,6 @@
         <img src="{{ getPlaceLogo(happ) }}">
       </ion-avatar>
       <h2>{{ getName(happ) }}</h2>
-      <p></p>
       <ion-note>{{ getHappDate(happ) }}</ion-note>
     </ion-item>
 
@@ -29,7 +35,7 @@
           Cheguei!
       </button>
 
-      <button *ngIf="userHasCheckedIn(happ)" ion-button color="secondary" outline icon-left (tap)="showConfirmation()">
+      <button *ngIf="userHasCheckedIn(happ)" ion-button color="secondary" outline icon-only (tap)="showConfirmation()">
           <ion-icon name="thumbs-up"></ion-icon>      
       </button>
 
@@ -39,6 +45,13 @@
 
 <ion-list class="lista-avatar">
   <ion-list-header>Happs que me Convidaram</ion-list-header>
+  <ion-item *ngIf="!guestHapps.length">
+    <ion-avatar item-left>
+      <img src="assets/img/sad-meme.jpeg">
+    </ion-avatar>
+    <h2>Não há nenhuma diversão por aqui</h2>
+    <p>triste isso...</p>
+  </ion-item>
 
   <ion-item-sliding *ngFor="let happ of guestHapps, trackBy: trackByHapps">
 
@@ -47,7 +60,6 @@
         <img src="{{ getPlaceLogo(happ) }}">
       </ion-avatar>
       <h2>{{ getName(happ) }}</h2>
-      <p></p>
       <ion-note>{{ getHappDate(happ) }}</ion-note>
     </ion-item>
 
@@ -64,12 +76,12 @@
           Detalhar
       </button>
 
-      <button *ngIf="!userHasCheckedIn(happ)" ion-button color="secondary" icon-left (tap)="checkInHappHour(happ)">
+      <button *ngIf="!userHasCheckedIn(happ) && userIsConfirmed(happ)" ion-button color="secondary" icon-left (tap)="checkInHappHour(happ)">
           <ion-icon name="checkmark"></ion-icon>
           Cheguei!
       </button>
 
-      <button *ngIf="userHasCheckedIn(happ)" ion-button color="secondary" outline icon-left (tap)="showConfirmation()">
+      <button *ngIf="userHasCheckedIn(happ) && userIsConfirmed(happ)" ion-button color="secondary" outline icon-only (tap)="showConfirmation()">
           <ion-icon name="thumbs-up"></ion-icon>      
       </button>
 

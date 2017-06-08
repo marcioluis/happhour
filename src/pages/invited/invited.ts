@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, Refresher, Events, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, Refresher, Events } from 'ionic-angular';
 import { HapphourProvider } from "../../providers/happhour";
 import { UserProvider } from "../../providers/user";
 import { MyHappHourModel } from "../../model/happhour-model";
 import { Geolocation } from "@ionic-native/geolocation";
+import { InfoPresenter } from "../../providers/info-presenter";
 
 @IonicPage()
 @Component({
@@ -13,7 +14,7 @@ import { Geolocation } from "@ionic-native/geolocation";
 export class InvitedPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private happHourProvider: HapphourProvider,
-    private userProvider: UserProvider, private events: Events, private geo: Geolocation, private loadCtrl: LoadingController) {
+    private userProvider: UserProvider, private events: Events, private geo: Geolocation, private info: InfoPresenter) {
   }
 
   activeHapps: MyHappHourModel[] = [];
@@ -72,7 +73,7 @@ export class InvitedPage {
 
   refuseInvite(happ: MyHappHourModel) {
     happ.isNew = false;
-    let loader = this.presentLoader();
+    let loader = this.info.presentLoader();
     this.happHourProvider.refuseInvitation(happ).subscribe(
       model => happ = model,
       error => console.error(JSON.stringify(error)),
@@ -81,7 +82,7 @@ export class InvitedPage {
 
   confirmInvite(happ: MyHappHourModel) {
     happ.isNew = false;
-    let loader = this.presentLoader();
+    let loader = this.info.presentLoader();
     this.happHourProvider.confirmInvitation(happ).subscribe(
       model => happ = model,
       error => console.error(JSON.stringify(error)),
@@ -91,7 +92,7 @@ export class InvitedPage {
   async checkIn(happ: MyHappHourModel) {
     try {
       happ.isNew = false;
-      let loader = this.presentLoader();
+      var loader = this.info.presentLoader();
       let position = await this.geo.getCurrentPosition({ enableHighAccuracy: true });
       this.happHourProvider.checkinHappHour(happ, position.coords).subscribe(
         model => happ = model,
@@ -99,12 +100,14 @@ export class InvitedPage {
         () => loader.dismiss());
     } catch (error) {
       console.error(JSON.stringify(error))
+    } finally {
+      loader.dismiss();
     }
   }
 
   cancelHappHour(happ: MyHappHourModel) {
     happ.isNew = false;
-    let loader = this.presentLoader();
+    let loader = this.info.presentLoader();
     this.happHourProvider.cancelHappHour(happ).subscribe(
       model => happ = model,
       error => console.error(JSON.stringify(error)),
@@ -112,23 +115,6 @@ export class InvitedPage {
         this.selectActiveAndCountNewHapps();
         loader.dismiss();
       });
-  }
-
-  private presentError(error) {
-    // let alert = this.alertCtrl.create({
-    //   title: error.name,
-    //   subTitle: error.message || JSON.stringify(error, null, '\t'),
-    //   buttons: ['OK']
-    // });
-    // alert.present();
-  }
-
-  private presentLoader(message: string = 'Aguarde...') {
-    let loader = this.loadCtrl.create({
-      content: 'Aguarde...'
-    });
-    loader.present();
-    return loader;
   }
 
 }

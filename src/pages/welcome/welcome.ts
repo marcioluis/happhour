@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, IonicPage, AlertController } from 'ionic-angular';
+import { NavController, IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Settings } from '../../providers/settings';
 import { Auth } from '../../providers/auth';
 import { UserProvider } from '../../providers/user';
+import { InfoPresenter } from '../../providers/info-presenter';
 
 @IonicPage()
 @Component({
@@ -13,7 +14,7 @@ import { UserProvider } from '../../providers/user';
 export class WelcomePage {
 
   constructor(public navCtrl: NavController, private settings: Settings,
-    private loadCtrl: LoadingController, translate: TranslateService, private auth: Auth, private user: UserProvider, private alertCtrl: AlertController) {
+    private infoPresenter: InfoPresenter, translate: TranslateService, private auth: Auth, private user: UserProvider) {
 
     settings.load();
     translate.get(["AUTHENTICATING"])
@@ -23,8 +24,7 @@ export class WelcomePage {
   private strings;
 
   async loginGoogle() {
-    let loader = this.presentLoader();
-    //TODO: tratar possiveis erros em loginGoole
+    let loader = this.infoPresenter.presentLoader(this.strings.AUTHENTICATING);
     try {
       let googleUser = await this.auth.doGoogleLogin();
       await this.user.save(googleUser);
@@ -33,15 +33,14 @@ export class WelcomePage {
       this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
 
     } catch (error) {
-      this.presentError(error);
+      this.infoPresenter.presentError(error);
     } finally {
       loader.dismiss();
     }
   }
 
   async loginFacebook() {
-    let loader = this.presentLoader();
-    //TODO: tratar possiveis erros em loginFacebook
+    let loader = this.infoPresenter.presentLoader(this.strings.AUTHENTICATING);
     try {
       let facebookUser = await this.auth.doFacebookLogin();
       await this.user.save(facebookUser);
@@ -50,28 +49,11 @@ export class WelcomePage {
       this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' })
 
     } catch (error) {
-      this.presentError(error);
+      this.infoPresenter.presentError(error);
     }
     finally {
       loader.dismiss()
     }
-  }
-
-  private presentError(error) {
-    let alert = this.alertCtrl.create({
-      title: error.name,
-      subTitle: error.message || JSON.stringify(error, null, '\t'),
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
-  private presentLoader() {
-    let loader = this.loadCtrl.create({
-      content: this.strings.AUTHENTICATING
-    });
-    loader.present();
-    return loader;
   }
 
   ionViewDidLoad() {

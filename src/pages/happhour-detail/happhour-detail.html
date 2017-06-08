@@ -46,7 +46,9 @@
     <p>{{ totalConfirmados }} de {{ totalConvidados }}</p>
   </div>
 
-  <button *ngIf="!isConfirmed" ion-button full (tap)="confirmHappHour()">Eu Vou!</button>
-  <button *ngIf="isConfirmed" ion-button full (tap)="checkInHappHour()">Cheguei!</button>
-
+  <button *ngIf="!isConfirmed" ion-button full color="primary" (tap)="confirmInvite()">Eu Vou!</button>
+  <button *ngIf="isConfirmed && !userHasCheckedIn" ion-button full color="secondary" (tap)="checkInHappHour()">Cheguei!</button>
+  <button *ngIf="isConfirmed && userHasCheckedIn" ion-button icon-only full color="secondary" outline (tap)="showConfirmation()">
+    <ion-icon name="thumbs-up"></ion-icon>      
+  </button>
 </ion-content>

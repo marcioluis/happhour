@@ -1,14 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AlertController } from 'ionic-angular';
 import { MyHappHourModel } from "../../model/happhour-model";
+import { InfoPresenter } from "../../providers/info-presenter";
 import * as moment from "moment";
 
-/**
- * Generated class for the ListaHappComponent component.
- *
- * See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
- * for more info on Angular Components.
- */
 @Component({
   selector: 'lista-happ',
   templateUrl: 'lista-happ.html'
@@ -34,7 +28,7 @@ export class ListaHappComponent {
   @Output()
   happCanceled = new EventEmitter<MyHappHourModel>();
 
-  constructor(private alertCtrl: AlertController) {
+  constructor(private infoPresenter: InfoPresenter) {
   }
 
   get ownerHapps() {
@@ -91,12 +85,6 @@ export class ListaHappComponent {
   }
 
   showConfirmation() {
-    let alert = this.alertCtrl.create({
-      title: 'Divirta-se!',
-      subTitle: 'Curta o HappHour com seus amigos. Seus pontos serão liberados em seguida.',
-      enableBackdropDismiss: true,
-      buttons: ['OK']
-    });
-    alert.present();
+    this.infoPresenter.showConfirmation();
   }
 }

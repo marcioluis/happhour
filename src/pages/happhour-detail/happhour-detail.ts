@@ -2,14 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MyHappHourModel } from "../../model/happhour-model";
 import * as moment from "moment";
+import { Geolocation } from "@ionic-native/geolocation";
+import { HapphourProvider } from "../../providers/happhour";
+import { InfoPresenter } from "../../providers/info-presenter";
 
 
-/**
- * Generated class for the HapphourDetailPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-happhour-detail',
@@ -19,15 +16,36 @@ export class HapphourDetailPage {
 
   happhour: MyHappHourModel = this.navParams.get('happhour');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private happHourProvider: HapphourProvider, public navCtrl: NavController, public navParams: NavParams,
+    private infoPresenter: InfoPresenter, private geo: Geolocation) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HapphourDetailPage');
   }
 
-  checkInHappHour() { }
-  confirmHappHour() { }
+  async checkInHappHour() {
+    //var loader = this.presentLoader();
+    try {
+      let happ = this.happhour;
+      let position = await this.geo.getCurrentPosition({ enableHighAccuracy: true });
+      this.happHourProvider.checkinHappHour(happ, position.coords).subscribe(
+        model => happ = model,
+        error => console.error(JSON.stringify(error)));
+    } catch (error) {
+      console.error(JSON.stringify(error))
+    } finally {
+      //loader.dismiss();
+    }
+  }
+
+  confirmInvite() {
+    // let loader = this.presentLoader();
+    let happ = this.happhour;
+    this.happHourProvider.confirmInvitation(happ).subscribe(
+      model => happ = model,
+      error => console.error(JSON.stringify(error)));
+  }
 
   get placeLogo() {
     return this.happhour.place.logoUrl;
@@ -73,6 +91,14 @@ export class HapphourDetailPage {
   }
   get isConfirmed() {
     return this.happhour.isConfirmed;
+  }
+
+  get userHasCheckedIn() {
+    return this.happhour.isCheckedin;
+  }
+
+  showConfirmation() {
+    this.infoPresenter.showConfirmation();
   }
 
 }

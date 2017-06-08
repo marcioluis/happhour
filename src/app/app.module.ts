@@ -11,6 +11,7 @@ import { MyApp } from './app.component';
 //providers
 import { Database } from "../providers/database";
 import { ProvidersModule } from "../providers/providers.module";
+
 /** 
  * The translate loader needs to know where to load i18n files
  * in Ionic's static asset pipeline.
