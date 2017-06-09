@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { Settings } from '../../providers/settings';
+import { UserProvider } from "../../providers/user";
+import { SettingsModel } from "../../model/settings-model";
+import { UserModel } from "../../model/user-model";
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @IonicPage()
 @Component({
@@ -10,52 +15,80 @@ import { Settings } from '../../providers/settings';
 })
 export class SettingsPage {
 
+  get mask() {
+    return {
+      mask: ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+      guide: true,
+      keepCharPositions: false
+    }
+
+  }
+
+
   // Our local settings object
-  options: any;
-
+  localSettings: SettingsModel;
+  // Our local user settings object
+  localProfile: UserModel;
   settingsReady = false;
-
+  profileReady = false;
   form: FormGroup;
 
-  profileSettings = {
+  profileNavSettings = {
     page: 'profile',
-    pageTitleKey: 'SETTINGS_PAGE_PROFILE'
+    pageTitle: 'Perfil'
   };
 
   page: string = 'main';
-  pageTitleKey: string = 'SETTINGS_TITLE';
-  pageTitle: string;
+  pageTitle: string = 'Configurações';
 
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
     public settings: Settings,
+    public userProvider: UserProvider,
     public formBuilder: FormBuilder,
     public navParams: NavParams) {
   }
 
-  _buildForm() {
+  get radius() {
+    return this.form.value.searchRadius;
+  }
+
+  _buildFormSettings() {
     let group: any = {
-      option1: [this.options.option1],
-      option2: [this.options.option2],
-      option3: [this.options.option3]
+      searchRadius: [this.localSettings.searchRadius],
+      geofances: [this.localSettings.geofances],
+      notifications: [this.localSettings.notifications],
+      promotions: [this.localSettings.promotions],
     };
 
-    switch (this.page) {
-      case 'main':
-        break;
-      case 'profile':
-        group = {
-          option4: [this.options.option4]
-        };
-        break;
-    }
     this.form = this.formBuilder.group(group);
 
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
-      this.settings.merge(this.form.value);
-    });
+    // Watch the form for changes
+    this.form.valueChanges
+      .debounceTime(600)
+      .distinctUntilChanged()
+      .subscribe((v) => {
+        this.settings.merge(v);
+      });
+  }
+
+  _buildFormProfile() {
+    let group: any = {
+      displayName: [this.localProfile.displayName],
+      gender: [this.localProfile.gender],
+      telephone: [this.localProfile.telephone]
+    };
+
+    this.form = this.formBuilder.group(group);
+
+    // Watch the form for changes
+    this.form.valueChanges
+      .debounceTime(850)
+      .distinctUntilChanged()
+      .subscribe((v) => {
+        //        console.log(JSON.stringify(v));
+      });
   }
 
   ionViewDidLoad() {
@@ -68,19 +101,24 @@ export class SettingsPage {
     this.form = this.formBuilder.group({});
 
     this.page = this.navParams.get('page') || this.page;
-    this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
+    this.pageTitle = this.navParams.get('pageTitle') || this.pageTitle;
 
-    this.pageTitle = "Page title";
-
-    this.settings.load().then(() => {
-      this.settingsReady = true;
-      this.options = this.settings.allSettings;
-
-      this._buildForm();
-    });
-  }
-
-  ngOnChanges() {
+    switch (this.page) {
+      case 'main':
+        this.settings.load().then(() => {
+          this.settingsReady = true;
+          this.localSettings = this.settings.allSettings;
+          this._buildFormSettings();
+        });
+        break;
+      case 'profile':
+        this.userProvider.loadUser().then(() => {
+          this.profileReady = true;
+          this.localProfile = this.userProvider.user;
+          this._buildFormProfile();
+        });
+        break;
+    }
   }
 
 }

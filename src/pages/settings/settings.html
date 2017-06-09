@@ -11,34 +11,63 @@
   <form [formGroup]="form" *ngIf="settingsReady">
     <ion-list *ngIf="page == 'main'">
       <ion-item>
-        <ion-label>{{ 'SETTINGS_OPTION1'}}</ion-label>
-        <ion-toggle formControlName="option1"></ion-toggle>
+        <ion-icon name="notifications" item-start></ion-icon>
+        <ion-label>Notificações</ion-label>
+        <ion-toggle formControlName="notifications"></ion-toggle>
       </ion-item>
 
       <ion-item>
-        <ion-label>{{ 'SETTINGS_OPTION2' }}</ion-label>
-        <ion-input formControlName="option2"></ion-input>
+        <ion-icon name="pricetags" item-start></ion-icon>
+        <ion-label>Promoções</ion-label>
+        <ion-toggle formControlName="promotions"></ion-toggle>
       </ion-item>
 
       <ion-item>
-        <ion-label>{{ 'SETTINGS_OPTION3' }}</ion-label>
-        <ion-select formControlName="option3">
-          <ion-option value="1" checked="true">1</ion-option>
-          <ion-option value="2">2</ion-option>
-          <ion-option value="3">3</ion-option>
+        <ion-icon name="compass" item-start></ion-icon>
+        <ion-label>Sugerir locais próximos</ion-label>
+        <ion-toggle formControlName="geofances"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Distância de procura</ion-label>
+        <ion-badge item-right>{{radius}} Mts</ion-badge>
+      </ion-item>
+
+      <ion-item>
+        <ion-range min="0" max="1000" formControlName="searchRadius">
+          <ion-icon range-left name="remove"></ion-icon>
+          <ion-icon range-right name="add"></ion-icon>
+        </ion-range>
+      </ion-item>
+
+      <ion-item [navPush]="subSettings" [navParams]="profileNavSettings">
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label>Meu perfil</ion-label>
+      </ion-item>
+    </ion-list>
+  </form>
+
+  <form [formGroup]="form" *ngIf="profileReady">
+    <ion-list *ngIf="page == 'profile'">
+      <ion-item>
+        <ion-label stacked color="primary">Nome exibição</ion-label>
+        <ion-input type="text" formControlName="displayName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked color="primary">Telefone</ion-label>
+        <ion-input type="text" textMask="{{mask}}" formControlName="telephone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Genero</ion-label>
+        <ion-select formControlName="gender" okText="Confirmar" cancelText="Cancelar">
+          <ion-option value="female">Feminino</ion-option>
+          <ion-option value="male">Masculino</ion-option>
+          <ion-option value="other">Outro</ion-option>
         </ion-select>
       </ion-item>
 
-      <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
-        {{ 'SETTINGS_PROFILE_BUTTON' }}
-      </button>
-    </ion-list>
-
-    <ion-list *ngIf="page == 'profile'">
-      <ion-item>
-        <ion-label>{{ 'SETTINGS_OPTION4' }}</ion-label>
-        <ion-input formControlName="option4"></ion-input>
-      </ion-item>
     </ion-list>
   </form>
 

@@ -10,6 +10,7 @@ export class UserModel {
     providerUserId?: string
     imageUrl?: string
     gender?: string
+    telephone?: string
 }
 
 export class UserModelHappHour extends UserModel {
