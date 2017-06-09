@@ -14,10 +14,9 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 })
 export class ContactsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ContactsPage');
   }
 
 }

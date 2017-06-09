@@ -2,14 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { Settings } from '../../providers/settings';
-import { TranslateService } from '@ngx-translate/core';
 
-/*
-  Generated class for the Settings page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @IonicPage()
 @Component({
   selector: 'page-settings',
@@ -38,8 +31,7 @@ export class SettingsPage {
   constructor(public navCtrl: NavController,
     public settings: Settings,
     public formBuilder: FormBuilder,
-    public navParams: NavParams,
-    public translate: TranslateService) {
+    public navParams: NavParams) {
   }
 
   _buildForm() {
@@ -69,8 +61,6 @@ export class SettingsPage {
   ionViewDidLoad() {
     // Build an empty form for the template to render
     this.form = this.formBuilder.group({});
-    console.log('ionViewDidLoad SettingsPage');
-
   }
 
   ionViewWillEnter() {
@@ -80,9 +70,7 @@ export class SettingsPage {
     this.page = this.navParams.get('page') || this.page;
     this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
 
-    this.translate.get(this.pageTitleKey).subscribe((res) => {
-      this.pageTitle = res;
-    })
+    this.pageTitle = "Page title";
 
     this.settings.load().then(() => {
       this.settingsReady = true;
@@ -93,7 +81,6 @@ export class SettingsPage {
   }
 
   ngOnChanges() {
-    console.log('Ng All Changes');
   }
 
 }

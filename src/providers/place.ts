@@ -13,7 +13,6 @@ import 'rxjs/add/observable/from';
 export class PlaceProvider {
 
   constructor() {
-    console.log('Hello Place Provider');
   }
 
   findNearbyPlaces(radius: number, skip: number = 0, size: number = 3) {

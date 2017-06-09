@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
-import { TranslateService } from '@ngx-translate/core';
 import { Settings } from './settings';
 import { UserModel } from '../model/models';
 
@@ -19,27 +18,24 @@ export interface GoogleSignInError {
 @Injectable()
 export class Auth {
 
-  constructor(private googlePlus: GooglePlus, private facebook: Facebook,
-    private settings: Settings, translate: TranslateService) {
-    console.log('Auth Provider');
+  constructor(private googlePlus: GooglePlus,
+    private facebook: Facebook,
+    private settings: Settings) {
 
-    translate.get(["GOOGLE_SIGN_IN_CANCELLED", "GOOGLE_SIGN_IN_FAILED", "GOOGLE_SIGN_IN_NETWORK"])
-      .subscribe(strings => {
-        this.GoogleSignInStatusCodes = {
-          "12501": {
-            name: 'SIGN_IN_CANCELLED',
-            message: strings.GOOGLE_SIGN_IN_CANCELLED
-          },
-          "12500": {
-            name: 'SIGN_IN_FAILED',
-            message: strings.GOOGLE_SIGN_IN_FAILED
-          },
-          "7": {
-            name: 'NETWORK_ERROR',
-            message: strings.GOOGLE_SIGN_IN_NETWORK
-          }
-        }
-      });
+    this.GoogleSignInStatusCodes = {
+      "12501": {
+        name: 'SIGN_IN_CANCELLED',
+        message: "Não foi possível entrar na sua conta. Verifique seus dados e tente novamente."
+      },
+      "12500": {
+        name: 'SIGN_IN_FAILED',
+        message: "Houve um erro ao fazer login com sua conta Google. Mudar para outra pode ou não resolver."
+      },
+      "7": {
+        name: 'NETWORK_ERROR',
+        message: "Erro de conexão. Tentar novamente deve resolver o problema."
+      }
+    }
   }
 
   private GoogleSignInStatusCodes: GoogleSignInError;

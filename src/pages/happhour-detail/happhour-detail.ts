@@ -21,7 +21,6 @@ export class HapphourDetailPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HapphourDetailPage');
   }
 
   async checkInHappHour() {

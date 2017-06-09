@@ -15,7 +15,6 @@ import 'rxjs/add/operator/map';
 export class Database {
 
   constructor(private sql: SQLite, private platform: Platform) {
-    console.log('Hello Database Provider');
   }
 
   private db: SQLiteObject;

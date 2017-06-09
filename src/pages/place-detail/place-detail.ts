@@ -4,12 +4,6 @@ import { PlaceModel } from "../../model/place-model";
 import { HapphourProvider } from "../../providers/happhour";
 import { UserProvider } from "../../providers/user";
 
-/**
- * Generated class for the PlaceDetail page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-place-detail',
@@ -25,8 +19,6 @@ export class PlaceDetailPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PlaceDetail');
-    this.isOpenNow();
   }
 
   get isOpenNow() {

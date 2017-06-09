@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { TranslateModule } from '@ngx-translate/core';
 import { PlaceDetailPage } from './place-detail';
 
 @NgModule({
   declarations: [
-    PlaceDetailPage,
+    PlaceDetailPage
   ],
   imports: [
-    IonicPageModule.forChild(PlaceDetailPage),
-    TranslateModule
+    IonicPageModule.forChild(PlaceDetailPage)
   ],
   exports: [
     PlaceDetailPage

@@ -10,7 +10,6 @@ export class Api {
   private url: string = 'http://10.110.114.121:3000/api/v1';
 
   constructor(private http: Http) {
-    console.log('Api Provider');
   }
 
   handleError(error: Response | any) {

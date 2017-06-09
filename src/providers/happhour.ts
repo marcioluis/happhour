@@ -11,20 +11,13 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { Coordinates } from "@ionic-native/geolocation";
 
-/*
-  Generated class for the HapphourProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class HapphourProvider {
 
   constructor(private storage: Database, private api: Api) {
-    console.log('Hello HapphourProvider Provider');
     _.defer(() => {
       storage.executeCommandSql('CREATE TABLE IF NOT EXISTS happhours (id INTEGER PRIMARY KEY ASC, is_active BOOLEAN, json TEXT)')
-        .subscribe(rs => console.log('tabela happhours ok'), error => console.error(`Erro ao criar tabela happhour ${JSON.stringify(error)}`));
+        .subscribe(rs => { }, error => console.error(`Erro ao criar tabela happhour ${JSON.stringify(error)}`));
     });
   }
 

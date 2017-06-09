@@ -25,7 +25,6 @@ export class InvitedPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InvitedPage');
     this.userProvider.loadUser();
   }
 

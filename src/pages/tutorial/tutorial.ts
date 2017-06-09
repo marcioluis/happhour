@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 import { Settings } from '../../providers/settings';
 
 export interface Slide {
@@ -9,12 +8,6 @@ export interface Slide {
   image: string;
 }
 
-/*
-  Generated class for the Tutorial page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @IonicPage()
 @Component({
   selector: 'page-tutorial',
@@ -25,33 +18,25 @@ export class TutorialPage {
   slides: Slide[];
   showSkip = true;
 
-  constructor(public navCtrl: NavController, translate: TranslateService, private settings: Settings) {
-    translate.get(["TUTORIAL_SLIDE1_TITLE",
-      "TUTORIAL_SLIDE1_DESCRIPTION",
-      "TUTORIAL_SLIDE2_TITLE",
-      "TUTORIAL_SLIDE2_DESCRIPTION",
-      "TUTORIAL_SLIDE3_TITLE",
-      "TUTORIAL_SLIDE3_DESCRIPTION",
-    ])
-      .subscribe((values) => {
-        this.slides = [
-          {
-            title: values.TUTORIAL_SLIDE1_TITLE,
-            description: values.TUTORIAL_SLIDE1_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-1.png',
-          },
-          {
-            title: values.TUTORIAL_SLIDE2_TITLE,
-            description: values.TUTORIAL_SLIDE2_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-2.png',
-          },
-          {
-            title: values.TUTORIAL_SLIDE3_TITLE,
-            description: values.TUTORIAL_SLIDE3_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-3.png',
-          }
-        ];
-      });
+  constructor(public navCtrl: NavController, private settings: Settings) {
+    this.slides = [
+      {
+        title: "Bem-vindo ao HappHour",
+        description: "O <b>Ionic Super Starter</b> é um starter para Ionic completo, com diversos componentes e páginas prontas para ser utilizado como guia de melhores práticas.",
+        image: 'assets/img/ica-slidebox-img-1.png',
+      },
+      {
+        title: "Como utilizar o Super Starter",
+        description: "Combine os tipos de páginas que você quer e remova aquelas que não precisa. No starter existem muitos casos de uso comuns de layouts e páginas como login, cadastro, abas e de tutorial.",
+        image: 'assets/img/ica-slidebox-img-2.png',
+      },
+      {
+        title: "Iniciando o projeto",
+        description: "Precisa de ajuda? Dê uma olhada no README do Super Starter para um tutorial completo",
+        image: 'assets/img/ica-slidebox-img-3.png',
+      }
+    ];
+
   }
 
   startApp() {
@@ -72,7 +57,6 @@ export class TutorialPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TutorialPage');
   }
 
 }
