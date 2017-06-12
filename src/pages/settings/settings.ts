@@ -15,15 +15,11 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 export class SettingsPage {
 
-  get mask() {
-    return {
-      mask: ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-      guide: true,
-      keepCharPositions: false
-    }
-
+  mask_phone = {
+    mask: ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
+    guide: false,
+    showMask: false
   }
-
 
   // Our local settings object
   localSettings: SettingsModel;
@@ -66,7 +62,7 @@ export class SettingsPage {
 
     // Watch the form for changes
     this.form.valueChanges
-      .debounceTime(600)
+      .debounceTime(850)
       .distinctUntilChanged()
       .subscribe((v) => {
         this.settings.merge(v);
@@ -87,7 +83,13 @@ export class SettingsPage {
       .debounceTime(850)
       .distinctUntilChanged()
       .subscribe((v) => {
-        //        console.log(JSON.stringify(v));
+        //workarounds
+        if (v.telephone === "(")
+          v.telephone = "";
+        if (v.telephone.length > this.mask_phone.mask.length) {
+          v.telephone = (<string>v.telephone).substring(0, this.mask_phone.mask.length);
+        }
+        this.userProvider.merge(v);
       });
   }
 

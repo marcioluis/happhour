@@ -73,7 +73,8 @@ export class PlaceDetailPage {
     loader.present();
 
     try {
-      let owner = await this.userProvider.loadUser();
+      await this.userProvider.loadUser();
+      let owner = this.userProvider.user;
       let happHour = this.happhourProvider.createNewHappHour(this.place, owner);
 
       this.happhourProvider.saveHappHourAll(happHour).subscribe((model) => {

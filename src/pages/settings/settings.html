@@ -50,13 +50,13 @@
   <form [formGroup]="form" *ngIf="profileReady">
     <ion-list *ngIf="page == 'profile'">
       <ion-item>
-        <ion-label stacked color="primary">Nome exibição</ion-label>
+        <ion-label stacked color="primary">Nome de exibição</ion-label>
         <ion-input type="text" formControlName="displayName"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked color="primary">Telefone</ion-label>
-        <ion-input type="text" textMask="{{mask}}" formControlName="telephone"></ion-input>
+        <ion-input type="tel" placeholder="(__) _________" [textMask]="mask_phone" formControlName="telephone"></ion-input>
       </ion-item>
 
       <ion-item>

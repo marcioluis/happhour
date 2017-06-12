@@ -17,21 +17,19 @@ export class UserProvider {
   constructor(private storage: Storage, private api: Api) {
   }
 
-  async save(user: UserModel): Promise<UserModel> {
+  async save(user: UserModel): Promise<void> {
     //FIXME: hardcode para nao depender do servidor
-    //let seq = this.api.post('users', user).map(res => res.json()).toPromise();
     try {
       user.id = user.id || Math.ceil(Math.random() * 10000);
+      //let seq = this.api.post('users', user).map(res => res.json())
       await this.storage.set(this.USER_KEY, user);
-      return Promise.resolve(user);
     } catch (error) {
       throw error;
     }
   }
 
-  async loadUser(): Promise<UserModel> {
+  async loadUser(): Promise<void> {
     this._user = await this.storage.get(this.USER_KEY);
-    return Promise.resolve(this._user);
   }
 
   public get user(): UserModel {
@@ -42,6 +40,7 @@ export class UserProvider {
     for (let k in user) {
       this._user[k] = user[k];
     }
+    this.save(this._user);
   }
 
 }
