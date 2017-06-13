@@ -18,6 +18,7 @@ import { PlaceProvider } from "./place";
 import { Settings } from './settings';
 import { UserProvider } from './user';
 import { InfoPresenter } from "./info-presenter";
+import { ContactsProvider } from "./contacts";
 
 /**
  * The Settings provider takes a set of default settings for your app.
@@ -45,6 +46,7 @@ export function provideDefaultSettings(storage: Storage) {
         Database,
         HapphourProvider,
         InfoPresenter,
+        ContactsProvider,
         //settings provider
         { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
         // Keep this to enable Ionic's runtime error handling during development
