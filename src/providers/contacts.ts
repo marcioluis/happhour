@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { ContactModel } from "../model/models";
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+import { Contacts } from "@ionic-native/contacts";
+import { PhoneNumberFormat, PhoneNumberUtil, PhoneNumberType } from "google-libphonenumber";
 
 @Injectable()
 export class ContactsProvider {
 
-  constructor() {
+  phoneUtil: PhoneNumberUtil
+
+  constructor(private phoneContacts: Contacts) {
+    this.phoneUtil = PhoneNumberUtil.getInstance();
   }
 
   loadLocalContacts(): Observable<ContactModel[]> {
@@ -26,9 +31,6 @@ export class ContactsProvider {
   }
 
   sync(): Observable<ContactModel[]> {
-    //tem que pegar os contatos da agenda , talvez menos os já existentes local
-    //jogar no backend para verificar se já é um usuario e retornar apenas os que já são
-    //adicionar aqui
     let contatos: ContactModel[] = [
       { displayName: "Ben Kenobi", id: 1, imageUrl: "assets/img/avatar-ben.png", phoneMasked: "(51) 993019777", phoneNumber: 51993019777 },
       { displayName: "Finn Trooper", id: 2, imageUrl: "assets/img/avatar-finn.png", phoneMasked: "(51) 993019774", phoneNumber: 51993019774 },
@@ -40,6 +42,28 @@ export class ContactsProvider {
         resolve(contatos);
       }, 1365);
     });
+
+    //tem que pegar os contatos da agenda , talvez menos os já existentes local
+    //jogar no backend para verificar se já é um usuario e retornar apenas os que já são
+    //adicionar aqui    
+    this.phoneContacts.find(["phoneNumbers"], { filter: '', desiredFields: ["displayName", "phoneNumbers"] })
+      .then(contacts => {
+        //filtra os contatos removendo os sem telefone e só residencial
+        let validContacts = contacts.filter(contact => {
+          if (contact.phoneNumbers) {
+            contact.phoneNumbers = contact.phoneNumbers.filter(p => {
+              let phoneParsed = this.phoneUtil.parse(p.value, 'br');
+              let isValid = this.phoneUtil.isValidNumber(phoneParsed);
+              let isMobile = this.phoneUtil.getNumberType(phoneParsed) == PhoneNumberType.MOBILE;
+              p.value = isValid ? this.phoneUtil.format(phoneParsed, PhoneNumberFormat.INTERNATIONAL) : p.value;
+              return isValid && isMobile;
+            });
+            return contact.phoneNumbers.length;
+          } else {
+            return false;
+          }
+        });
+      }).catch(e => console.error(e));
 
     return Observable.from(p);
   }
