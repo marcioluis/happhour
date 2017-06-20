@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
-import { Settings } from './settings';
+import { SettingsProvider } from './settings.provider';
 import { UserModel } from '../model/models';
 
 
@@ -20,7 +20,7 @@ export class Auth {
 
   constructor(private googlePlus: GooglePlus,
     private facebook: Facebook,
-    private settings: Settings) {
+    private settings: SettingsProvider) {
 
     this.GoogleSignInStatusCodes = {
       "12501": {

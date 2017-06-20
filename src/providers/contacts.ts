@@ -43,7 +43,7 @@ export class ContactsProvider {
       }, 1365);
     });
 
-    //tem que pegar os contatos da agenda , talvez menos os já existentes local
+    //TODO: tem que pegar os contatos da agenda , talvez menos os já existentes local
     //jogar no backend para verificar se já é um usuario e retornar apenas os que já são
     //adicionar aqui    
     this.phoneContacts.find(["phoneNumbers"], { filter: '', desiredFields: ["displayName", "phoneNumbers"] })

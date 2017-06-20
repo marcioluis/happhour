@@ -3,7 +3,7 @@ import { Platform, Nav, Config } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Globalization } from "@ionic-native/globalization";
-import { Settings } from "../providers/settings";
+import { SettingsProvider } from "../providers/settings.provider";
 import * as moment from "moment";
 
 
@@ -19,7 +19,7 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     config: Config,
-    settings: Settings,
+    settings: SettingsProvider,
     globalization: Globalization) {
 
     config.set('ios', 'backButtonText', "Voltar");

@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
-import { Settings } from '../../providers/settings';
-
-export interface Slide {
-  title: string;
-  description: string;
-  image: string;
-}
+import { Component, ViewChild } from '@angular/core';
+import { NavController, IonicPage, Slides } from 'ionic-angular';
+import { Diagnostic } from "@ionic-native/diagnostic";
 
 @IonicPage()
 @Component({
@@ -15,28 +9,9 @@ export interface Slide {
 })
 export class TutorialPage {
 
-  slides: Slide[];
-  showSkip = true;
+  @ViewChild(Slides) slides: Slides;
 
-  constructor(public navCtrl: NavController, private settings: Settings) {
-    this.slides = [
-      {
-        title: "Bem-vindo ao HappHour",
-        description: "O <b>Ionic Super Starter</b> é um starter para Ionic completo, com diversos componentes e páginas prontas para ser utilizado como guia de melhores práticas.",
-        image: 'assets/img/ica-slidebox-img-1.png',
-      },
-      {
-        title: "Como utilizar o Super Starter",
-        description: "Combine os tipos de páginas que você quer e remova aquelas que não precisa. No starter existem muitos casos de uso comuns de layouts e páginas como login, cadastro, abas e de tutorial.",
-        image: 'assets/img/ica-slidebox-img-2.png',
-      },
-      {
-        title: "Iniciando o projeto",
-        description: "Precisa de ajuda? Dê uma olhada no README do Super Starter para um tutorial completo",
-        image: 'assets/img/ica-slidebox-img-3.png',
-      }
-    ];
-
+  constructor(public navCtrl: NavController, private diagnostics: Diagnostic) {
   }
 
   startApp() {
@@ -46,8 +21,59 @@ export class TutorialPage {
     });
   }
 
-  onSlideChangeStart(slider) {
-    this.showSkip = !slider.isEnd();
+  startLocation() {
+    this.diagnostics.isLocationAuthorized().then(authorized => {
+      this.slides.lockSwipes(false);
+      if (!authorized) {
+        this.diagnostics.requestLocationAuthorization().then(result => {
+          switch (result) {
+            case this.diagnostics.permissionStatus.GRANTED:
+            case this.diagnostics.permissionStatus.GRANTED_WHEN_IN_USE:
+              this.slides.slideNext();
+              break;
+            default:
+              this.slides.lockSwipes(true);
+              break;
+          }
+        });
+      } else {
+        this.slides.slideNext();
+      }
+    });
+  }
+
+  startContacts() {
+    this.diagnostics.isContactsAuthorized().then(authorized => {
+      this.slides.lockSwipes(false);
+      if (!authorized) {
+        this.diagnostics.requestContactsAuthorization().then(result => {
+          switch (result) {
+            case this.diagnostics.permissionStatus.GRANTED:
+              this.slides.slideNext();
+              break;
+            default:
+              this.slides.lockSwipes(true);
+              break;
+          }
+        });
+      } else {
+        this.slides.slideNext();
+      }
+    });
+  }
+
+  onSlideChangeStart(slides: Slides) {
+    let index = slides.getActiveIndex();
+    //slides com acoes de permissao de acesso
+    switch (index) {
+      case 1:
+      case 2:
+        slides.lockSwipes(true);
+        break;
+      default:
+        slides.lockSwipes(false);
+        break;
+    }
   }
 
   ionViewDidEnter() {

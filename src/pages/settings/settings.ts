@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
-import { Settings } from '../../providers/settings';
+import { SettingsProvider } from '../../providers/settings.provider';
 import { UserProvider } from "../../providers/user";
 import { SettingsModel } from "../../model/settings-model";
 import { UserModel } from "../../model/user-model";
@@ -40,7 +40,7 @@ export class SettingsPage {
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
-    public settings: Settings,
+    public settings: SettingsProvider,
     public userProvider: UserProvider,
     public formBuilder: FormBuilder,
     public navParams: NavParams) {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
-import { Settings } from '../../providers/settings';
+import { SettingsProvider } from '../../providers/settings.provider';
 import { Auth } from '../../providers/auth';
 import { UserProvider } from '../../providers/user';
 import { InfoPresenter } from '../../providers/info-presenter';
@@ -13,7 +13,7 @@ import { InfoPresenter } from '../../providers/info-presenter';
 export class WelcomePage {
 
   constructor(public navCtrl: NavController,
-    private settings: Settings,
+    private settings: SettingsProvider,
     private infoPresenter: InfoPresenter,
     private auth: Auth,
     private user: UserProvider) {

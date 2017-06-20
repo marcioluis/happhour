@@ -1,21 +1,32 @@
-<ion-header no-shadow>
-  <ion-navbar>
-    <ion-buttons end *ngIf="showSkip">
-      <button ion-button (click)="startApp()" color="primary">Pular</button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-
 <ion-content no-bounce>
   <ion-slides [pager]="true" (ionSlideWillChange)="onSlideChangeStart($event)">
-    <ion-slide *ngFor="let slide of slides">
-      <img [src]="slide.image" class="slide-image" />
-      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
-      <p [innerHTML]="slide.description"></p>
+    <ion-slide>
+      <img src="assets/img/ica-slidebox-img-1.png" class="slide-image" />
+      <h2 class="slide-title">Bem-vindo ao HappHour</h2>
+      <p>O <b>HappHour</b> ajuda você à encontrar o melhor local para seu Happy Hour, juntar seus amigos e ganhar pontos para
+        trocar por itens do bar.</p>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
+      <h2 class="slide-title">Perto de mim</h2>
+      <p>Utilize sua localização para encontrar os melhores bares por perto de você.</p>
+      <button ion-button icon-right large clear (click)="startLocation()">
+        Continuar        
+        <ion-icon name="pin"></ion-icon>
+      </button>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/ica-slidebox-img-3.png" class="slide-image" />
+      <h2 class="slide-title">Quanto mais melhor</h2>
+      <p>Convide seus contatos para um HappHour e ganhe mais pontos.</p>
+      <button ion-button icon-right large clear (click)="startContacts()">
+        Continuar
+        <ion-icon name="contacts"></ion-icon>
+      </button>
     </ion-slide>
     <ion-slide>
       <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
-      <h2 class="slide-title">Pronto para usar?</h2>
+      <h2 class="slide-title">Pronto para começar?</h2>
       <button ion-button icon-right large clear (click)="startApp()">
         Continuar
         <ion-icon name="arrow-forward"></ion-icon>

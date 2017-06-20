@@ -6,7 +6,7 @@ import { SettingsModel } from '../model/models';
  * A simple settings/config class for storing key/value pairs with persistence.
  */
 @Injectable()
-export class Settings {
+export class SettingsProvider {
   private SETTINGS_KEY: string = '_settings';
 
   settings: SettingsModel;

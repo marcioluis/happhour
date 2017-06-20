@@ -10,13 +10,14 @@ import { SQLite } from "@ionic-native/sqlite";
 import { Globalization } from "@ionic-native/globalization";
 import { Geolocation } from "@ionic-native/geolocation";
 import { Contacts } from "@ionic-native/contacts";
+import { Diagnostic } from "@ionic-native/diagnostic";
 //providers
 import { Api } from "./api";
 import { Auth } from './auth';
 import { Database } from "./database";
 import { HapphourProvider } from "./happhour";
 import { PlaceProvider } from "./place";
-import { Settings } from './settings';
+import { SettingsProvider } from './settings.provider';
 import { UserProvider } from './user';
 import { InfoPresenter } from "./info-presenter";
 import { ContactsProvider } from "./contacts";
@@ -28,7 +29,7 @@ import { ContactsProvider } from "./contacts";
  * these values will not overwrite the saved values (this can be done manually if desired).
  */
 export function provideDefaultSettings(storage: Storage) {
-    return new Settings(storage, { isFirstRun: true, searchRadius: 500 });
+    return new SettingsProvider(storage, { isFirstRun: true, searchRadius: 500, geofances: true, notifications: true, promotions: true });
 }
 
 @NgModule({
@@ -41,6 +42,8 @@ export function provideDefaultSettings(storage: Storage) {
         Facebook,
         Geolocation,
         Contacts,
+        Diagnostic,
+
         Api,
         Auth,
         PlaceProvider,
@@ -50,7 +53,7 @@ export function provideDefaultSettings(storage: Storage) {
         InfoPresenter,
         ContactsProvider,
         //settings provider
-        { provide: Settings, useFactory: provideDefaultSettings, deps: [Storage] },
+        { provide: SettingsProvider, useFactory: provideDefaultSettings, deps: [Storage] },
         // Keep this to enable Ionic's runtime error handling during development
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ],
