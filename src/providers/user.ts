@@ -28,6 +28,9 @@ export class UserProvider {
     }
   }
 
+  /**
+   * Load user from local storage
+   */
   async loadUser(): Promise<void> {
     this._user = await this.storage.get(this.USER_KEY);
   }

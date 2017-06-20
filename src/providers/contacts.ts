@@ -14,6 +14,14 @@ export class ContactsProvider {
     this.phoneUtil = PhoneNumberUtil.getInstance();
   }
 
+  formatPhone(phone: string, country: string = 'br'): string {
+    let phoneParsed = this.phoneUtil.parse(phone, country);
+    if (this.phoneUtil.isPossibleNumber(phoneParsed))
+      return this.phoneUtil.format(phoneParsed, PhoneNumberFormat.INTERNATIONAL);
+    else
+      return "";
+  }
+
   loadLocalContacts(): Observable<ContactModel[]> {
     let contatos: ContactModel[] = [
       { displayName: "Ben Kenobi", id: 1, imageUrl: "assets/img/avatar-ben.png", phoneMasked: "(51) 993019777", phoneNumber: 51993019777 },

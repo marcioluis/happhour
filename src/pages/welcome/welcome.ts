@@ -25,7 +25,7 @@ export class WelcomePage {
     let loader = this.infoPresenter.presentLoader("Autenticando...");
     try {
       let googleUser = await this.auth.doGoogleLogin();
-      await this.user.save(googleUser);
+      await this.user.merge(googleUser);
       this.settings.allSettings.isFirstRun = false;
       await this.settings.save();
       this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
@@ -41,7 +41,7 @@ export class WelcomePage {
     let loader = this.infoPresenter.presentLoader("Autenticando...");
     try {
       let facebookUser = await this.auth.doFacebookLogin();
-      await this.user.save(facebookUser);
+      await this.user.merge(facebookUser);
       this.settings.allSettings.isFirstRun = false;
       await this.settings.save();
       this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' })

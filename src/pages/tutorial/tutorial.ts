@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, IonicPage, Slides } from 'ionic-angular';
+import { NavController, IonicPage, Slides, AlertController } from 'ionic-angular';
 import { Diagnostic } from "@ionic-native/diagnostic";
+import { UserProvider } from "../../providers/user";
+import { ContactsProvider } from "../../providers/contacts";
 
 @IonicPage()
 @Component({
@@ -11,7 +13,53 @@ export class TutorialPage {
 
   @ViewChild(Slides) slides: Slides;
 
-  constructor(public navCtrl: NavController, private diagnostics: Diagnostic) {
+  phoneCountry: string = "br";
+  parsedPhoneNumber: string;
+
+  constructor(public navCtrl: NavController,
+    private diagnostics: Diagnostic,
+    private alertCtrl: AlertController,
+    private settings: UserProvider,
+    private contacts: ContactsProvider) {
+  }
+
+  presentPhonePrompt() {
+    let alert = this.alertCtrl.create({
+      title: 'Telefone',
+      inputs: [
+        {
+          name: 'phone',
+          placeholder: '(__) _________',
+          type: 'tel'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            let p = (<string>data.phone).replace(/\D/, "");
+            if (p.length >= 10) {
+              this.parsedPhoneNumber = this.contacts.formatPhone(p);
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  startPhone() {
+    if (this.parsedPhoneNumber) {
+      this.settings.loadUser().then(() => {
+        this.settings.user.telephone = this.parsedPhoneNumber;
+        this.slides.lockSwipes(false);
+        this.slides.slideNext();
+      });
+    }
   }
 
   startApp() {
@@ -68,21 +116,16 @@ export class TutorialPage {
     switch (index) {
       case 1:
       case 2:
+      case 3:
         slides.lockSwipes(true);
         break;
       default:
-        slides.lockSwipes(false);
+        if (slides.isEnd())
+          slides.lockSwipeToPrev(true);
+        else
+          slides.lockSwipes(false);
         break;
     }
-  }
-
-  ionViewDidEnter() {
-  }
-
-  ionViewWillLeave() {
-  }
-
-  ionViewDidLoad() {
   }
 
 }
