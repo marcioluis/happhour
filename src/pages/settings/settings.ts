@@ -7,6 +7,7 @@ import { SettingsModel } from "../../model/settings-model";
 import { UserModel } from "../../model/user-model";
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import { ContactsProvider } from "../../providers/contacts";
 
 @IonicPage()
 @Component({
@@ -14,12 +15,6 @@ import 'rxjs/add/operator/distinctUntilChanged';
   templateUrl: 'settings.html'
 })
 export class SettingsPage {
-
-  mask_phone = {
-    mask: ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
-    guide: false,
-    showMask: false
-  }
 
   // Our local settings object
   localSettings: SettingsModel;
@@ -43,13 +38,17 @@ export class SettingsPage {
     public settings: SettingsProvider,
     public userProvider: UserProvider,
     public formBuilder: FormBuilder,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public contacts: ContactsProvider) {
   }
 
   get radius() {
     return this.form.value.searchRadius;
   }
 
+  /**
+   * Cria um formulario para editar as configurações do app
+   */
   _buildFormSettings() {
     let group: any = {
       searchRadius: [this.localSettings.searchRadius],
@@ -69,6 +68,9 @@ export class SettingsPage {
       });
   }
 
+  /**
+   * Cria um formulario para editar o perfil
+   */
   _buildFormProfile() {
     let group: any = {
       displayName: [this.localProfile.displayName],
@@ -83,12 +85,6 @@ export class SettingsPage {
       .debounceTime(850)
       .distinctUntilChanged()
       .subscribe((v) => {
-        //workarounds
-        if (v.telephone === "(")
-          v.telephone = "";
-        if (v.telephone.length > this.mask_phone.mask.length) {
-          v.telephone = (<string>v.telephone).substring(0, this.mask_phone.mask.length);
-        }
         this.userProvider.merge(v);
       });
   }

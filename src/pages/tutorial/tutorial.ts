@@ -19,7 +19,7 @@ export class TutorialPage {
   constructor(public navCtrl: NavController,
     private diagnostics: Diagnostic,
     private alertCtrl: AlertController,
-    private settings: UserProvider,
+    private userProvider: UserProvider,
     private contacts: ContactsProvider) {
   }
 
@@ -54,8 +54,8 @@ export class TutorialPage {
 
   startPhone() {
     if (this.parsedPhoneNumber) {
-      this.settings.loadUser().then(() => {
-        this.settings.user.telephone = this.parsedPhoneNumber;
+      this.userProvider.loadUser().then(() => {
+        this.userProvider.user.telephone = this.parsedPhoneNumber;
         this.slides.lockSwipes(false);
         this.slides.slideNext();
       });

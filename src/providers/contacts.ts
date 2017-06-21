@@ -14,6 +14,11 @@ export class ContactsProvider {
     this.phoneUtil = PhoneNumberUtil.getInstance();
   }
 
+  /**
+   * Formata um número para o padrão internacional
+   * @param phone telefone para formatar
+   * @param country código do país, exemplo: br ou us
+   */
   formatPhone(phone: string, country: string = 'br'): string {
     let phoneParsed = this.phoneUtil.parse(phone, country);
     if (this.phoneUtil.isPossibleNumber(phoneParsed))

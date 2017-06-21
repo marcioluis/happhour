@@ -10,7 +10,7 @@ export class TabsPage {
 
   @ViewChild('tabsComponent') tabRef: Tabs;
   tab1Root: any = 'InvitedPage';
-  tab2Root: any = 'HomePage';
+  tab2Root: any = 'NearbyPage';
   tab3Root: any = 'SettingsPage';
   tab4Root: any = 'ContactsPage';
 

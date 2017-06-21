@@ -1,12 +1,11 @@
 <ion-list class="lista-avatar">
   <ion-list-header>Meus Happs</ion-list-header>
+
   <ion-item *ngIf="!ownerHapps.length">
-    <ion-avatar item-left>
-      <img src="assets/img/forever-alone.jpg">
-    </ion-avatar>
-    <h2>Forever alone?</h2>
-    <p>Crie um novo HappHour!</p>
+    <h2>Procurando programação?</h2>
+    <p>Crie um novo HappHour e convide seus amigos!</p>
   </ion-item>
+
   <ion-item-sliding *ngFor="let happ of ownerHapps, trackBy: trackByHapps">
 
     <ion-item (tap)="detailHappHour(happ)">
@@ -45,12 +44,10 @@
 
 <ion-list class="lista-avatar">
   <ion-list-header>Happs que me Convidaram</ion-list-header>
+
   <ion-item *ngIf="!guestHapps.length">
-    <ion-avatar item-left>
-      <img src="assets/img/sad-meme.jpeg">
-    </ion-avatar>
-    <h2>Não há nenhuma diversão por aqui</h2>
-    <p>triste isso...</p>
+    <h2>Não há convites para HappHour</h2>
+    <p>Que tal você criar um?</p>
   </ion-item>
 
   <ion-item-sliding *ngFor="let happ of guestHapps, trackBy: trackByHapps">

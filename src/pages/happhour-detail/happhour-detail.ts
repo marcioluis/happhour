@@ -24,7 +24,7 @@ export class HapphourDetailPage {
   }
 
   async checkInHappHour() {
-    //var loader = this.presentLoader();
+    var loader = this.infoPresenter.presentLoader();
     try {
       let happ = this.happhour;
       let position = await this.geo.getCurrentPosition({ enableHighAccuracy: true });
@@ -34,12 +34,11 @@ export class HapphourDetailPage {
     } catch (error) {
       console.error(JSON.stringify(error))
     } finally {
-      //loader.dismiss();
+      loader.dismiss();
     }
   }
 
   confirmInvite() {
-    // let loader = this.presentLoader();
     let happ = this.happhour;
     this.happHourProvider.confirmInvitation(happ).subscribe(
       model => happ = model,
