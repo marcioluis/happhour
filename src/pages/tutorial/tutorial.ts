@@ -23,6 +23,10 @@ export class TutorialPage {
     private contacts: ContactsProvider) {
   }
 
+  nextSlide() {
+    this.slides.slideNext();
+  }
+
   presentPhonePrompt() {
     let alert = this.alertCtrl.create({
       title: 'Telefone',
