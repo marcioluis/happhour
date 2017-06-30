@@ -4,4 +4,6 @@ export class SettingsModel {
     geofances?: boolean
     notifications?: boolean
     promotions?: boolean
+    usuarioId?: number
+    id?: number
 }

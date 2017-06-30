@@ -84,6 +84,7 @@ export class SettingsProvider {
   }
 
   save() {
+    //TODO: salvar remoto se existir user id
     return this.setAll(this.settings);
   }
 

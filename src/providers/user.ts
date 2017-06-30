@@ -22,7 +22,8 @@ export class UserProvider {
     try {
       user.id = user.id || Math.ceil(Math.random() * 10000);
       //let seq = this.api.post('users', user).map(res => res.json())
-      await this.storage.set(this.USER_KEY, user);
+      this._user = user;
+      await this.storage.set(this.USER_KEY, this._user);
     } catch (error) {
       throw error;
     }
